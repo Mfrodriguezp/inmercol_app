@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/*@import "~tom-select/dist/scss/tom-select.bootstrap5";*/
+
+[x-cloak] {
+    display: none;
+}
+
+
+
+:root {
+    --width: 200px;
+    --padding: 10px;
+    --width-collapsed: 53px;
+    --hover-color: rgb(83, 171, 175);
+    --primary-color: #16878c;
+    --secondary-color: #53abaf;
+}
+* {
+    font-family: "Roboto", sans-serif;
+}
+
+.nav {
+    background: var(--secondary-color);
+}
+
+.btn-menu {
+    width: var(--width-collapsed);
+    margin-right: 2rem;
+}
+.btn-menu:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/*Estilos de menú vertical*/
+
+#vertical-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    color: white;
+    height: 100%;
+    left: 0px;
+    z-index: 1;
+    background-color: var(--primary-color);
+}
+
+#vertical-menu a {
+    color: white;
+    text-decoration: none;
+}
+
+#vertical-menu #menu-items {
+    overflow: hidden;
+    margin-top: 90px;
+}
+
+#vertical-menu #menu-item-logout {
+    overflow: hidden;
+}
+
+#vertical-menu #menu-items .item,
+#vertical-menu #menu-item-logout .item {
+    width: var(--width);
+}
+
+#vertical-menu #menu-items .item .icon,
+#vertical-menu #menu-item-logout .item .icon {
+    font-size: 30px;
+    box-sizing: border-box;
+    padding: var(--padding);
+    width: var(--width-collapsed);
+}
+#vertical-menu #menu-items .item .title,
+#vertical-menu #menu-item-logout .item .title {
+    font-size: 16px;
+    padding: var(--padding) 0;
+}
+#vertical-menu #menu-items .item .icon,
+#vertical-menu #menu-items .item .title,
+#vertical-menu #menu-item-logout .item .icon,
+#vertical-menu #menu-item-logout .item .title {
+    vertical-align: middle;
+    overflow: hidden;
+    display: inline-block;
+}
+
+#vertical-menu #menu-item-logout .item .title a:hover {
+    text-decoration: underline;
+}
+
+#vertical-menu #menu-items .item a,
+#vertical-menu #menu-item-logout .item a {
+    display: block;
+}
+
+#vertical-menu #menu-items .item a:hover {
+    background-color: rgba(83, 171, 175, 0.5);
+}
+
+#vertical-menu #menu-item-logout .item a:hover {
+    background-color: rgba(83, 171, 175, 0.5);
+}
+
+#vertical-menu #menu-items .item .icon i {
+    width: 100%;
+}
+#vertical-menu #menu-item-logout .item .icon i {
+    width: 100%;
+}
+
+/*Estilos de menú expandido*/
+.menu-expanded {
+    transition: all 0.8s ease;
+    width: var(--width);
+    box-shadow: 0px 0px 10px rgba(0px, 0px, 0px, 0.5);
+}
+
+/*Estilos menú colapsado*/
+.menu-collapsed {
+    transition: all 0.8s ease;
+    width: var(--width-collapsed);
+}
+.menu-collapsed .item {
+    width: 100%;
+}
+
+/*General Styles*/
+.header > .title {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--hover-color);
+}
+
+.pg-actions {
+    display: flex;
+    justify-content:flex-start;
+    gap: 1rem;
+}
+
+/*Wordking Bootstrap*/
+/*@import 'bootstrap/scss/bootstrap';*/
