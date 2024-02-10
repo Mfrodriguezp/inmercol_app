@@ -29,6 +29,10 @@ class EvaluatedFragance extends Model
         'control_2',
         'control_3',
         'control_4',
+        'code_1_test_a',
+        'code_2_test_a',
+        'code_1_test_b',
+        'code_2_test_b',
         'status_evaluation'
     ];
 

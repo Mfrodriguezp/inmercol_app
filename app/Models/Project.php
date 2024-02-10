@@ -14,7 +14,8 @@ class Project extends Model
     public $timestamps = false;
     protected $fillable =[
         'project_name',
-        'id_client',
+        'id_analisys',
+        'clients_id_client',
         'status',
         'date_creation',
         'last_evaluation',
