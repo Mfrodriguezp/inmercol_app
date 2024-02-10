@@ -257,7 +257,7 @@
         <div id="menu-items">
             <div class="item">
                 <a
-                    href="{{route('manager.projects.index')}}">
+                    href="{{route('admin.projects.index')}}">
                     <div class="icon"><i class="fa-solid fa-file-pen"></i></div>
                     <div class="title"><span>Proyectos</span></div>
                 </a>

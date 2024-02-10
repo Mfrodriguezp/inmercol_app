@@ -2,11 +2,16 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\User;
 use Livewire\Component;
 
 class UsersIndex extends Component
 {
-    public $title = "Permisos de usuarios";
+    public $title;
+
+    public function mount(){
+        $this->title= "Usuarios";
+    }
 
     public function render()
     {

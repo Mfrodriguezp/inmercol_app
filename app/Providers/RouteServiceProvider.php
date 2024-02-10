@@ -40,14 +40,6 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web', 'auth')
                 ->prefix('app')
                 ->group(base_path('routes/admin.php'));
-            //Ruta para Manager - Liz
-            Route::middleware('web', 'auth')
-                ->prefix('app')
-                ->group(base_path('routes/manager.php'));
-            //Ruta para Jueces
-            Route::middleware('web', 'auth')
-                ->prefix('app')
-                ->group(base_path('routes/judge.php'));
         });
     }
 }

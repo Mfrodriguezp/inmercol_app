@@ -15,6 +15,9 @@ use PowerComponents\LivewirePowerGrid\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\View\View;
+use Livewire\Component;
 
 final class UserTable extends PowerGridComponent
 {
@@ -79,31 +82,56 @@ final class UserTable extends PowerGridComponent
 
     public function filters(): array
     {
-        return [
-        ];
+        return [];
     }
 
     #[\Livewire\Attributes\On('edit')]
-    public function edit($rowId): void
+    public function edit($rowId)
     {
-        $this->js('alert('.$rowId.')');
+        //$this->js('alert('.$rowId.')');
+        return redirect()->route('admin.users.edit', [$rowId]);
     }
+
+    #[\Livewire\Attributes\On('destroy')]
+    public function destroy($rowId): void
+    {
+        $this->js('alert(' . $rowId . ')');
+    }
+    #[\Livewire\Attributes\On('test')]
+    public function test($rowId)
+    {
+        $openModal = true;
+        return redirect()->route('admin.users.index', compact('openModal'));
+        //$this->js('alert('.$rowId.')');
+    }
+
 
     public function actions(\App\Models\User $row): array
     {
         return [
+            Button::add('permisions')
+                ->slot('<i class="fa-solid fa-sliders"></i>')
+                ->class('inline-flex items-center px-2 py-2 bg-gray-800 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150')
+                ->dispatch('admin.edit-modal', ['rowId' => $row->id])
+                ->tooltip('Permisos'),
             Button::add('edit')
-                ->slot('Edit: '.$row->id)
-                ->id()
-                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('edit', ['rowId' => $row->id])
+                ->slot('<i class="fa-solid fa-pencil"></i>')
+                ->class('inline-flex items-center justify-center px-2 py-2 bg-yellow-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
+                ->openModal('admin.create-edit-user-modal', ['user' => $row])
+                ->tooltip('Editar'),
+                Button::add('destroy')
+                ->slot('<i class="fa-solid fa-trash"></i>')
+                ->class('inline-flex items-center justify-center px-2 py-2 bg-red-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
+                ->openModal('admin.edit-modal', ['rowId' => $row->id])
+                ->tooltip('Eliminar'),
+
         ];
     }
 
     /*
     public function actionRules($row): array
     {
-       return [
+    return [
             // Hide button edit for ID 1
             Rule::button('edit')
                 ->when(fn($row) => $row->id === 1)

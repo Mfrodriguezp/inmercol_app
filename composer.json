@@ -14,7 +14,8 @@
         "livewire/livewire": "^3.0",
         "openspout/openspout": "^4.23",
         "power-components/livewire-powergrid": "^5.3",
-        "spatie/laravel-permission": "^6.3"
+        "spatie/laravel-permission": "^6.3",
+        "wire-elements/modal": "^2.0"
     },
     "require-dev": {
         "composer/composer": "^2.6",

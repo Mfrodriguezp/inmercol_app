@@ -50,7 +50,7 @@ final class ProjectTable extends PowerGridComponent
         return Project::query()
 
             ->join('clients', function ($clients) {
-                $clients->on('projects.id_client', '=', 'clients.id_client');
+                $clients->on('projects.clients_id_client', '=', 'clients.id_client');
             })
             ->select([
                 'projects.id_project',
@@ -73,8 +73,12 @@ final class ProjectTable extends PowerGridComponent
             ->addColumn('project_name')
             ->addColumn('client_name')
             ->addColumn('status')
-            ->addColumn('date_creation')
-            ->addColumn('last_evaluation');
+            ->addColumn('date_creation',function(Project $project){
+                return Carbon::parse($project->date_creation)->format('d-m-Y');
+            })
+            ->addColumn('last_evaluation',function(Project $project){
+                return Carbon::parse($project->last_evaluation)->format('d-m-Y');
+            });
     }
 
     public function columns(): array
@@ -89,7 +93,7 @@ final class ProjectTable extends PowerGridComponent
             Column::make('Fecha Creación', 'date_creation')
                 ->sortable()
                 ->searchable(),
-            Column::make('Last evaluation', 'last_evaluation_formatted', 'last_evaluation')
+            Column::make('Última Evaluación', 'last_evaluation_formatted', 'last_evaluation')
                 ->sortable(),
             Column::make('Estado', 'status')
                 ->sortable()
@@ -112,39 +116,26 @@ final class ProjectTable extends PowerGridComponent
     public function actions(\App\Models\Project $row): array
     {
         return [
-            Button::add('addEvaluated')
-                ->render(function (Project $project) {
-                    return Blade::render(<<<HTML
-            <x-button-evaluated wire:click="editStock('$project->id')">
-            <i class="fa-solid fa-flask-vial"></i>
-            </x-button-evaluated>
-            HTML);
-                }),
-            Button::add('view')
-                ->render(function (Project $project) {
-                    return Blade::render(<<<HTML
-        <x-button-view wire:click="editStock('$project->id')">
-        <i class="fa-solid fa-timeline"></i>
-            </x-button-view>
-        HTML);
-                }),
+            Button::add('evaluated')
+                ->slot('<i class="fa-solid fa-flask-vial"></i>')
+                ->class('inline-flex items-center px-2 py-2 bg-gray-800 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150')
+                ->dispatch('admin.edit-modal', ['rowId' => $row->id])
+                ->tooltip('Añadir Evaluaciones'),
+            Button::add('Historial')
+                ->slot('<i class="fa-solid fa-timeline"></i>')
+                ->class('btn-primary inline-flex items-center px-2 py-2 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150')
+                ->dispatch('admin.edit-modal', ['rowId' => $row->id])
+                ->tooltip('Permisos'),
             Button::add('edit')
-                ->tooltip('Editar registro')
-                ->render(function (Project $project) {
-                    return Blade::render(<<<HTML
-            <x-button-edit wire:click="projects.editProject($project->id_project)">
-            <i class="fa-solid fa-pencil"></i>
-            </x-button-edit>
-            HTML);
-                }),
-            Button::add('delete')
-                ->render(function (Project $project) {
-                    return Blade::render(<<<HTML
-            <x-button-delete wire:click="editStock('$project->id')">
-            <i class="fa-solid fa-trash"></i>
-            </x-button-delete>
-            HTML);
-                }),
+                ->slot('<i class="fa-solid fa-pencil"></i>')
+                ->class('inline-flex items-center justify-center px-2 py-2 bg-yellow-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
+                ->openModal('admin.create-edit-user-modal', ['user' => $row])
+                ->tooltip('Editar'),
+            Button::add('destroy')
+                ->slot('<i class="fa-solid fa-trash"></i>')
+                ->class('inline-flex items-center justify-center px-2 py-2 bg-red-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
+                ->openModal('admin.edit-modal', ['rowId' => $row->id])
+                ->tooltip('Eliminar'),
         ];
     }
 
