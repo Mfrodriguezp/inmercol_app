@@ -270,7 +270,7 @@
                 </a>
             </div>
             <div class="item">
-                <a href="#">
+                <a href="{{route('admin.judges.index')}}">
                     <div class="icon"><i class="fa-solid fa-address-card"></i></div>
                     <div class="title"><span>Jueces</span></div>
                 </a>
