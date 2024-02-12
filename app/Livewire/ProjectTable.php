@@ -24,7 +24,7 @@ final class ProjectTable extends PowerGridComponent
 
     public string $primaryKey = 'projects.id_project';
     public string $sortField = 'projects.id_project';
-    public int $perPage = 5;
+    public int $perPage = 10;
     public array $perPageValues = [0, 5, 10, 20, 50, 100];
     public function setUp(): array
     {
@@ -54,12 +54,13 @@ final class ProjectTable extends PowerGridComponent
             })
             ->select([
                 'projects.id_project',
+                'projects.id_analisys',
                 'projects.project_name',
                 'projects.status',
                 'projects.date_creation',
                 'projects.last_evaluation',
                 'clients.client_name as client_name',
-            ])->orderByDesc('id_project');
+            ]);
     }
 
     public function relationSearch(): array
@@ -70,20 +71,28 @@ final class ProjectTable extends PowerGridComponent
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
+            ->addColumn('id_project')
+            ->addColumn('id_analisys')
             ->addColumn('project_name')
             ->addColumn('client_name')
             ->addColumn('status')
-            ->addColumn('date_creation',function(Project $project){
-                return Carbon::parse($project->date_creation)->format('d-m-Y');
+            ->addColumn('date_creation', function (Project $project) {
+                return Carbon::parse($project->date_creation)->format('d-m-Y | H:i');
             })
-            ->addColumn('last_evaluation',function(Project $project){
-                return Carbon::parse($project->last_evaluation)->format('d-m-Y');
+            ->addColumn('last_evaluation', function (Project $project) {
+                return Carbon::parse($project->last_evaluation)->format('d-m-Y | H:i');
             });
     }
 
     public function columns(): array
     {
         return [
+            Column::make('ID', 'id_project')
+                ->sortable()
+                ->searchable(),
+            Column::make('ID Analisis', 'id_analisys')
+                ->sortable()
+                ->searchable(),
             Column::make('Proyecto', 'project_name')
                 ->sortable()
                 ->searchable(),
@@ -93,8 +102,9 @@ final class ProjectTable extends PowerGridComponent
             Column::make('Fecha Creación', 'date_creation')
                 ->sortable()
                 ->searchable(),
-            Column::make('Última Evaluación', 'last_evaluation_formatted', 'last_evaluation')
-                ->sortable(),
+            Column::make('Última Evaluación', 'last_evaluation')
+                ->sortable()
+                ->searchable(),
             Column::make('Estado', 'status')
                 ->sortable()
                 ->searchable(),
@@ -129,12 +139,12 @@ final class ProjectTable extends PowerGridComponent
             Button::add('edit')
                 ->slot('<i class="fa-solid fa-pencil"></i>')
                 ->class('inline-flex items-center justify-center px-2 py-2 bg-yellow-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
-                ->openModal('admin.create-edit-user-modal', ['user' => $row])
+                ->openModal('admin.create-edit-modal',['project'=>$row->id_project])
                 ->tooltip('Editar'),
             Button::add('destroy')
                 ->slot('<i class="fa-solid fa-trash"></i>')
                 ->class('inline-flex items-center justify-center px-2 py-2 bg-red-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
-                ->openModal('admin.edit-modal', ['rowId' => $row->id])
+                ->openModal('admin.destroy-modal', ['project' => $row->id_project])
                 ->tooltip('Eliminar'),
         ];
     }

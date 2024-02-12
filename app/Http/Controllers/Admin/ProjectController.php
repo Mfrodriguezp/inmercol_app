@@ -70,17 +70,11 @@ class ProjectController extends Controller
             $proyecto = Project::create([
                 'project_name' => $project_name,
                 'id_analisys' => $id_analisys,
-                'clients_id_client' => $id_client
+                'clients_id_client' => $id
             ]);
-            session()->flash('status', 'Proyecto creado satisfactoriamente');
-            return redirect()->to('/projects');
+            return redirect()->action([ProjectController::class, 'index'])
+                ->with('success', 'Proyecto Creado Correctamente!');
         }
-        /*$nuevaFruta = DB::table('frutas')->insert([
-            'nombre' => $nombre,
-            'descripcion' => $descripcion,
-            'precio' => $precio,
-            'fecha' => date('Y-m-d')
-        ]);*/
     }
 
     /**
@@ -102,16 +96,33 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Project $request, string $id)
     {
-        //
-    }
 
+        /*$project_name = $request->input('project_name');
+        $id_client = intval($request->input('id_client'));
+        $id_analisys = $request->input('id_analisys');
+        
+        Project::where('id_project', $id)
+            ->update([
+                'project_name' => $project_name,
+                'id_analisys' => $id_analisys,
+                'id_client' => $id_client
+            ]);
+        
+        return redirect()->action([ProjectController::class, 'index'])
+        ->with('success', 'Proyecto Actualizado!');*/
+        
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $project = Project::find($id);
+        $project->delete();
+
+        return redirect()->action([ProjectController::class, 'index'])
+                ->with('success', 'Proyecto Eliminado Correctamente!');
     }
 }
