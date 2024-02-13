@@ -264,7 +264,7 @@
             </div>
             <div class="item">
                 <a
-                    href="#">
+                    href="{{route('admin.evaluateds.index')}}">
                     <div class="icon"><i class="fa-solid fa-flask-vial"></i></div>
                     <div class="title"><span>Evaluaciones</span></div>
                 </a>

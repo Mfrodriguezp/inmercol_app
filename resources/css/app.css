@@ -7,8 +7,6 @@
     display: none;
 }
 
-
-
 :root {
     --width: 200px;
     --padding: 10px;
@@ -144,8 +142,12 @@
 
 .pg-actions {
     display: flex;
-    justify-content:flex-start;
+    justify-content: flex-start;
     gap: 1rem;
+}
+/*Altura para data Formulario de Evaluaciones*/
+.dataProject{
+    height: 60vh;
 }
 
 /*Wordking Bootstrap*/

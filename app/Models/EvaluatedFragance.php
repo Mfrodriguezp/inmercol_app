@@ -22,6 +22,7 @@ class EvaluatedFragance extends Model
         'fragance_counter_2',
         'fragance_ms_2',
         'fragance_test_code_2',
+        'number_judges',
         'rot_fragance_aplication',
         'name_carrier_a',
         'name_carrier_b',

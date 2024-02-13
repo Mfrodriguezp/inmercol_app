@@ -20,13 +20,15 @@
                     <x-label>
                         Nombre Juez
                     </x-label>
-                    <x-input type="text" class="w-full" name="judge_name" value="{{ $judge->judge_name ?? '' }}" required />
+                    <x-input type="text" class="w-full" name="judge_name" value="{{ $judge->judge_name ?? '' }}"
+                        required />
                 </div>
                 <div class="mb-4">
                     <x-label>
                         Número de Juez
                     </x-label>
-                    <x-input type="number" class="w-full" name="judge_number" value="{{ $judge->judge_number ?? '' }}" required />
+                    <x-input type="number" class="w-full" name="judge_number" value="{{ $judge->judge_number ?? '' }}"
+                        required />
                 </div>
                 <div class="mb-4">
                     <x-secondary-button wire:click="$dispatch('closeModal')" wire:loading.attr="disabled">
@@ -44,9 +46,7 @@
                 </div>
             </form>
         </div>
+        <div class="flex flex-row justify-end px-6 py-4 bg-gray-100 text-end">
+        </div>
     </div>
-    <div class="flex flex-row justify-end px-6 py-4 bg-gray-100 text-end">
-
-    </div>
-</div>
 </div>
