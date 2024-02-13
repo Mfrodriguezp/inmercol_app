@@ -9,7 +9,7 @@ class EvaluatedFragance extends Model
 {
     use HasFactory;
     public $table = "evaluated_fragances";
-    public $primarKey= 'id_evaluated_fragance';
+    public $primaryKey= 'id_evaluated_fragance';
     public $timestamps = false;
     protected $fillable =[
         'tb',

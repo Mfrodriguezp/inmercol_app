@@ -22,7 +22,7 @@ final class EvaluatedTable extends PowerGridComponent
     public string $primaryKey = 'evaluated_fragances.id_evaluated_fragance';
     public string $sortField = 'evaluated_fragances.id_evaluated_fragance';
     public int $perPage = 5;
-    public array $perPageValues = [0, 5, 10, 20, 50,100];
+    public array $perPageValues = [0, 5, 10, 20, 50, 100];
 
     public function setUp(): array
     {
@@ -105,60 +105,67 @@ final class EvaluatedTable extends PowerGridComponent
             Column::make('Tb', 'tb')
                 ->sortable()
                 ->searchable(),
-            Column::make('Proyecto', 'project_name')
+            Column::make('proyecto', 'project_name')
                 ->sortable()
                 ->searchable(),
-            Column::make('Nombre Fragancia 1', 'fragance_name_1')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Ms Fragancia 1', 'fragance_ms_1')
+            Column::make('Fragancia 1', 'fragance_name_1')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Cod. Fragancia 1', 'fragance_test_code_1')
+            Column::make('Muestra Frag. 1', 'fragance_ms_1')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Nombre Fragancia 2', 'fragance_name_2')
+            Column::make('Cod. Test Frag. 1', 'fragance_test_code_1')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Ms Fragancia 1', 'fragance_ms_2')
+            Column::make('Fragancia 2', 'fragance_name_2')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Cod. Fragancia 2', 'fragance_test_code_2')
+            Column::make('Muestra Frag. 2', 'fragance_ms_2')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Rot fragance aplication', 'rot_fragance_aplication')
+            Column::make('Cod. Test Frag. 2', 'fragance_test_code_2')
                 ->sortable()
                 ->searchable(),
+
+            Column::make('Rotacion Aplicacion Fragancia', 'rot_fragance_aplication')
+                ->sortable()
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
 
             Column::make('Portador A', 'name_carrier_a')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
 
             Column::make('Portador B', 'name_carrier_b')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
 
             Column::make('Control 1', 'control_1')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
 
             Column::make('Control 2', 'control_2')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
 
             Column::make('Control 3', 'control_3')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
 
             Column::make('Control 4', 'control_4')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
 
             Column::make('Estado', 'status_evaluation')
                 ->sortable()
@@ -170,7 +177,10 @@ final class EvaluatedTable extends PowerGridComponent
 
     public function filters(): array
     {
-        return [];
+        return [
+            Filter::inputText('proyecto', '')
+                ->operators(['contains']),
+        ];
     }
 
     #[\Livewire\Attributes\On('edit')]
@@ -183,10 +193,15 @@ final class EvaluatedTable extends PowerGridComponent
     {
         return [
             Button::add('edit')
-                ->slot('Edit: ' . $row->id)
-                ->id()
-                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('edit', ['rowId' => $row->id])
+                ->slot('<i class="fa-solid fa-pencil"></i>')
+                ->class('inline-flex items-center justify-center px-2 py-2 bg-yellow-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
+                ->openModal('admin.create-edit-evaluated-modal', ['evaluatedFragance' => $row->id_evaluated_fragance])
+                ->tooltip('Editar'),
+            Button::add('destroy')
+                ->slot('<i class="fa-solid fa-trash"></i>')
+                ->class('inline-flex items-center justify-center px-2 py-2 bg-red-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
+                ->openModal('admin.destroy-evaluated-modal', ['evaluatedFragance' => $row->id_evaluated_fragance])
+                ->tooltip('Eliminar'),
         ];
     }
 
