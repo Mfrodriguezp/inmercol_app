@@ -4,13 +4,12 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 
-class Reports extends Component
+class ReportsIndex extends Component
 {
-    //Parameters
     public $title ="Reportes";
 
     public function render()
     {
-        return view('livewire.admin.reports');
+        return view('livewire.admin.reports-index');
     }
 }

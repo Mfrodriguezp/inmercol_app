@@ -7,8 +7,7 @@ use App\Http\Controllers\RedirectionAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProjectController;
-
-
+use App\Http\Controllers\Admin\ReportController;
 
 Route::get('admin', [HomeController::class, 'index'])->name('index.admin');
 
@@ -25,8 +24,12 @@ Route::group(['prefix'=>'judges'],function(){
 });
 //Rutas para evaluaciones
 Route::group(['prefix'=>'evaluateds'],function(){
-    Route::get('/{rotationCarriers?}',[EvaluatedController::class,'index'])->name('admin.evaluateds.index');
+    Route::get('/',[EvaluatedController::class,'index'])->name('admin.evaluateds.index');
     Route::post('store',[EvaluatedController::class,'store'])->name('admin.evaluateds.store');
     Route::post('update',[EvaluatedController::class,'update'])->name('admin.evaluateds.update');
     Route::get('destroy/{evaluated?}',[EvaluatedController::class,'destroy'])->name('admin.evaluateds.destroy');
+});
+//Rutas para evaluaciones
+Route::group(['prefix'=>'reports'],function(){
+    Route::get('',[ReportController::class,'index'])->name('admin.reports.index');
 });

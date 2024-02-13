@@ -277,7 +277,7 @@
             </div>
             <div class="item">
                 <a
-                    href="#">
+                    href="{{route('admin.reports.index')}}">
                     <div class="icon"><i class="fa-solid fa-print"></i></div>
                     <div class="title"><span>Reportes</span></div>
                 </a>
