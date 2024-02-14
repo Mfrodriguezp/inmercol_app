@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\EvaluatedController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\JudgeController;
+use App\Http\Controllers\Admin\JudmentController;
 use App\Http\Controllers\RedirectionAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
@@ -34,5 +35,6 @@ Route::group(['prefix'=>'reports'],function(){
     Route::get('',[ReportController::class,'index'])->name('admin.reports.index');
 });
 Route::group(['prefix'=>'judments'],function(){
-    Route::get('',[ReportController::class,'index'])->name('admin.judments.index');
+    Route::get('',[JudmentController::class,'index'])->name('admin.judments.index');
+
 });

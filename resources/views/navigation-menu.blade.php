@@ -284,11 +284,18 @@
             </div>
             <div class="item">
                 <a
+                    href="{{route('admin.judments.index')}}">
+                    <div class="icon"><i class="fa-solid fa-list-check"></i></div>
+                    <div class="title"><span>Juicios</span></div>
+                </a>
+            </div>
+            {{--<div class="item">
+                <a
                     href="{{route('admin.users.index')}}">
                     <div class="icon"><i class="fa-solid fa-toolbox"></i></div>
                     <div class="title"><span>Permisos</span></div>
                 </a>
-            </div>
+            </div>--}}
         </div>
         <div id="menu-item-logout">
             <form class="item" method="POST" action="{{ route('logout') }}" x-data>
