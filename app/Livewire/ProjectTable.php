@@ -71,15 +71,15 @@ final class ProjectTable extends PowerGridComponent
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
-            ->addColumn('id_project')
-            ->addColumn('id_analisys')
-            ->addColumn('project_name')
-            ->addColumn('client_name')
-            ->addColumn('status')
-            ->addColumn('date_creation', function (Project $project) {
+            ->add('id_project')
+            ->add('id_analisys')
+            ->add('project_name')
+            ->add('client_name')
+            ->add('status')
+            ->add('date_creation', function (Project $project) {
                 return Carbon::parse($project->date_creation)->format('d-m-Y | H:i');
             })
-            ->addColumn('last_evaluation', function (Project $project) {
+            ->add('last_evaluation', function (Project $project) {
                 return Carbon::parse($project->last_evaluation)->format('d-m-Y | H:i');
             });
     }

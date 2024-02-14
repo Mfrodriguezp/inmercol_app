@@ -20,7 +20,7 @@
         </div>
         <!--Data Section-->
         {{-- Form create/edit project --}}
-        <x-dialog-modal wire:model="openModal">
+        <x-dialog-modal wire:model.live="openModal">
             <x-slot name="title">
                 Agregar Evaluacion
             </x-slot>
@@ -31,14 +31,14 @@
                         <x-label>
                             TB
                         </x-label>
-                        <x-input class="w-full" wire:model="tb" required />
+                        <x-input class="w-full" wire:model.live="tb" required />
                     </div>
                     <div class="mb-4">
                         <x-label>
                             Proyecto
                         </x-label>
 
-                        <x-select wire:model="id_project" class="w-full" required>
+                        <x-select wire:model.live="id_project" class="w-full" required>
                             <option value="" disabled>
                                 Seleccione una opción
                             </option>
@@ -56,25 +56,25 @@
                                 <x-label>
                                     Nombre:
                                 </x-label>
-                                <x-input wire:model="fragance_name_1" required />
+                                <x-input wire:model.live="fragance_name_1" required />
                             </div>
                             <div class="mb-4 m-auto">
                                 <x-label>
                                     Counter:
                                 </x-label>
-                                <x-input wire:model="fragance_counter_1" required />
+                                <x-input wire:model.live="fragance_counter_1" required />
                             </div>
                             <div class="mb-4 m-auto">
                                 <x-label>
                                     Ms:
                                 </x-label>
-                                <x-input wire:model="fragance_ms_1" required />
+                                <x-input wire:model.live="fragance_ms_1" required />
                             </div>
                             <div class="mb-4 m-auto">
                                 <x-label>
                                     Código Fragancia
                                 </x-label>
-                                <x-input wire:model="fragance_test_code_1" required />
+                                <x-input wire:model.live="fragance_test_code_1" required />
                             </div>
                         </div>
                     </div>
@@ -87,25 +87,25 @@
                                 <x-label>
                                     Nombre:
                                 </x-label>
-                                <x-input wire:model="fragance_name_2" required />
+                                <x-input wire:model.live="fragance_name_2" required />
                             </div>
                             <div class="mb-4 m-auto">
                                 <x-label>
                                     Counter:
                                 </x-label>
-                                <x-input wire:model="fragance_counter_2" required />
+                                <x-input wire:model.live="fragance_counter_2" required />
                             </div>
                             <div class="mb-4 m-auto">
                                 <x-label>
                                     Ms:
                                 </x-label>
-                                <x-input wire:model="fragance_ms_2" required />
+                                <x-input wire:model.live="fragance_ms_2" required />
                             </div>
                             <div class="mb-4 m-auto">
                                 <x-label>
                                     Código Fragancia
                                 </x-label>
-                                <x-input wire:model="fragance_test_code_2" required />
+                                <x-input wire:model.live="fragance_test_code_2" required />
                             </div>
                         </div>
 

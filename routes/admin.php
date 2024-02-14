@@ -33,3 +33,6 @@ Route::group(['prefix'=>'evaluateds'],function(){
 Route::group(['prefix'=>'reports'],function(){
     Route::get('',[ReportController::class,'index'])->name('admin.reports.index');
 });
+Route::group(['prefix'=>'judments'],function(){
+    Route::get('',[ReportController::class,'index'])->name('admin.judments.index');
+});

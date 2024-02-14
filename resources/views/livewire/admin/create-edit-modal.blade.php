@@ -17,21 +17,21 @@
             @endif
             
             @if (isset($project) && is_object($project))
-                <input type="hidden" name="id_project" wire:model="id_project" value="{{ $project->id_project }}">
+                <input type="hidden" name="id_project" wire:model.live="id_project" value="{{ $project->id_project }}">
                 {{ csrf_field() }}
             @endif
             <div class="mb-4">
                 <x-label>
                     ID análisis
                 </x-label>
-                <x-input class="w-full" name="id_analisys" wire:model="id_analisys"
+                <x-input class="w-full" name="id_analisys" wire:model.live="id_analisys"
                     value="{{ $project->id_analisys ?? '' }}" />
             </div>
             <div class="mb-4">
                 <x-label>
                     Nombre Proyecto
                 </x-label>
-                <x-input class="w-full" name="project_name" wire:model="project_name"
+                <x-input class="w-full" name="project_name" wire:model.live="project_name"
                     value="{{ $project->project_name ?? '' }}" required />
             </div>
             {{-- Comprobación para crear o editar --}}
@@ -40,7 +40,7 @@
                     <x-label>
                         Clientes
                     </x-label>
-                    <x-select name="id_client" wire:model="id_client" class="w-full" required>
+                    <x-select name="id_client" wire:model.live="id_client" class="w-full" required>
                         <option value="" selected disabled>
                             Seleccione una opción
                         </option>

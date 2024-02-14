@@ -31,7 +31,7 @@
                                     
                                 @else
                                     @if (isset($evaluatedFragance) && is_object($evaluatedFragance))
-                                        <x-select name="projects_id_project" wire:model="projects_id_project"
+                                        <x-select name="projects_id_project" wire:model.live="projects_id_project"
                                             class="w-full" required>
                                             <option value="" selected disabled>
                                                 Proyecto
@@ -62,7 +62,7 @@
                             <div
                                 class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 @if (isset($evaluatedFragance) && is_object($evaluatedFragance))
-                                    <x-select name="number_judges" wire:model="number_judges" class="w-full" required>
+                                    <x-select name="number_judges" wire:model.live="number_judges" class="w-full" required>
                                         <option value="" selected disabled>Cant. Jueces</option>
                                         <option value="8">8</option>
                                         <option value="12">12</option>

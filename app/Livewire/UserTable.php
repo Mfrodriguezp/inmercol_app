@@ -51,10 +51,10 @@ final class UserTable extends PowerGridComponent
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
-            ->addColumn('id')
-            ->addColumn('name')
-            ->addColumn('email')
-            ->addColumn('created_at');
+            ->add('id')
+            ->add('name')
+            ->add('email')
+            ->add('created_at');
     }
 
     public function columns(): array

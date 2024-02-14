@@ -59,7 +59,7 @@
             <select
                 @if ($multiple) multiple @endif
                 class="{{ data_get($theme, 'selectClass') }}"
-                wire:model="filters.multi_select.{{ data_get($filter, 'field') }}.values"
+                wire:model.live="filters.multi_select.{{ data_get($filter, 'field') }}.values"
                 x-ref="select_picker_{{ data_get($filter, 'field') }}_{{ $tableName }}"
             >
                 <option value="">{{ trans('livewire-powergrid::datatable.multi_select.all') }}</option>

@@ -47,7 +47,7 @@
                     type="checkbox"
                     {{ $inputAttributes }}
                     x-on:click="window.Alpine.store('pgBulkActions').add($event.target.value, '{{ $tableName }}')"
-                    wire:model="checkboxValues"
+                    wire:model.live="checkboxValues"
                     value="{{ $attribute }}"
                 >
             </label>

@@ -77,15 +77,15 @@ final class JudmentTable extends PowerGridComponent
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
-            ->addColumn('id_judment')
-            ->addColumn('proyecto')
-            ->addColumn('tb')
-            ->addColumn('nombre_juez')
-            ->addColumn('codigo_fragancia')
-            ->addColumn('portador')
-            ->addColumn('control')
-            ->addColumn('calificacion')
-            ->addColumn('fecha_evaluacion');
+            ->add('id_judment')
+            ->add('proyecto')
+            ->add('tb')
+            ->add('nombre_juez')
+            ->add('codigo_fragancia')
+            ->add('portador')
+            ->add('control')
+            ->add('calificacion')
+            ->add('fecha_evaluacion');
     }
 
     public function columns(): array

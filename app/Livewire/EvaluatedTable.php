@@ -79,23 +79,23 @@ final class EvaluatedTable extends PowerGridComponent
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
-            ->addColumn('id_evaluated_fragance')
-            ->addColumn('tb')
-            ->addColumn('project_name')
-            ->addColumn('fragance_name_1')
-            ->addColumn('fragance_ms_1')
-            ->addColumn('fragance_test_code_1')
-            ->addColumn('fragance_name_2')
-            ->addColumn('fragance_ms_2')
-            ->addColumn('fragance_test_code_2')
-            ->addColumn('rot_fragance_aplication')
-            ->addColumn('name_carrier_a')
-            ->addColumn('name_carrier_b')
-            ->addColumn('control_1')
-            ->addColumn('control_2')
-            ->addColumn('control_3')
-            ->addColumn('control_4')
-            ->addColumn('status_evaluation');
+            ->add('id_evaluated_fragance')
+            ->add('tb')
+            ->add('project_name')
+            ->add('fragance_name_1')
+            ->add('fragance_ms_1')
+            ->add('fragance_test_code_1')
+            ->add('fragance_name_2')
+            ->add('fragance_ms_2')
+            ->add('fragance_test_code_2')
+            ->add('rot_fragance_aplication')
+            ->add('name_carrier_a')
+            ->add('name_carrier_b')
+            ->add('control_1')
+            ->add('control_2')
+            ->add('control_3')
+            ->add('control_4')
+            ->add('status_evaluation');
     }
 
     public function columns(): array

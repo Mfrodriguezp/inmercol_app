@@ -15,7 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/fontawesome/css/fontawesome.css', 'resources/fontawesome/css/solid.css', 'resources/js/app.js', 'resources/js/expandCollapsedMenu.js'])
+    <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/expandCollapsedMenu.js'])
 
     <!-- Styles -->
     @livewireStyles

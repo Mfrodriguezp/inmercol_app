@@ -56,8 +56,8 @@ final class JudgeTable extends PowerGridComponent
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
-            ->addColumn('judge_number')
-            ->addColumn('judge_name');
+            ->add('judge_number')
+            ->add('judge_name');
     }
 
     public function columns(): array

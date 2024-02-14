@@ -56,7 +56,7 @@
                         <tbody
                             wire:key="tbody-{{ $rowId }}"
                             {{ $trAttributesBag }}
-                            x-data="{ detailState: @entangle('setUp.detail.state.' . $rowId) }"
+                            x-data="{ detailState: @entangle('setUp.detail.state.' . $rowId).live }"
                         >
                             @include('livewire-powergrid::components.row', [
                                 'rowIndex' => $loop->index + 1,

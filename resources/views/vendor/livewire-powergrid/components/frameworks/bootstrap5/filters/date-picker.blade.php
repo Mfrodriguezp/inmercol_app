@@ -41,7 +41,7 @@
             <input
                 id="input_{{ $field }}"
                 x-ref="rangeInput"
-                wire:model="filters.{{ $type }}.{{ $field }}.formatted"
+                wire:model.live="filters.{{ $type }}.{{ $field }}.formatted"
                 autocomplete="off"
                 data-field="{{ $field }}"
                 style="{{ data_get($theme, 'inputStyle') }} {{ data_get($column, 'headerStyle') }}"

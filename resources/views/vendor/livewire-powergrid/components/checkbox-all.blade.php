@@ -20,7 +20,7 @@
                     class="{{ data_get($theme, 'inputClass') }}"
                     type="checkbox"
                     wire:click="selectCheckboxAll"
-                    wire:model="checkboxAll"
+                    wire:model.live="checkboxAll"
                 >
             </label>
         </div>
