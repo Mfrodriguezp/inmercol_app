@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\EvaluatedFragance;
 use Illuminate\Support\Facades\DB;
+use App\Models\JudmentCounter;
 
 class JudmentController extends Controller
 {
@@ -44,9 +45,16 @@ class JudmentController extends Controller
                 break;
         }
 
+        //Update del valor inicial de los jueces
+        $judmentCounter = JudmentCounter::find(1);
+        $judmentCounter->judment_number = 1;
+        $judmentCounter->save();
+
+        //Retorno de vista de formulario con la primera rotación de jueces
         return view('admin.judments.judment', [
             'rotationJudges' => $rotationJudges,
-            'carrier' => $carrier
+            'carrier' => $carrier,
+            'control'=>$control
         ]);
     }
 }

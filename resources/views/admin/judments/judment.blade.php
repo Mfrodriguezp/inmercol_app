@@ -4,9 +4,9 @@
             <div class="bg-white mt-10 m-auto overflow-hidden shadow-xl sm:rounded-lg p-8">
                 {{--Paso de parámetros desde el controlador al componente livewire judment --}}
                 @livewire('judments.judment',[
-                    'control'=>$control,
+                    'rotationJudges'=>$rotationJudges,
                     'carrier'=>$carrier,
-                    'judges'=>$judges
+                    'control'=>$control
                 ])
             </div>
         </div>

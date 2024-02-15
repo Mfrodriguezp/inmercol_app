@@ -3,11 +3,20 @@
 namespace App\Livewire\Judments;
 
 use Livewire\Component;
+use App\Models\Judge;
+use App\Models\EvaluatedFragance;
 
 class Judment extends Component
 {
-    public $control,$carrier,$judges;
-
+    
+    public $carrier,$rotationJudges,$control;//Parámetros recibidos a través de la vista
+    /*----------------------
+    Parámetros configurados para traer:
+    *Códigos de muestras
+    *Codigos para portadores
+    *Código de proyecto
+    *Código evaluación de fragancia
+    ------------------------*/
     public function mount(){
         //$this->carrier;
         //$this->control;
@@ -16,10 +25,6 @@ class Judment extends Component
 
     public function render()
     {
-        return view('livewire.judments.judment',[
-            'control'=>$this->control,
-            'carrier'=>$this->carrier,
-            'judges'=>$this->judges
-        ]);
+        return view('livewire.judments.judment');
     }
 }

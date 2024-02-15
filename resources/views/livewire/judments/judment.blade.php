@@ -1,9 +1,11 @@
 <div>
     <div class="mb-4">
         <ul>
-            <li>{{$control}}</li>
             <li>{{$carrier}}</li>
-            <li>{{$judges}}</li>
+            <li>{{$control}}</li>
         </ul>
+    </div>
+    <div class="mb-4">
+        {{$rotationJudges}}
     </div>
 </div>
