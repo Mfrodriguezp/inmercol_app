@@ -14,7 +14,7 @@ class JudmentsIndex extends Component
         $this->evaluated=EvaluatedFragance::where('status_evaluation','En curso')
         ->orderByDesc('id_evaluated_fragance','desc')
         ->limit(1)
-        ->get();
+        ->first();
     }
 
     public function render()
