@@ -25,17 +25,17 @@ class EvaluatedController extends Controller
             ->where('projects_id_project', '=', $id_project)
             ->orderBy('id_evaluated_fragance', 'desc')
             ->take(1)
-            ->pluck('rot_fragance_aplication');
+            ->pluck('rot_fragance_aplication')
+            ->first();
         $rotation = 0;
         if (is_null($last_evaluated)) {
             $rotation = 1;
-        } elseif ($last_evaluated[0] = 4) {
-            $rotation = 2;
+        } elseif ($last_evaluated = 4) {
+            $rotation = 1;
         } else {
             $rotation = $last_evaluated[0];
             $rotation++;
         }
-
 
         //Data Del formulario
         $record = [
