@@ -9,9 +9,9 @@ class Judment extends Component
     public $control,$carrier,$judges;
 
     public function mount(){
-        $this->carrier;
-        $this->control;
-        $this->judges;
+        //$this->carrier;
+        //$this->control;
+        //$this->judges;
     }
 
     public function render()
