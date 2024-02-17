@@ -146,8 +146,75 @@
     gap: 1rem;
 }
 /*Altura para data Formulario de Evaluaciones*/
-.dataProject{
+.dataProject {
     height: 60vh;
+}
+
+/*----------------------
+Estilos para el input range de las pruebas de sustantividad
+------------------------*/
+.range {
+    width: 950.9px;
+    display: block;
+}
+
+/*Styles Thumb input range*/
+input[type="range"],
+input[type="range"]::-webkit-slider-runnable-track,
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    background-color: var(--secondary-color);
+    width: 20px;
+    height: 20px;
+    border: 3px solid #333;
+    border-radius: 50%;
+    margin-top: -9px;
+}
+
+/*Estilo para mozilla firefox - Thumb*/
+input[type="range"]::-moz-range-thumb {
+    /*background-color: green;*/
+    margin-top: -0.35em;
+    border: none;
+    width: 1.75em;
+    height: 1.75em;
+    background: currentcolor;
+    --poly: polygon(50% 100%, 41% 0, 63% 0);
+    -webkit-clip-path: var(--poly);
+    clip-path: var(--poly);
+    cursor: ew-resize;
+}
+
+input[type=range]::-ms-thumb {
+    background-color: #777;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #333;
+    border-radius: 50%;
+  }
+
+/*Estilos de línea Firefox*/
+input[type="range"]::-moz-range-track {
+    background-color: var(--primary-color);
+    height: 3px;
+}
+
+input[type="range"]::-ms-track {
+    background-color: #777;
+    height: 3px;
+}
+
+/*Estilo línea de Range Input - Navegador Google Chrome*/
+input[type="range"]::-webkit-slider-runnable-track {
+    background-color: var(--primary-color);
+    height: 3px;
+}
+
+input[type="range"]:focus::-webkit-slider-runnable-track {
+    outline: none;
 }
 
 /*Wordking Bootstrap*/

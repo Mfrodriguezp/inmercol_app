@@ -1,7 +1,7 @@
 <div>
     <div class="header flex items-center mb-10">
         <div class="title basis-3/5">
-            <span class="title">Jueces</span>
+            <span class="title">{{$title}}</span>
         </div>
         <div class="search flex justify-end gap-12 items-end basis-3/5">
             <div class="">

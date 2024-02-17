@@ -3,6 +3,7 @@
         <div class="title basis-3/5">
             <span class="title">{{ $title }}</span>
         </div>
+        @dump($evaluated->control_1_a)
     </div>
 
     <div class="data">
@@ -15,18 +16,19 @@
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Control inicial
                         </h5>
                     </div>
-                    @if ($evaluated->control_1_a === 'activate')
+                    @if ($control_1_a === "activate")
                         <div>
                             <a href="{{ route('admin.judments.judment', [
                                 'control' => 1,
                                 'carrier' => 'a',
                                 'judges' => 8,
+                                'judmentNumber'=>1
                             ]) }}"
                                 class="btn-primary inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Iniciar
                             </a>
                         </div>
-                    @elseif ($evaluated->control_1_a === 'finish')
+                    @elseif ($control_1_a === "finish")
                         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
                             role="alert">
                             <span class="font-medium">Felicitaciones !</span> Este control ya ha finalizado.
@@ -51,6 +53,7 @@
                                 'control' => 2,
                                 'carrier' => 'a',
                                 'judges' => 8,
+                                'judmentNumber'=>1
                             ]) }}"
                                 class="btn-primary inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Iniciar
@@ -82,6 +85,7 @@
                                 'control' => 3,
                                 'carrier' => 'a',
                                 'judges' => 8,
+                                'judmentNumber'=>1
                             ]) }}"
                                 class="btn-primary inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Iniciar
@@ -112,6 +116,7 @@
                                 'control' => 4,
                                 'carrier' => 'a',
                                 'judges' => 8,
+                                'judmentNumber'=>1
                             ]) }}"
                                 class="btn-primary inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Iniciar
@@ -145,12 +150,13 @@
                                 'control' => 1,
                                 'carrier' => 'b',
                                 'judges' => 8,
+                                'judmentNumber'=>1
                             ]) }}"
                                 class="btn-primary inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Iniciar
                             </a>
                         </div>
-                    @elseif ($evaluated->control_2_a === 'finish')
+                    @elseif ($evaluated->control_1_b === 'finish')
                         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
                             role="alert">
                             <span class="font-medium">Felicitaciones !</span> Este control ya ha finalizado.
@@ -175,12 +181,13 @@
                                 'control' => 2,
                                 'carrier' => 'b',
                                 'judges' => 8,
+                                'judmentNumber'=>1
                             ]) }}"
                                 class="btn-primary inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Iniciar
                             </a>
                         </div>
-                    @elseif ($evaluated->control_2_a === 'finish')
+                    @elseif ($evaluated->control_2_b === 'finish')
                         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
                             role="alert">
                             <span class="font-medium">Felicitaciones !</span> Este control ya ha finalizado.
@@ -206,12 +213,13 @@
                                 'control' => 3,
                                 'carrier' => 'b',
                                 'judges' => 8,
+                                'judmentNumber'=>1
                             ]) }}"
                                 class="btn-primary inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Iniciar
                             </a>
                         </div>
-                    @elseif ($evaluated->control_2_a === 'finish')
+                    @elseif ($evaluated->control_3_b === 'finish')
                         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
                             role="alert">
                             <span class="font-medium">Felicitaciones !</span> Este control ya ha finalizado.
@@ -236,12 +244,13 @@
                                 'control' => 4,
                                 'carrier' => 'b',
                                 'judges' => 8,
+                                'judmentNumber'=>1
                             ]) }}"
                                 class="btn-primary inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Iniciar
                             </a>
                         </div>
-                    @elseif ($evaluated->control_2_a === 'finish')
+                    @elseif ($evaluated->control_4_b === 'finish')
                         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
                             role="alert">
                             <span class="font-medium">Felicitaciones !</span> Este control ya ha finalizado.

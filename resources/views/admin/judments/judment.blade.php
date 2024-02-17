@@ -6,7 +6,9 @@
                 @livewire('judments.judment',[
                     'rotationJudges'=>$rotationJudges,
                     'carrier'=>$carrier,
-                    'control'=>$control
+                    'control'=>$control,
+                    'evaluated'=>$evaluated,
+                    'counter'=>$counter //Contador de jueces
                 ])
             </div>
         </div>

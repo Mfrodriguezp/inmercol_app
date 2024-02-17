@@ -16,6 +16,8 @@ class EvaluatedsIndex extends Component
     public function mount()
     {
         $this->title = "Evaluaciones";
+
+        //Captura de aplicación de fragancias en los portadores
         $this->rotationCarriers = DB::table('rotation_aplication_fragances')
             ->select()
             ->orderBy('idrotation_aplication_fragances', 'desc')

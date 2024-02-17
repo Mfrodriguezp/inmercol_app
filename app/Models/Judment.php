@@ -10,6 +10,7 @@ class Judment extends Model
     use HasFactory;
     public $table ='judments';
     protected $primaryKey = 'id_judment';
+    public $timestamps = false;
     protected $fillable = [
         'projects_id_project',
         'evaluated_fragances_id_evaluated_fragance',
