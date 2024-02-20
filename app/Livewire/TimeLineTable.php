@@ -24,6 +24,7 @@ final class TimeLineTable extends PowerGridComponent
     public int $perPage = 5;
     public array $perPageValues = [0, 5, 10, 20, 50, 100];
     public ?string $id_project;
+    public bool $showFilters = true;
 
     public function setUp(): array
     {

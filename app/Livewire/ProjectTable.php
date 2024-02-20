@@ -17,15 +17,18 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 use PowerComponents\LivewirePowerGrid\Facades\Rule;
 use Illuminate\Support\Facades\Blade;
+use PowerComponents\LivewirePowerGrid\Themes\Components\Toggleable;
+
 
 final class ProjectTable extends PowerGridComponent
 {
     use WithExport;
 
-    public string $primaryKey = 'projects.id_project';
-    public string $sortField = 'projects.id_project';
+    public string $primaryKey = 'id_project';
+    public string $sortField = 'id_project';
     public int $perPage = 10;
     public array $perPageValues = [0, 5, 10, 20, 50, 100];
+    public bool $showFilters = true;
     public function setUp(): array
     {
         $this->showCheckBox('id_project');
@@ -68,8 +71,11 @@ final class ProjectTable extends PowerGridComponent
         return [];
     }
 
+
+
     public function fields(): PowerGridFields
     {
+
         return PowerGrid::fields()
             ->add('id_project')
             ->add('id_analisys')
@@ -84,8 +90,18 @@ final class ProjectTable extends PowerGridComponent
             });
     }
 
+    public function onUpdatedToggleable(string $id, string $field, string $value): void
+    {
+        
+        $project = Project::query()->find($id)->update([
+            $field => $value,
+        ]);
+        $this->skipRender();
+    }
+
     public function columns(): array
     {
+        $canEdit = true;
         return [
             Column::make('ID', 'id_project')
                 ->sortable()
@@ -107,14 +123,18 @@ final class ProjectTable extends PowerGridComponent
                 ->searchable(),
             Column::make('Estado', 'status')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->toggleable($canEdit,'Finalizado','En curso'),
             Column::action('Action')
         ];
     }
 
     public function filters(): array
     {
-        return [];
+        return [
+            Filter::boolean('status')
+            ->label('Finalizado', 'En curso')
+        ];
     }
 
     #[\Livewire\Attributes\On('edit')]
@@ -134,12 +154,12 @@ final class ProjectTable extends PowerGridComponent
             Button::add('historial')
                 ->slot('<i class="fa-solid fa-timeline"></i>')
                 ->class('btn-primary inline-flex items-center px-2 py-2 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150')
-                ->openModal('admin.time-line-modal',['project'=>$row->id_project])
+                ->openModal('admin.time-line-modal', ['project' => $row->id_project])
                 ->tooltip('Histórico de evaluaciones'),
             Button::add('edit')
                 ->slot('<i class="fa-solid fa-pencil"></i>')
                 ->class('inline-flex items-center justify-center px-2 py-2 bg-yellow-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
-                ->openModal('admin.create-edit-modal',['project'=>$row->id_project])
+                ->openModal('admin.create-edit-modal', ['project' => $row->id_project])
                 ->tooltip('Editar'),
             Button::add('destroy')
                 ->slot('<i class="fa-solid fa-trash"></i>')
@@ -148,6 +168,8 @@ final class ProjectTable extends PowerGridComponent
                 ->tooltip('Eliminar'),
         ];
     }
+
+
 
     /*
     public function actionRules($row): array

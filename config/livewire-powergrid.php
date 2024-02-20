@@ -57,11 +57,11 @@ return [
              * Slim Select options
              * https://slimselectjs.com/
              */
-            'slim' => [
+            /*'slim' => [
                 'settings' => [
                     'alwaysOpen' => false,
                 ],
-            ],
+            ],*/
             /*
              * datapicker
              * https://slimselectjs.com/
@@ -81,7 +81,7 @@ return [
     |
     */
 
-    'filter' => 'outside',
+    'filter' => 'inline',
 
     /*
     |--------------------------------------------------------------------------
