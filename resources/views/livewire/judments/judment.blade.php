@@ -90,10 +90,10 @@
                                 </div>
                             </div>
                             <div class="m-auto">
-                                <input type="range" name="quality_1" class="range block" id="rango"
+                                <input type="range" min="0" max="20" value="0" name="quality_1" class="range block" id="rango"
                                     step="0.05" />
                                 <div class="scala">
-                                    escala
+                                    
                                 </div>
                             </div>
                         </div>
@@ -124,10 +124,10 @@
                                 </div>
                             </div>
                             <div class="m-auto">
-                                <input type="range" name="quality_2" class="range block" id="rango"
+                                <input type="range" min="0" max="20" value="0" name="quality_2" class="range block" id="rango"
                                     step="0.05" />
                                 <div class="scala">
-                                    escala
+                                    
                                 </div>
                             </div>
                         </div>
@@ -164,7 +164,7 @@
                                 <input type="range" name="quality_1" class="range block" id="rango"
                                     step="0.05" />
                                 <div class="scala">
-                                    escala
+                                    
                                 </div>
                             </div>
                         </div>
@@ -198,7 +198,7 @@
                                 <input type="range" name="quality_2" class="range block" id="rango"
                                     step="0.05" />
                                 <div class="scala">
-                                    escala
+                                    
                                 </div>
                             </div>
                         </div>
@@ -234,10 +234,10 @@
                                 </div>
                             </div>
                             <div class="m-auto">
-                                <input type="range" name="quality_1" class="range block" id="rango"
+                                <input type="range" min="0" max="20" value="0" name="quality_1" class="range block" id="rango"
                                     step="0.05" />
                                 <div class="scala">
-                                    escala
+                                    
                                 </div>
                             </div>
                         </div>
@@ -267,10 +267,10 @@
                                 </div>
                             </div>
                             <div class="m-auto">
-                                <input type="range" name="quality_2" class="range block" id="rango"
+                                <input type="range" min="0" max="20" value="0" name="quality_2" class="range block" id="rango"
                                     step="0.05" />
                                 <div class="scala">
-                                    escala
+                                    
                                 </div>
                             </div>
                         </div>
@@ -304,10 +304,10 @@
                                 </div>
                             </div>
                             <div class="m-auto">
-                                <input type="range" name="quality_1" class="range block" id="rango"
+                                <input type="range" min="0" max="20" value="0" name="quality_1" class="range block" id="rango"
                                     step="0.05" />
                                 <div class="scala">
-                                    escala
+                                    
                                 </div>
                             </div>
                         </div>
@@ -337,10 +337,10 @@
                                 </div>
                             </div>
                             <div class="m-auto">
-                                <input type="range" name="quality_2" class="range block" id="rango"
+                                <input type="range" min="0" max="20" value="0" name="quality_2" class="range block" id="rango"
                                     step="0.05" />
                                 <div class="scala">
-                                    escala
+                                    
                                 </div>
                             </div>
                         </div>

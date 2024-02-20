@@ -36,7 +36,7 @@ Route::group(['prefix'=>'reports'],function(){
 });
 Route::group(['prefix'=>'judments'],function(){
     Route::get('',[JudmentController::class,'index'])->name('admin.judments.index');
-    Route::get('judment/{control?}/{carrier?}/{judges?}/{judmentNumber?}',[JudmentController::class,'judment'])
+    Route::get('judment/{control?}/{carrier?}/{judges?}/{judmentNumber?}/{idEvaluated?}',[JudmentController::class,'judment'])
     ->name('admin.judments.judment');
     Route::post('saveJudment',[JudmentController::class,'saveJudment'])->name('admin.judments.saveJudment');
 

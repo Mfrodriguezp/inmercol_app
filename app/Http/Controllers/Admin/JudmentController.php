@@ -16,7 +16,7 @@ class JudmentController extends Controller
         return view('admin.judments.index');
     }
 
-    public function judment($control, $carrier, $judges, $judmentNumber)
+    public function judment($control, $carrier, $judges, $judmentNumber,$idEvaluated)
     {
         //reset del contador de paso de jueces
         $judmentCounter = JudmentCounter::find($judmentNumber);
@@ -43,6 +43,7 @@ class JudmentController extends Controller
                         '=',
                         'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                     )
+                    ->where('id_evaluated_fragance',"=",$idEvaluated)
                     ->select([
                         'id_evaluated_fragance',
                         'projects_id_project as id_proyecto',
@@ -54,7 +55,6 @@ class JudmentController extends Controller
                         'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                     ])
                     ->orderBy('id_evaluated_fragance', 'desc')
-                    ->take(1)
                     ->first();
                 break;
             case 'b':
@@ -80,6 +80,7 @@ class JudmentController extends Controller
                         '=',
                         'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                     )
+                    ->where('id_evaluated_fragance','=',$idEvaluated)
                     ->select([
                         'id_evaluated_fragance',
                         'projects_id_project as id_proyecto',
@@ -91,7 +92,6 @@ class JudmentController extends Controller
                         'rotation_aplication_fragances.fragance_carrier_b_arm_left as codigo_brazo_izquierdo'
                     ])
                     ->orderBy('id_evaluated_fragance', 'desc')
-                    ->take(1)
                     ->first();
                 break;
         }

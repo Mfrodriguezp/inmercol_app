@@ -154,8 +154,18 @@
 Estilos para el input range de las pruebas de sustantividad
 ------------------------*/
 .range {
-    width: 950.9px;
     display: block;
+}
+
+.scala {
+    margin: auto;
+    width: 924px;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    height: 15px;
+    position: relative;
+    top: -1rem;
 }
 
 /*Styles Thumb input range*/
@@ -163,59 +173,73 @@ input[type="range"],
 input[type="range"]::-webkit-slider-runnable-track,
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 950.9px;
 }
 
+/*-----------------------------------
+Estilos de input range Chrome
+-------------------------------------*/
 input[type="range"]::-webkit-slider-thumb {
-    background-color: var(--secondary-color);
-    width: 20px;
-    height: 20px;
-    border: 3px solid #333;
-    border-radius: 50%;
-    margin-top: -9px;
-}
-
-/*Estilo para mozilla firefox - Thumb*/
-input[type="range"]::-moz-range-thumb {
-    /*background-color: green;*/
+    background-color: var(--primary-color);
     margin-top: -0.35em;
     border: none;
     width: 1.75em;
     height: 1.75em;
-    background: currentcolor;
-    --poly: polygon(50% 100%, 41% 0, 63% 0);
+    --poly: polygon(50% 100%, 0% 0, 100% 0);
     -webkit-clip-path: var(--poly);
     clip-path: var(--poly);
-    cursor: ew-resize;
+    cursor: pointer;
 }
 
-input[type=range]::-ms-thumb {
+/*Estilo para mozilla firefox - Thumb*/
+input[type="range"]::-moz-range-thumb {
+    background-color: var(--secondary-color);
+    margin-top: -0.35em;
+    border: none;
+    width: 1.75em;
+    height: 1.75em;
+    --poly: polygon(50% 100%, 0% 0, 100% 0);
+    -webkit-clip-path: var(--poly);
+    clip-path: var(--poly);
+    cursor: pointer;
+}
+
+/*Estilos de línea Firefox*/
+input[type="range"]::-moz-range-track {
+    background-color: transparent;
+    height: 3px;
+}
+
+/*input[type="range"]::-moz-range-progress {
+    background-color: transparent;
+    height: 1em;
+}*/
+
+/*input[type=range]::-ms-thumb {
     background-color: #777;
     width: 20px;
     height: 20px;
     border: 3px solid #333;
     border-radius: 50%;
-  }
+  }*/
 
-/*Estilos de línea Firefox*/
-input[type="range"]::-moz-range-track {
-    background-color: var(--primary-color);
-    height: 3px;
-}
-
-input[type="range"]::-ms-track {
+/*input[type="range"]::-ms-track {
     background-color: #777;
     height: 3px;
-}
+}*/
 
 /*Estilo línea de Range Input - Navegador Google Chrome*/
-input[type="range"]::-webkit-slider-runnable-track {
+/*input[type="range"]::-webkit-slider-runnable-track {
     background-color: var(--primary-color);
     height: 3px;
-}
+}*/
 
-input[type="range"]:focus::-webkit-slider-runnable-track {
+/*input[type="range"]:focus::-webkit-slider-runnable-track {
     outline: none;
-}
+}*/
 
 /*Wordking Bootstrap*/
 /*@import 'bootstrap/scss/bootstrap';*/
