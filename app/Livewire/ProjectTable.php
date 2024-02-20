@@ -131,11 +131,11 @@ final class ProjectTable extends PowerGridComponent
                 ->class('inline-flex items-center px-2 py-2 bg-gray-800 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150')
                 ->openModal('admin.create-edit-evaluated-modal', ['project' => $row->id_project])
                 ->tooltip('Añadir Evaluaciones'),
-            Button::add('Historial')
+            Button::add('historial')
                 ->slot('<i class="fa-solid fa-timeline"></i>')
                 ->class('btn-primary inline-flex items-center px-2 py-2 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150')
-                ->dispatch('admin.edit-modal', ['rowId' => $row->id])
-                ->tooltip('Permisos'),
+                ->openModal('admin.time-line-modal',['project'=>$row->id_project])
+                ->tooltip('Histórico de evaluaciones'),
             Button::add('edit')
                 ->slot('<i class="fa-solid fa-pencil"></i>')
                 ->class('inline-flex items-center justify-center px-2 py-2 bg-yellow-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
