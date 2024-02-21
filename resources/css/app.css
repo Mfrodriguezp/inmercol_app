@@ -155,6 +155,8 @@ Estilos para el input range de las pruebas de sustantividad
 ------------------------*/
 .range {
     display: block;
+    position: relative;
+    z-index: 2;
 }
 
 .scala {
@@ -162,12 +164,60 @@ Estilos para el input range de las pruebas de sustantividad
     width: 924px;
     border-bottom: 1px solid black;
     border-left: 1px solid black;
-    border-right: 1px solid black;
     height: 15px;
     position: relative;
-    top: -1rem;
+    top: -0.8rem;
+    z-index: 1;
+    display: flex;
+    /*justify-content: space-between;*/
+    align-items: flex-end;
+    padding: 6px 0;
 }
 
+.numero {
+    position: relative;
+    text-align: center;
+}
+
+.linea {
+    width: 1px;
+    height: 12px;
+    background-color: black;
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.markingA {
+    position: relative;
+    left: 1.2rem;
+}
+.markingB {
+    position: relative;
+    left: 2.4rem;
+}
+
+.markingC {
+    position: relative;
+    left: 4.9rem;
+}
+
+.markingD {
+    position: relative;
+    left: 18.2rem;
+}
+
+.markingE
+{
+  position: relative;
+  left: 27.95rem;
+}
+
+.markingF
+{
+  position: relative;
+  left: 54.2rem;
+}
 /*Styles Thumb input range*/
 input[type="range"],
 input[type="range"]::-webkit-slider-runnable-track,
@@ -177,6 +227,7 @@ input[type="range"]::-webkit-slider-thumb {
     background: transparent;
     cursor: pointer;
     width: 950.9px;
+    z-index: 2;
 }
 
 /*-----------------------------------
@@ -188,7 +239,7 @@ input[type="range"]::-webkit-slider-thumb {
     border: none;
     width: 1.75em;
     height: 1.75em;
-    --poly: polygon(50% 100%, 0% 0, 100% 0);
+    --poly:polygon(50% 100%, 10% 0, 90% 0);
     -webkit-clip-path: var(--poly);
     clip-path: var(--poly);
     cursor: pointer;
@@ -200,8 +251,8 @@ input[type="range"]::-moz-range-thumb {
     margin-top: -0.35em;
     border: none;
     width: 1.75em;
-    height: 1.75em;
-    --poly: polygon(50% 100%, 0% 0, 100% 0);
+    height: 1.5em;
+    --poly: polygon(50% 100%, 10% 0, 90% 0);
     -webkit-clip-path: var(--poly);
     clip-path: var(--poly);
     cursor: pointer;
@@ -213,10 +264,10 @@ input[type="range"]::-moz-range-track {
     height: 3px;
 }
 
-/*input[type="range"]::-moz-range-progress {
+input[type="range"]::-moz-range-progress {
     background-color: transparent;
     height: 1em;
-}*/
+}
 
 /*input[type=range]::-ms-thumb {
     background-color: #777;
@@ -233,8 +284,7 @@ input[type="range"]::-moz-range-track {
 
 /*Estilo línea de Range Input - Navegador Google Chrome*/
 /*input[type="range"]::-webkit-slider-runnable-track {
-    background-color: var(--primary-color);
-    height: 3px;
+    background-color: transparent;
 }*/
 
 /*input[type="range"]:focus::-webkit-slider-runnable-track {
