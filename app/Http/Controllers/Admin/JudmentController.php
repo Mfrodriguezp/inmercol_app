@@ -8,6 +8,8 @@ use App\Models\EvaluatedFragance;
 use App\Models\Judment;
 use Illuminate\Support\Facades\DB;
 use App\Models\JudmentCounter;
+use App\Models\Project;
+use Seld\PharUtils\Timestamps;
 
 class JudmentController extends Controller
 {
@@ -114,6 +116,7 @@ class JudmentController extends Controller
         $counter = $request->input('counter');
         $control = $request->input('marking_type');
         $idEvaluated = $request->input('id_evaluated_fragance');
+        $idProject = $request->input('id_proyecto');
         $controlTransform = ''; //var for transform number a C1,C2,C3,C4. 
         if ($counter < 8) {
             //Concateniación de la "C" a cada control
@@ -775,15 +778,20 @@ class JudmentController extends Controller
                             $upd_control_4_b->save();
                             break;
                         case 4:
-                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
-                                ->sortByDesc('id_evaluated_fragance')
-                                ->take(1)
-                                ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;*/
-                            //Actualización de estatus del primer control portador a    
+                            //Actualización de estatus del cuarto control portador b    
                             $upd_control_4_b = EvaluatedFragance::find($idEvaluated);
                             $upd_control_4_b->control_4_b = 'finish';
                             $upd_control_4_b->save();
+
+                            //Actualición del estado de la evaluación de fragancia
+                            $upd_status_evaluated = EvaluatedFragance::find($idEvaluated);
+                            $upd_status_evaluated->status_evaluation = "Finalizado";
+                            $upd_status_evaluated->save();
+
+                            //Actualización de la fecha/hora ultima evaluación en la tabla project
+                            $upd_last_evaluation = Project::find($idProject);
+                            $upd_last_evaluation->last_evaluation = now('America/Bogota');
+                            $upd_last_evaluation->save();
                             break;
                     }
                     break;
