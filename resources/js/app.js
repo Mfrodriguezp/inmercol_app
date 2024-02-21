@@ -1,11 +1,9 @@
 import './bootstrap';
 import 'flowbite';
-import './../../vendor/power-components/livewire-powergrid/dist/powergrid'
- 
+import './../../vendor/power-components/livewire-powergrid/dist/powergrid';
+
 // If you use Tailwind 
-import './../../vendor/power-components/livewire-powergrid/dist/tailwind.css'
-
-
+import './../../vendor/power-components/livewire-powergrid/dist/tailwind.css';
 
 //Datapicker
 import flatpickr from "flatpickr";

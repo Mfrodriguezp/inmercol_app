@@ -16,7 +16,7 @@ class JudmentController extends Controller
         return view('admin.judments.index');
     }
 
-    public function judment($control, $carrier, $judges, $judmentNumber,$idEvaluated)
+    public function judment($control, $carrier, $judges, $judmentNumber, $idEvaluated)
     {
         //reset del contador de paso de jueces
         $judmentCounter = JudmentCounter::find($judmentNumber);
@@ -43,7 +43,7 @@ class JudmentController extends Controller
                         '=',
                         'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                     )
-                    ->where('id_evaluated_fragance',"=",$idEvaluated)
+                    ->where('id_evaluated_fragance', "=", $idEvaluated)
                     ->select([
                         'id_evaluated_fragance',
                         'projects_id_project as id_proyecto',
@@ -81,7 +81,7 @@ class JudmentController extends Controller
                         '=',
                         'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                     )
-                    ->where('id_evaluated_fragance','=',$idEvaluated)
+                    ->where('id_evaluated_fragance', '=', $idEvaluated)
                     ->select([
                         'id_evaluated_fragance',
                         'projects_id_project as id_proyecto',
@@ -113,11 +113,12 @@ class JudmentController extends Controller
         $carrier = $request->input('carrier');
         $counter = $request->input('counter');
         $control = $request->input('marking_type');
+        $idEvaluated = $request->input('id_evaluated_fragance');
         $controlTransform = ''; //var for transform number a C1,C2,C3,C4. 
         if ($counter < 8) {
             //Concateniación de la "C" a cada control
             $controlTransform = strval($control);
-            $controlTransform = 'C'.$controlTransform;
+            $controlTransform = 'C' . $controlTransform;
             //recolección de datos
             $quality1 = [
                 'projects_id_project' => $request->input('id_proyecto'),
@@ -165,6 +166,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -172,11 +174,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_a_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_a_fragancia_2',
+                                    'evaluated_fragances.name_carrier_a as nombre_portador_a',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                         case 3:
@@ -198,6 +200,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -205,11 +208,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_a_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_a_fragancia_2',
+                                    'evaluated_fragances.name_carrier_a as nombre_portador_a',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                         case 4:
@@ -231,6 +234,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -238,11 +242,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_a_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_a_fragancia_2',
+                                    'evaluated_fragances.name_carrier_a as nombre_portador_a',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                         case 5:
@@ -264,6 +268,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -271,11 +276,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_a_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_a_fragancia_2',
+                                    'evaluated_fragances.name_carrier_a as nombre_portador_a',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                         case 6:
@@ -297,6 +302,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -304,11 +310,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_a_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_a_fragancia_2',
+                                    'evaluated_fragances.name_carrier_a as nombre_portador_a',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                         case 7:
@@ -330,6 +336,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -337,11 +344,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_a_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_a_fragancia_2',
+                                    'evaluated_fragances.name_carrier_a as nombre_portador_a',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                         case 8:
@@ -363,6 +370,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -370,11 +378,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_a_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_a_fragancia_2',
+                                    'evaluated_fragances.name_carrier_a as nombre_portador_a',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                     }
@@ -400,6 +408,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -407,11 +416,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_b_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_b_fragancia_2',
+                                    'evaluated_fragances.name_carrier_b as nombre_portador_b',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                         case 3:
@@ -433,6 +442,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -440,11 +450,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_b_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_b_fragancia_2',
+                                    'evaluated_fragances.name_carrier_b as nombre_portador_b',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                         case 4:
@@ -466,6 +476,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -473,11 +484,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_b_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_b_fragancia_2',
+                                    'evaluated_fragances.name_carrier_b as nombre_portador_b',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                         case 5:
@@ -499,6 +510,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -506,11 +518,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_b_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_b_fragancia_2',
+                                    'evaluated_fragances.name_carrier_b as nombre_portador_b',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                         case 6:
@@ -532,6 +544,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance','=',$idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -539,11 +552,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_b_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_b_fragancia_2',
+                                    'evaluated_fragances.name_carrier_b as nombre_portador_b',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                         case 7:
@@ -565,6 +578,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance','=',$idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -572,11 +586,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_b_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_b_fragancia_2',
+                                    'evaluated_fragances.name_carrier_b as nombre_portador_b',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                         case 8:
@@ -598,6 +612,7 @@ class JudmentController extends Controller
                                     '=',
                                     'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
                                 )
+                                ->where('id_evaluated_fragance','=',$idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
@@ -605,11 +620,11 @@ class JudmentController extends Controller
                                     'code_1_test_a as codigo_portador_b_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_b_fragancia_2',
+                                    'evaluated_fragances.name_carrier_b as nombre_portador_b',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
-                                ->take(1)
                                 ->first();
                             break;
                     }
@@ -626,7 +641,7 @@ class JudmentController extends Controller
         } else {
             //Concateniación de la "C" a cada control
             $controlTransform = strval($control);
-            $controlTransform = 'C'.$controlTransform;
+            $controlTransform = 'C' . $controlTransform;
             //recolección de datos
             $quality1 = [
                 'projects_id_project' => $request->input('id_proyecto'),
@@ -655,58 +670,58 @@ class JudmentController extends Controller
                 case 'a':
                     switch ($control) {
                         case 1:
-                            $id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
+                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
                                 ->sortByDesc('id_evaluated_fragance')
                                 ->take(1)
                                 ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;
+                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus activate finish del primer control portador a    
-                            $update_control_1_a = EvaluatedFragance::find($id);
+                            $update_control_1_a = EvaluatedFragance::find($idEvaluated);
                             $update_control_1_a->control_1_a = 'finish';
                             $update_control_1_a->save();
                             //Update de status de pending a activate segundo control
-                            $update_control_2_a = EvaluatedFragance::find($id);
+                            $update_control_2_a = EvaluatedFragance::find($idEvaluated);
                             $update_control_2_a->control_2_a = 'activate';
                             $update_control_2_a->save();
                             break;
                         case 2:
-                            $id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
+                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
                                 ->sortByDesc('id_evaluated_fragance')
                                 ->take(1)
                                 ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;
+                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus del segundo control portador a    
-                            $upd_control_2_a = EvaluatedFragance::find($id);
+                            $upd_control_2_a = EvaluatedFragance::find($idEvaluated);
                             $upd_control_2_a->control_2_a = 'finish';
                             $upd_control_2_a->save();
                             //Update de status de pending a activate tercer control
-                            $update_control_3_a = EvaluatedFragance::find($id);
+                            $update_control_3_a = EvaluatedFragance::find($idEvaluated);
                             $update_control_3_a->control_3_a = 'activate';
                             $update_control_3_a->save();
                             break;
                         case 3:
-                            $id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
+                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
                                 ->sortByDesc('id_evaluated_fragance')
                                 ->take(1)
                                 ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;
+                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus del tercer control portador a    
-                            $upd_control_3_a = EvaluatedFragance::find($id);
+                            $upd_control_3_a = EvaluatedFragance::find($idEvaluated);
                             $upd_control_3_a->control_3_a = 'finish';
                             $upd_control_3_a->save();
                             //Update de status de pending a activate cuarto control
-                            $update_control_4_a = EvaluatedFragance::find($id);
+                            $update_control_4_a = EvaluatedFragance::find($idEvaluated);
                             $update_control_4_a->control_4_a = 'activate';
                             $update_control_4_a->save();
                             break;
                         case 4:
-                            $id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
+                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
                                 ->sortByDesc('id_evaluated_fragance')
                                 ->take(1)
                                 ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;
+                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus del último control portador a    
-                            $upd_control_4_a = EvaluatedFragance::find($id);
+                            $upd_control_4_a = EvaluatedFragance::find($idEvaluated);
                             $upd_control_4_a->control_4_a = 'finish';
                             $upd_control_4_a->save();
                             break;
@@ -715,58 +730,58 @@ class JudmentController extends Controller
                 case 'b':
                     switch ($control) {
                         case 1:
-                            $id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
+                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
                                 ->sortByDesc('id_evaluated_fragance')
                                 ->take(1)
                                 ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;
+                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus del primer control portador a    
-                            $upd_control_1_b = EvaluatedFragance::find($id);
+                            $upd_control_1_b = EvaluatedFragance::find($idEvaluated);
                             $upd_control_1_b->control_1_b = 'finish';
                             $upd_control_1_b->save();
                             //Update de status de pending a activate segundo control
-                            $upd_control_2_b = EvaluatedFragance::find($id);
+                            $upd_control_2_b = EvaluatedFragance::find($idEvaluated);
                             $upd_control_2_b->control_2_b = 'activate';
                             $upd_control_2_b->save();
                             break;
                         case 2:
-                            $id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
+                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
                                 ->sortByDesc('id_evaluated_fragance')
                                 ->take(1)
                                 ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;
+                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus del segundo control portador a    
-                            $upd_control_2_b = EvaluatedFragance::find($id);
+                            $upd_control_2_b = EvaluatedFragance::find($idEvaluated);
                             $upd_control_2_b->control_2_b = 'finish';
                             $upd_control_2_b->save();
                             //Update de status de pending a activate tercer control
-                            $upd_control_3_b = EvaluatedFragance::find($id);
+                            $upd_control_3_b = EvaluatedFragance::find($idEvaluated);
                             $upd_control_3_b->control_3_b = 'activate';
                             $upd_control_3_b->save();
                             break;
                         case 3:
-                            $id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
+                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
                                 ->sortByDesc('id_evaluated_fragance')
                                 ->take(1)
                                 ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;
+                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus del primer control portador a    
-                            $upd_control_3_b = EvaluatedFragance::find($id);
+                            $upd_control_3_b = EvaluatedFragance::find($idEvaluated);
                             $upd_control_3_b->control_3_b = 'finish';
                             $upd_control_3_b->save();
                             //Update de status de pending a activate tercer control
-                            $upd_control_4_b = EvaluatedFragance::find($id);
+                            $upd_control_4_b = EvaluatedFragance::find($idEvaluated);
                             $upd_control_4_b->control_4_b = 'activate';
                             $upd_control_4_b->save();
                             break;
                         case 4:
-                            $id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
+                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
                                 ->sortByDesc('id_evaluated_fragance')
                                 ->take(1)
                                 ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;
+                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus del primer control portador a    
-                            $upd_control_4_b = EvaluatedFragance::find($id);
+                            $upd_control_4_b = EvaluatedFragance::find($idEvaluated);
                             $upd_control_4_b->control_4_b = 'finish';
                             $upd_control_4_b->save();
                             break;

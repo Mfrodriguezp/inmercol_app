@@ -12,6 +12,9 @@
                 <div>
                     <span class="text-teal-500 text-2xl font-semibold capitalize">Pruebas Portador: {{$evaluated->name_carrier_a}}</span>
                 </div>
+                <div>
+                    @dump($evaluated->id_evaluated_fragance)
+                </div>
                 <div class="sutantive-test grid gap-4 grid-cols-4 my-3" id="carrier1">
                     {{-- Control 1 --}}
                     <div
@@ -21,7 +24,7 @@
                                 inicial
                             </h5>
                         </div>
-                        @if ($evaluated->control_1_a === 'activate')
+                        @if ($evaluated->control_1_a = 'activate')
                             <div>
                                 <a href="{{ route('admin.judments.judment', [
                                     'control' => 1,
@@ -34,7 +37,7 @@
                                     Iniciar
                                 </a>
                             </div>
-                        @elseif ($evaluated->control_1_a === 'finish')
+                        @elseif ($evaluated->control_1_a = 'finish')
                             <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
                                 role="alert">
                                 <span class="font-medium">Felicitaciones !</span> Este control ya ha finalizado.
@@ -160,7 +163,7 @@
                                 inicial
                             </h5>
                         </div>
-                        @if ($evaluated->control_1_b === 'activate')
+                        @if ($evaluated->control_1_b = 'activate')
                             <div>
                                 <a href="{{ route('admin.judments.judment', [
                                     'control' => 1,
@@ -173,7 +176,7 @@
                                     Iniciar
                                 </a>
                             </div>
-                        @elseif ($evaluated->control_1_b === 'finish')
+                        @elseif ($evaluated->control_1_b = 'finish')
                             <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
                                 role="alert">
                                 <span class="font-medium">Felicitaciones !</span> Este control ya ha finalizado.

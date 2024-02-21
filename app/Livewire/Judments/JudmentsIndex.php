@@ -11,16 +11,18 @@ class JudmentsIndex extends Component
 {
     use  WithPagination;
     public $title = "Pruebas de sustantividad";
-
+    /*public EvaluatedFragance $evaluateds;
+    public $control_1_a,$control_2_a,$control_3_a,$control_4_a;
+    public $control_1_b,$control_2_b,$control_3_b,$control_4_b;*/
     public function mount()
     {
-        //$this->evaluated = EvaluatedFragance::where('status_evaluation', 'En curso')->paginate(1);
-        //$this->evaluated = EvaluatedFragance::where('status_evaluation', '=', 'En curso')->paginate(1);
-        /*if (isset($evaluated)) {
+        /*
+        if (isset($evaluateds)) {
+            
             //Portador A
-            //$this->control_1_a = $this->evaluated->control_1_a;
-            $this->control_2_a = $this->evaluated->control_2_a;
-            $this->control_3_a = $this->evaluated->control_3_a;
+            $this->control_1_a = $this->evaluateds->control_1_a;
+            $this->control_2_a = $this->evaluateds->control_2_a;
+            $this->control_3_a = $this->evaluateds->control_3_a;
             $this->control_4_a = $this->evaluated->control_4_a;
             //Portador B
             $this->control_1_b = $this->evaluated->control_1_b;
