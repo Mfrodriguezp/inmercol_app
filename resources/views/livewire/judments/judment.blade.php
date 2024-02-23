@@ -1,12 +1,12 @@
 <div>
     <div class="header flex justify-between items-center mb-4">
-        <div class="title basis-2/5">
+        <div class="title basis-3/5">
             <span class="title">{{ $title }}</span>
         </div>
         {{-- Alert --}}
         @if (!is_null($message))
             <div id="alert-3"
-                class="fixed right-32 flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                class="fixed right-20 flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
                 role="alert">
                 <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     viewBox="0 0 20 20">
