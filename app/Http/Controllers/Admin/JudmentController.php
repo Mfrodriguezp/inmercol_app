@@ -75,7 +75,7 @@ class JudmentController extends Controller
                 /*Query para validar los códigos de test de fragancia
                  y códigos de fragracias para los portadores
                 */
-                //Query para extracción de los datos de la evaluación portador A
+                //Query para extracción de los datos de la evaluación portador B
                 $evaluated = DB::table('evaluated_fragances')
                     ->join(
                         'rotation_aplication_fragances',
@@ -106,13 +106,15 @@ class JudmentController extends Controller
             'carrier' => $carrier,
             'control' => $control,
             'evaluated' => $evaluated,
-            'counter' => $judmentNumber
+            'counter' => $judmentNumber,
+            'message'=>null
         ]);
     }
 
     public function saveJudment(Request $request)
     {
         $carrier = $request->input('carrier');
+        $carrier_name = $request->input('carrier_name');
         $counter = $request->input('counter');
         $control = $request->input('marking_type');
         $idEvaluated = $request->input('id_evaluated_fragance');
@@ -639,7 +641,8 @@ class JudmentController extends Controller
                 'carrier' => $carrier, //portador
                 'control' => $control,
                 'evaluated' => $evaluated, //Datata para el formulario
-                'counter' => $counter
+                'counter' => $counter,
+                'message'=>'Evaluación registrada satisfactoriamente'
             ]);
         } else {
             //Concateniación de la "C" a cada control
@@ -673,11 +676,6 @@ class JudmentController extends Controller
                 case 'a':
                     switch ($control) {
                         case 1:
-                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
-                                ->sortByDesc('id_evaluated_fragance')
-                                ->take(1)
-                                ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus activate finish del primer control portador a    
                             $update_control_1_a = EvaluatedFragance::find($idEvaluated);
                             $update_control_1_a->control_1_a = 'finish';
@@ -688,11 +686,6 @@ class JudmentController extends Controller
                             $update_control_2_a->save();
                             break;
                         case 2:
-                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
-                                ->sortByDesc('id_evaluated_fragance')
-                                ->take(1)
-                                ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus del segundo control portador a    
                             $upd_control_2_a = EvaluatedFragance::find($idEvaluated);
                             $upd_control_2_a->control_2_a = 'finish';
@@ -703,11 +696,6 @@ class JudmentController extends Controller
                             $update_control_3_a->save();
                             break;
                         case 3:
-                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
-                                ->sortByDesc('id_evaluated_fragance')
-                                ->take(1)
-                                ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus del tercer control portador a    
                             $upd_control_3_a = EvaluatedFragance::find($idEvaluated);
                             $upd_control_3_a->control_3_a = 'finish';
@@ -718,11 +706,6 @@ class JudmentController extends Controller
                             $update_control_4_a->save();
                             break;
                         case 4:
-                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
-                                ->sortByDesc('id_evaluated_fragance')
-                                ->take(1)
-                                ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus del último control portador a    
                             $upd_control_4_a = EvaluatedFragance::find($idEvaluated);
                             $upd_control_4_a->control_4_a = 'finish';
@@ -733,11 +716,6 @@ class JudmentController extends Controller
                 case 'b':
                     switch ($control) {
                         case 1:
-                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
-                                ->sortByDesc('id_evaluated_fragance')
-                                ->take(1)
-                                ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus del primer control portador a    
                             $upd_control_1_b = EvaluatedFragance::find($idEvaluated);
                             $upd_control_1_b->control_1_b = 'finish';
@@ -748,11 +726,6 @@ class JudmentController extends Controller
                             $upd_control_2_b->save();
                             break;
                         case 2:
-                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
-                                ->sortByDesc('id_evaluated_fragance')
-                                ->take(1)
-                                ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus del segundo control portador a    
                             $upd_control_2_b = EvaluatedFragance::find($idEvaluated);
                             $upd_control_2_b->control_2_b = 'finish';
@@ -763,11 +736,6 @@ class JudmentController extends Controller
                             $upd_control_3_b->save();
                             break;
                         case 3:
-                            /*$id_evaluated = EvaluatedFragance::all(['id_evaluated_fragance'])
-                                ->sortByDesc('id_evaluated_fragance')
-                                ->take(1)
-                                ->first();
-                            $id = $id_evaluated->id_evaluated_fragance;*/
                             //Actualización de estatus del primer control portador a    
                             $upd_control_3_b = EvaluatedFragance::find($idEvaluated);
                             $upd_control_3_b->control_3_b = 'finish';
@@ -796,7 +764,8 @@ class JudmentController extends Controller
                     }
                     break;
             }
-            return redirect()->route('admin.judments.index');
+            return redirect()->route('admin.judments.index')
+            ->with('message','El control '.$control.' del portador '.$carrier_name. ' ha sido guardado correctamente.');
         }
     }
 }
