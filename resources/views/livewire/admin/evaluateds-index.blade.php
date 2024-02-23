@@ -55,7 +55,7 @@
                 <div class="mt-2 mb-4 text-sm">
                     @if (isset($rotationCarriers) && is_object($rotationCarriers))
                         <div class="mb-4">
-                            <h3 class="text-lg font-medium">Aplicación Fragancias Portador A</h3>
+                            <h3 class="text-lg font-medium">Aplicación Fragancias Portador {{$rotationCarriers->name_carrier_a}}</h3>
                             <ul>
                                 <li>
                                     <strong>Brazo Derecho:
@@ -68,7 +68,7 @@
                             </ul>
                         </div>
                         <div class="mb-4">
-                            <h3 class="text-lg font-medium">Aplicación Fragancias Portador B</h3>
+                            <h3 class="text-lg font-medium">Aplicación Fragancias Aplicación Fragancias Portador {{$rotationCarriers->name_carrier_b}}</h3>
                             <ul>
                                 <li>
                                     <strong>Brazo Derecho:
