@@ -120,7 +120,7 @@ class JudmentController extends Controller
         $idEvaluated = $request->input('id_evaluated_fragance');
         $idProject = $request->input('id_proyecto');
         $controlTransform = ''; //var for transform number a C1,C2,C3,C4. 
-        if ($counter < 8) {
+        if ($counter < 9) {
             //Concateniación de la "C" a cada control
             $controlTransform = strval($control);
             $controlTransform = 'C' . $controlTransform;
