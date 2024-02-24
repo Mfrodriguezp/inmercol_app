@@ -15,7 +15,7 @@
                 </svg>
                 <span class="sr-only">Info</span>
                 <div class="ms-3 text-sm font-medium">
-                    {{ $message}}
+                    {{ $message }}
                 </div>
                 <button type="button"
                     class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
@@ -62,7 +62,8 @@
                     <input type="hidden" name="carrier" value="{{ $carrier }}">
                 </div>
                 <div class="div">
-                    <input type="hidden" name="carrier_name" value="{{ $carrier === 'a' ? $evaluated->nombre_portador_a : $evaluated->nombre_portador_b }}">
+                    <input type="hidden" name="carrier_name"
+                        value="{{ $carrier === 'a' ? $evaluated->nombre_portador_a : $evaluated->nombre_portador_b }}">
                 </div>
                 <div class="">
                     <input type="hidden" name="counter" value="{{ $counter }}">
@@ -460,7 +461,16 @@
                         </div>
                     @endif
                 @endif
-                <div class="footer flex justify-end">
+                <div class="footer flex justify-between items-center">
+                    <div class="flex justify-between basis-3/5">
+                        <span class="block text-xs">Escala: </span>
+                        <span class="block text-xs">A= Ligeramente suave</span>
+                        <span class="block text-xs">B= Suave</span>
+                        <span class="block text-xs">C= Moderado</span>
+                        <span class="block text-xs">D= Fuerte</span>
+                        <span class="block text-xs">E= Muy Fuerte</span>
+                        <span class="block text-xs">F= Extremo Fuerte</span>
+                    </div>
                     <x-button>
                         Registrar Prueba
                     </x-button>
