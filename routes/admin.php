@@ -14,11 +14,19 @@ Route::get('admin', [HomeController::class, 'index'])->name('index.admin');
 
 //Rutas Resource para administración de usuarios y permisos.
 Route::resource('users', UserController::class)->names('admin.users');
+
+//Route::resource('projects',ProjectController::class)->names('admin.projects');
 //Rutas Resource para Proyectos
-Route::resource('projects',ProjectController::class)->names('admin.projects');
+Route::group(['prefix'=>'projects'],function(){
+    Route::get('/',[ProjectController::class,'index'])->name('admin.projects.index');
+    Route::post('store',[ProjectController::class,'store'])->name('admin.projects.store');
+    Route::post('update',[ProjectController::class,'update'])->name('admin.projects.update');
+    Route::get('destroy/{project?}',[ProjectController::class,'destroy'])->name('admin.projects.destroy');
+});
+
 //Rutas para Jueces
 Route::group(['prefix'=>'judges'],function(){
-    Route::get('',[JudgeController::class,'index'])->name('admin.judges.index');
+    Route::get('/',[JudgeController::class,'index'])->name('admin.judges.index');
     Route::post('store',[JudgeController::class,'store'])->name('admin.judges.store');
     Route::post('update',[JudgeController::class,'update'])->name('admin.judges.update');
     Route::get('destroy/{judge?}',[JudgeController::class,'destroy'])->name('admin.judges.destroy');

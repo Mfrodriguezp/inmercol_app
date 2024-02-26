@@ -1,7 +1,7 @@
 <div>
     <div class="px-6 py-4">
         <div class="text-lg text-center font-medium text-gray-900">
-            ¿Estas seguro de eliminar <strong>{{ $project->project_name }}</strong>?
+            ¿Estas seguro de eliminar el proyecto <strong>{{ $project->project_name }}</strong>?
         </div>
 
         <div class="mt-4 text-sm text-gray-600">
@@ -15,8 +15,9 @@
         <x-secondary-button wire:click="$dispatch('closeModal')" wire:loading.attr="disabled">
             Cancelar
         </x-secondary-button>
-        <x-danger-button wire:click="deleteProject" class="ml-2" wire:loading.attr="disabled">
+        <a class="ml-2 inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150"
+            href="{{ action('App\Http\Controllers\Admin\ProjectController@destroy', ['project' => $project->id_project]) }}">
             Eliminar Proyecto
-        </x-danger-button>
+        </a>
     </div>
 </div>
