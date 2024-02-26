@@ -21,20 +21,30 @@ class EvaluatedController extends Controller
     {
         //Validación de rotación
         $id_project = $request->input('projects_id_project');
-        $last_evaluated = DB::table('evaluated_fragances')
+        /*$last_evaluated = DB::table('evaluated_fragances')
             ->where('projects_id_project', '=', $id_project)
             ->orderBy('id_evaluated_fragance', 'desc')
             ->take(1)
             ->pluck('rot_fragance_aplication')
+            ->first();*/
+
+        //Query para extraer la rotación de fragancia
+        $last_evaluated = EvaluatedFragance::all()
+            ->where('projects_id_project', '=', $id_project)
+            ->sortByDesc('id_evaluated_fragance')
+            ->take(1)
+            ->pluck('rot_fragance_aplication')
             ->first();
+
+        //Asignación de valorpara la rotación de aplicación de fragancia
         $rotation = 0;
         if (is_null($last_evaluated)) {
             $rotation = 1;
-        } elseif ($last_evaluated = 4) {
+        } elseif ($last_evaluated == 4) {
             $rotation = 1;
         } else {
-            $rotation = $last_evaluated[0];
-            $rotation++;
+            $rotation += $last_evaluated;
+            $rotation ++;
         }
 
         //Data Del formulario
