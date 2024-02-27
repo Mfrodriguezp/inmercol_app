@@ -24,7 +24,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/app', function () {
-        return view('dashboard');
+        return redirect()->route('index.admin');
     })->name('dashboard');
     /*Route::get('/dashboard/{option}',function($option){
         return view('dashboard',[

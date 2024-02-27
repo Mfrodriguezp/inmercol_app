@@ -15,8 +15,23 @@ class UserSeeder extends Seeder
     {
         User::Create([
             'name'=>'Miller Rodriguez',
-            'email'=>'mildriz06@gmail.com',
+            'email'=>'sa@inmercol.com',
             'password'=>bcrypt('DevFull2024.')
         ])->assignRole('Admin');
+        User::Create([
+            'name'=>'David Arroyo',
+            'email'=>'admin@inmercol.com',
+            'password'=>bcrypt('Admin2024..')
+        ])->assignRole('Admin');
+        User::Create([
+            'name'=>'Liz',
+            'email'=>'manager@inmercol.com',
+            'password'=>bcrypt('Manager2024.')
+        ])->assignRole('Manager');
+        User::Create([
+            'name'=>'Jueces',
+            'email'=>'juez@inmercol.com',
+            'password'=>bcrypt('Juez2024.')
+        ])->assignRole('Judge');
     }
 }

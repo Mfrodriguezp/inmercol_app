@@ -15,6 +15,8 @@ use PowerComponents\LivewirePowerGrid\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 final class EvaluatedTable extends PowerGridComponent
 {
@@ -199,6 +201,17 @@ final class EvaluatedTable extends PowerGridComponent
 
     public function actions(\App\Models\EvaluatedFragance $row): array
     {
+        //Validación de usuario actual para permiso de eliminar
+        $id_user = Auth::user()->id;
+        $this_authorize = User::permission('admin.evaluateds.destroy')
+            ->where('id', $id_user)
+            ->get();
+        if (count($this_authorize) == 0) {
+            $canDestroy = false;
+        } else {
+            $canDestroy = true;
+        }
+
         return [
             Button::add('edit')
                 ->slot('<i class="fa-solid fa-spray-can-sparkles"></i>')
@@ -214,6 +227,7 @@ final class EvaluatedTable extends PowerGridComponent
                 ->slot('<i class="fa-solid fa-trash"></i>')
                 ->class('inline-flex items-center justify-center px-2 py-2 bg-red-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
                 ->openModal('admin.destroy-evaluated-modal', ['evaluatedFragance' => $row->id_evaluated_fragance])
+                ->can($canDestroy)
                 ->tooltip('Eliminar'),
         ];
     }

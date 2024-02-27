@@ -19,8 +19,7 @@
                     </div>
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
-                        <a
-                            href="{{ route('dashboard') }}">
+                        <a href="{{ route('index.admin') }}">
                             <x-application-mark class="block h-9 w-auto" />
                         </a>
                     </div>
@@ -172,9 +171,7 @@
         <!-- Responsive Navigation Menu -->
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link
-                    href="{{ route('dashboard') }}"
-                    :active="request()->routeIs('dashboard')">
+                <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>
             </div>
@@ -255,47 +252,53 @@
     </nav>
     <div class="menu-collapsed fixed z-0" id="vertical-menu">
         <div id="menu-items">
-            <div class="item">
-                <a
-                    href="{{route('admin.projects.index')}}">
-                    <div class="icon"><i class="fa-solid fa-file-pen"></i></div>
-                    <div class="title"><span>Proyectos</span></div>
-                </a>
-            </div>
-            <div class="item">
-                <a
-                    href="{{route('admin.evaluateds.index')}}">
-                    <div class="icon"><i class="fa-solid fa-flask-vial"></i></div>
-                    <div class="title"><span>Evaluaciones</span></div>
-                </a>
-            </div>
-            <div class="item">
-                <a href="{{route('admin.judges.index')}}">
-                    <div class="icon"><i class="fa-solid fa-address-card"></i></div>
-                    <div class="title"><span>Jueces</span></div>
-                </a>
-            </div>
-            <div class="item">
-                <a
-                    href="{{route('admin.reports.index')}}">
-                    <div class="icon"><i class="fa-solid fa-print"></i></div>
-                    <div class="title"><span>Reportes</span></div>
-                </a>
-            </div>
-            <div class="item">
-                <a
-                    href="{{route('admin.judments.index')}}">
-                    <div class="icon"><i class="fa-solid fa-list-check"></i></div>
-                    <div class="title"><span>Juicios</span></div>
-                </a>
-            </div>
-            {{--<div class="item">
+            @can('admin.projects.index')
+                <div class="item">
+                    <a href="{{ route('admin.projects.index') }}">
+                        <div class="icon"><i class="fa-solid fa-file-pen"></i></div>
+                        <div class="title"><span>Proyectos</span></div>
+                    </a>
+                </div>
+            @endcan
+            @can('admin.evaluateds.index')
+                <div class="item">
+                    <a href="{{ route('admin.evaluateds.index') }}">
+                        <div class="icon"><i class="fa-solid fa-flask-vial"></i></div>
+                        <div class="title"><span>Evaluaciones</span></div>
+                    </a>
+                </div>
+            @endcan
+            @can('admin.judges.index')
+                <div class="item">
+                    <a href="{{ route('admin.judges.index') }}">
+                        <div class="icon"><i class="fa-solid fa-address-card"></i></div>
+                        <div class="title"><span>Jueces</span></div>
+                    </a>
+                </div>
+            @endcan
+            @can('admin.reports.index')
+                <div class="item">
+                    <a href="{{ route('admin.reports.index') }}">
+                        <div class="icon"><i class="fa-solid fa-print"></i></div>
+                        <div class="title"><span>Reportes</span></div>
+                    </a>
+                </div>
+            @endcan
+            @can('admin.judments.index')
+                <div class="item">
+                    <a href="{{ route('admin.judments.index') }}">
+                        <div class="icon"><i class="fa-solid fa-list-check"></i></div>
+                        <div class="title"><span>Juicios</span></div>
+                    </a>
+                </div>
+            @endcan
+            {{-- <div class="item">
                 <a
                     href="{{route('admin.users.index')}}">
                     <div class="icon"><i class="fa-solid fa-toolbox"></i></div>
                     <div class="title"><span>Permisos</span></div>
                 </a>
-            </div>--}}
+            </div> --}}
         </div>
         <div id="menu-item-logout">
             <form class="item" method="POST" action="{{ route('logout') }}" x-data>
