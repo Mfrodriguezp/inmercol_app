@@ -38,8 +38,135 @@ class EvaluatedController extends Controller
             $rotation = 1;
         } else {
             $rotation += $last_evaluated;
-            $rotation ++;
+            $rotation++;
         }
+
+        //Lógica para rotación insertar rotación de jueces
+        $random_judges_a = []; //Array de rotaciones de jueces portadores a
+        $random_judges_b = []; //Array de rotaciones de jueces portadores b
+        $start_rotation_a = []; //array para rotación de brazo_portadores a
+        $start_rotation_b = []; //array para rotación de brazo_portadores b
+
+        
+        for ($i = 1; $i < 5; $i++) {
+            //Ingreso de valores en la primera rotación de jueces
+            if (count($random_judges_a) == 0) {
+                $rand = rand(1, 97); //Creación de número aleatorio
+                array_push($random_judges_a, $rand);
+            } else {
+                $rand = rand(1, 97); //Creación de número aleatorio
+                while (in_array($rand, $random_judges_a)) {
+                    $rand = rand(1, 97);
+                }
+                array_push($random_judges_a, $rand);
+            }
+
+            //Ingreso de valores en la segunda rotación de jueces
+            $rand = rand(1, 97);//Creación de número aleatorio
+            if (count($random_judges_b) == 0 && !in_array($rand, $random_judges_a)) {
+                array_push($random_judges_b, $rand);
+            } else {
+                $rand = rand(1, 97); //Creación de número aleatorio
+                while (in_array($rand, $random_judges_b) || in_array($rand, $random_judges_a)) {
+                    $rand = rand(1, 97);
+                }
+                array_push($random_judges_b, $rand);
+            }
+
+            //Ingreso de valores en la rotacion de brazos portador a
+            if (count($start_rotation_a) == 0) {
+                $rand = rand(1, 4); //Creación de número aleatorio
+                array_push($start_rotation_a, $rand);
+            } else {
+                $rand = rand(1, 4); //Creación de número aleatorio
+                while (in_array($rand, $start_rotation_a)) {
+                    $rand = rand(1, 4);
+                }
+                array_push($start_rotation_a, $rand);
+            }
+
+            //Ingreso de valores en la rotacion de brazos portador a
+            if (count($start_rotation_b) == 0) {
+                $rand = rand(1, 4); //Creación de número aleatorio
+                array_push($start_rotation_b, $rand);
+            } else {
+                $rand = rand(1, 4); //Creación de número aleatorio
+                while (in_array($rand, $start_rotation_b)) {
+                    $rand = rand(1, 4);
+                }
+                array_push($start_rotation_b, $rand);
+            }
+        }
+
+        //var_dump($random_judges_a,$random_judges_b,$start_rotation_a,$start_rotation_b);
+        //die();
+        //Inserción de datos en la tabla de relación de datos para rotación de jueces
+
+        $rotation_judges_a_control_1 = DB::table('judges_8_rotations_has_start_8_evaluations')
+        ->where('control','=',1)
+        ->where('carrier','=','a')
+        ->update([
+            'judges_8_rotations_id'=>$random_judges_a[0],
+            'start_8_evaluations_id'=>$start_rotation_a[0]
+        ]);
+
+        $rotation_judges_a_control_2 = DB::table('judges_8_rotations_has_start_8_evaluations')
+        ->where('control','=',2)
+        ->where('carrier','=','a')
+        ->update([
+            'judges_8_rotations_id'=>$random_judges_a[1],
+            'start_8_evaluations_id'=>$start_rotation_a[1]
+        ]);
+
+        $rotation_judges_a_control_3 = DB::table('judges_8_rotations_has_start_8_evaluations')
+        ->where('control','=',3)
+        ->where('carrier','=','a')
+        ->update([
+            'judges_8_rotations_id'=>$random_judges_a[2],
+            'start_8_evaluations_id'=>$start_rotation_a[2]
+        ]);
+
+        $rotation_judges_a_control_4 = DB::table('judges_8_rotations_has_start_8_evaluations')
+        ->where('control','=',4)
+        ->where('carrier','=','a')
+        ->update([
+            'judges_8_rotations_id'=>$random_judges_a[3],
+            'start_8_evaluations_id'=>$start_rotation_a[3]
+        ]);
+
+        $rotation_judges_b_control_1 = DB::table('judges_8_rotations_has_start_8_evaluations')
+        ->where('control','=',1)
+        ->where('carrier','=','b')
+        ->update([
+            'judges_8_rotations_id'=>$random_judges_b[0],
+            'start_8_evaluations_id'=>$start_rotation_b[0]
+        ]);
+
+        $rotation_judges_b_control_2 = DB::table('judges_8_rotations_has_start_8_evaluations')
+        ->where('control','=',2)
+        ->where('carrier','=','b')
+        ->update([
+            'judges_8_rotations_id'=>$random_judges_b[1],
+            'start_8_evaluations_id'=>$start_rotation_b[1]
+        ]);
+
+        $rotation_judges_b_control_3 = DB::table('judges_8_rotations_has_start_8_evaluations')
+        ->where('control','=',3)
+        ->where('carrier','=','b')
+        ->update([
+            'judges_8_rotations_id'=>$random_judges_b[2],
+            'start_8_evaluations_id'=>$start_rotation_b[2]
+        ]);
+
+        $rotation_judges_b_control_4 = DB::table('judges_8_rotations_has_start_8_evaluations')
+        ->where('control','=',4)
+        ->where('carrier','=','b')
+        ->update([
+            'judges_8_rotations_id'=>$random_judges_b[3],
+            'start_8_evaluations_id'=>$start_rotation_b[3]
+        ]);
+
+
 
         //Data Del formulario
         $record = [
@@ -65,7 +192,6 @@ class EvaluatedController extends Controller
 
         $evaluated = EvaluatedFragance::create($record);
 
-
         return redirect()->route('admin.evaluateds.index')
             ->with('success', 'Evaluación Creada Satisfactoriamente')
             ->with('info', 'Aplicación de Fragancias para Portadores');
@@ -78,7 +204,6 @@ class EvaluatedController extends Controller
         $id = $request->input('id');
 
         //Datos del formulario para enviar
-        /*
         $record = [
             'tb' => $request->input('tb'),
             'projects_id_project' => $request->input('projects_id_project'),
@@ -97,10 +222,10 @@ class EvaluatedController extends Controller
             'code_2_test_a' => $request->input('code_2_test_a'),
             'code_1_test_b' => $request->input('code_1_test_b'),
             'code_2_test_b' => $request->input('code_2_test_b')
-        ];*/
+        ];
         //Query para actualizar Evaluación de fragancia
         $evaluated = EvaluatedFragance::where('id_evaluated_fragance', $id)
-            ->update([
+            ->update($record/*[
                 'tb' => $request->input('tb'),
                 'projects_id_project' => $request->input('projects_id_project'),
                 'fragance_name_1' => $request->input('fragance_name_1'),
@@ -118,7 +243,7 @@ class EvaluatedController extends Controller
                 'code_2_test_a' => $request->input('code_2_test_a'),
                 'code_1_test_b' => $request->input('code_1_test_b'),
                 'code_2_test_b' => $request->input('code_2_test_b')
-            ]);
+            ]*/);
 
         return redirect()->route('admin.evaluateds.index')
             ->with('success', 'Evaluación de Fragancia Actualizada Satisfactoriamente');

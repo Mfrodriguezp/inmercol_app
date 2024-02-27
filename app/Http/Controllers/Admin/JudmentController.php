@@ -36,6 +36,7 @@ class JudmentController extends Controller
                         'start_8_evaluations.judge_1_a as brazo_inicial'
                     ])
                     ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                    ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                     ->first();
                 //Query para extracción de los datos de la evaluación portador A
                 $evaluated = DB::table('evaluated_fragances')
@@ -70,6 +71,7 @@ class JudmentController extends Controller
                         'start_8_evaluations.judge_1_b as brazo_inicial'
                     ])
                     ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                    ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                     ->first();
 
                 /*Query para validar los códigos de test de fragancia
@@ -162,6 +164,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_2_a as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
@@ -196,6 +199,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_3_a as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
@@ -230,6 +234,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_4_a as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
@@ -264,6 +269,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_5_a as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
@@ -298,6 +304,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_6_a as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
@@ -332,6 +339,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_7_a as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
@@ -366,6 +374,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_8_a as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
@@ -404,6 +413,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_2_b as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
@@ -438,6 +448,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_3_b as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
@@ -472,6 +483,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_4_b as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
@@ -506,6 +518,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_5_b as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
@@ -540,6 +553,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_6_b as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
@@ -574,6 +588,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_7_b as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
@@ -608,6 +623,7 @@ class JudmentController extends Controller
                                     'start_8_evaluations.judge_8_b as brazo_inicial'
                                 ])
                                 ->where('judges_8_rotations_has_start_8_evaluations.control', '=', $control)
+                                ->where('judges_8_rotations_has_start_8_evaluations.carrier', '=', $carrier)
                                 ->first();
                             //Query para extracción de los datos de la evaluación portador A
                             $evaluated = DB::table('evaluated_fragances')
