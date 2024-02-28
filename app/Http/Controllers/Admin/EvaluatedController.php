@@ -40,14 +40,16 @@ class EvaluatedController extends Controller
             $rotation += $last_evaluated;
             $rotation++;
         }
-
+        //Eliminación de la tabla para limpiarla
+        $delete_rotations = DB::table('judges_8_rotations_has_start_8_evaluations')
+            ->delete();
         //Lógica para rotación insertar rotación de jueces
         $random_judges_a = []; //Array de rotaciones de jueces portadores a
         $random_judges_b = []; //Array de rotaciones de jueces portadores b
         $start_rotation_a = []; //array para rotación de brazo_portadores a
         $start_rotation_b = []; //array para rotación de brazo_portadores b
 
-        
+
         for ($i = 1; $i < 5; $i++) {
             //Ingreso de valores en la primera rotación de jueces
             if (count($random_judges_a) == 0) {
@@ -62,7 +64,7 @@ class EvaluatedController extends Controller
             }
 
             //Ingreso de valores en la segunda rotación de jueces
-            $rand = rand(1, 97);//Creación de número aleatorio
+            $rand = rand(1, 97); //Creación de número aleatorio
             if (count($random_judges_b) == 0 && !in_array($rand, $random_judges_a)) {
                 array_push($random_judges_b, $rand);
             } else {
@@ -102,71 +104,59 @@ class EvaluatedController extends Controller
         //die();
         //Inserción de datos en la tabla de relación de datos para rotación de jueces
 
-        $rotation_judges_a_control_1 = DB::table('judges_8_rotations_has_start_8_evaluations')
-        ->where('control','=',1)
-        ->where('carrier','=','a')
-        ->update([
-            'judges_8_rotations_id'=>$random_judges_a[0],
-            'start_8_evaluations_id'=>$start_rotation_a[0]
-        ]);
-
-        $rotation_judges_a_control_2 = DB::table('judges_8_rotations_has_start_8_evaluations')
-        ->where('control','=',2)
-        ->where('carrier','=','a')
-        ->update([
-            'judges_8_rotations_id'=>$random_judges_a[1],
-            'start_8_evaluations_id'=>$start_rotation_a[1]
-        ]);
-
-        $rotation_judges_a_control_3 = DB::table('judges_8_rotations_has_start_8_evaluations')
-        ->where('control','=',3)
-        ->where('carrier','=','a')
-        ->update([
-            'judges_8_rotations_id'=>$random_judges_a[2],
-            'start_8_evaluations_id'=>$start_rotation_a[2]
-        ]);
-
-        $rotation_judges_a_control_4 = DB::table('judges_8_rotations_has_start_8_evaluations')
-        ->where('control','=',4)
-        ->where('carrier','=','a')
-        ->update([
-            'judges_8_rotations_id'=>$random_judges_a[3],
-            'start_8_evaluations_id'=>$start_rotation_a[3]
-        ]);
-
-        $rotation_judges_b_control_1 = DB::table('judges_8_rotations_has_start_8_evaluations')
-        ->where('control','=',1)
-        ->where('carrier','=','b')
-        ->update([
-            'judges_8_rotations_id'=>$random_judges_b[0],
-            'start_8_evaluations_id'=>$start_rotation_b[0]
-        ]);
-
-        $rotation_judges_b_control_2 = DB::table('judges_8_rotations_has_start_8_evaluations')
-        ->where('control','=',2)
-        ->where('carrier','=','b')
-        ->update([
-            'judges_8_rotations_id'=>$random_judges_b[1],
-            'start_8_evaluations_id'=>$start_rotation_b[1]
-        ]);
-
-        $rotation_judges_b_control_3 = DB::table('judges_8_rotations_has_start_8_evaluations')
-        ->where('control','=',3)
-        ->where('carrier','=','b')
-        ->update([
-            'judges_8_rotations_id'=>$random_judges_b[2],
-            'start_8_evaluations_id'=>$start_rotation_b[2]
-        ]);
-
-        $rotation_judges_b_control_4 = DB::table('judges_8_rotations_has_start_8_evaluations')
-        ->where('control','=',4)
-        ->where('carrier','=','b')
-        ->update([
-            'judges_8_rotations_id'=>$random_judges_b[3],
-            'start_8_evaluations_id'=>$start_rotation_b[3]
-        ]);
-
-
+        $rotation_judges_a = DB::table('judges_8_rotations_has_start_8_evaluations')
+            ->insert(
+                [
+                    [
+                        'control' => 1,
+                        'judges_8_rotations_id' => $random_judges_a[0],
+                        'start_8_evaluations_id' => $start_rotation_a[0],
+                        'carrier' => "a"
+                    ],
+                    [
+                        'control' => 2,
+                        'judges_8_rotations_id' => $random_judges_a[1],
+                        'start_8_evaluations_id' => $start_rotation_a[1],
+                        'carrier' => "a"
+                    ],
+                    [
+                        'control' => 3,
+                        'judges_8_rotations_id' => $random_judges_a[2],
+                        'start_8_evaluations_id' => $start_rotation_a[2],
+                        'carrier' => "a"
+                    ],
+                    [
+                        'control' => 4,
+                        'judges_8_rotations_id' => $random_judges_a[3],
+                        'start_8_evaluations_id' => $start_rotation_a[3],
+                        'carrier' => "a"
+                    ],
+                    [
+                        'control' => 1,
+                        'judges_8_rotations_id' => $random_judges_b[0],
+                        'start_8_evaluations_id' => $start_rotation_b[0],
+                        'carrier' => "b"
+                    ],
+                    [
+                        'control' => 2,
+                        'judges_8_rotations_id' => $random_judges_b[1],
+                        'start_8_evaluations_id' => $start_rotation_b[1],
+                        'carrier' => "b"
+                    ],
+                    [
+                        'control' => 3,
+                        'judges_8_rotations_id' => $random_judges_b[2],
+                        'start_8_evaluations_id' => $start_rotation_b[2],
+                        'carrier' => "b"
+                    ],
+                    [
+                        'control' => 4,
+                        'judges_8_rotations_id' => $random_judges_b[3],
+                        'start_8_evaluations_id' => $start_rotation_b[3],
+                        'carrier' => "b"
+                    ]
+                ]
+            );
 
         //Data Del formulario
         $record = [
