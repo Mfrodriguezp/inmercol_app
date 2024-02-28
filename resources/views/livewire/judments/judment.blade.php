@@ -80,6 +80,9 @@
                 <div class="">
                     <input type="hidden" name="marking_type" value="{{ $control }}">
                 </div>
+                <div class="">
+                    <input type="hidden" name="number_judges" value="{{ $number_judges }}">
+                </div>
             </div>
             <div class="second-section">
                 <div class="mb-2">

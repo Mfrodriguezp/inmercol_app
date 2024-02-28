@@ -8,8 +8,9 @@
                     'carrier'=>$carrier,
                     'control'=>$control,
                     'evaluated'=>$evaluated,
-                    'counter'=>$counter,
-                    'message'=>$message //Contador de jueces
+                    'counter'=>$counter,//Contador de jueces del paso de jueces
+                    'number_judges'=>$number_judges, //Cantidad de jueces para el control
+                    'message'=>$message 
                 ])
             </div>
         </div>
