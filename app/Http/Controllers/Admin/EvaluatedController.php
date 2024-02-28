@@ -100,8 +100,6 @@ class EvaluatedController extends Controller
             }
         }
 
-        //var_dump($random_judges_a,$random_judges_b,$start_rotation_a,$start_rotation_b);
-        //die();
         //Inserción de datos en la tabla de relación de datos para rotación de jueces
 
         $rotation_judges_a = DB::table('judges_8_rotations_has_start_8_evaluations')
