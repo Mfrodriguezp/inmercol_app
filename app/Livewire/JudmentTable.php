@@ -84,6 +84,7 @@ final class JudmentTable extends PowerGridComponent
             ->add('proyecto')
             ->add('tb')
             ->add('nombre_juez')
+            ->add('numero_juez')
             ->add('codigo_fragancia')
             ->add('portador', function (Judment $judment) {
                 return strtoupper($judment->portador);
@@ -98,21 +99,23 @@ final class JudmentTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id_judment'),
             Column::make('proyecto', 'proyecto')
                 ->sortable()
                 ->searchable(),
             Column::make('id evaluacion', 'id_evaluated')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->visibleInExport(false),
             Column::make('tb', 'tb')
                 ->sortable()
                 ->searchable(),
-
-            Column::make('juez', 'nombre_juez')
+            Column::make('N° Juez', 'numero_juez')
                 ->sortable()
                 ->searchable(),
-
+            Column::make('juez', 'nombre_juez')
+                ->sortable()
+                ->searchable()
+                ->visibleInExport(false),
             Column::make('codigo fragancia', 'codigo_fragancia')
                 ->sortable()
                 ->searchable(),
@@ -130,7 +133,8 @@ final class JudmentTable extends PowerGridComponent
                 ->searchable(),
 
             Column::make('fecha evaluacion', 'fecha_evaluacion')
-                ->sortable(),
+                ->sortable()
+                ->visibleInExport(false),
 
             //Column::action('Action')
         ];
