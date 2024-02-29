@@ -161,7 +161,7 @@ Estilos para el input range de las pruebas de sustantividad
 
 .scala {
     margin: auto;
-    width: 931.8px;
+    width: 930.5px;
     border-bottom: 1px solid black;
     border-left: 1px solid black;
     height: 15px;
@@ -190,33 +190,33 @@ Estilos para el input range de las pruebas de sustantividad
 }
 .markingA {
     position: relative;
-    left: 1.06rem;
+    left: 1.12rem;
 }
 .markingB {
     position: relative;
-    left: 2.44rem;
+    left: 2.52rem;
 }
 
 .markingC {
     position: relative;
-    left: 8.2374rem;
+    left: 8.28rem;
 }
 
 .markingD {
     position: relative;
-    left: 18.34rem;
+    left: 18.374rem;
 }
 
 .markingE
 {
   position: relative;
-  left: 28.221rem;
+  left: 28.22rem;
 }
 
 .markingF
 {
   position: relative;
-  left: 54.73rem;
+  left: 54.7rem;
 }
 /*Styles Thumb input range*/
 input[type="range"],
@@ -226,7 +226,7 @@ input[type="range"]::-webkit-slider-thumb {
     appearance: none;
     background: transparent;
     cursor: pointer;
-    width: 960px;
+    width: 958px;
     z-index: 2;
 }
 
