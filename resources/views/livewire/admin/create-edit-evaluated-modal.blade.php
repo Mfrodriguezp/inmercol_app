@@ -11,7 +11,6 @@
             action="{{ isset($evaluatedFragance) ? action('App\Http\Controllers\Admin\EvaluatedController@update') : action('App\Http\Controllers\Admin\EvaluatedController@store') }}"
             method="POST" class=" mt-4">
             <div class="mt-4 text-sm text-gray-600">
-
                 @csrf
                 @if (isset($evaluatedFragance) && is_object($evaluatedFragance))
                     <input type="hidden" name="id" value="{{ $evaluatedFragance->id_evaluated_fragance }}">
@@ -24,11 +23,12 @@
                         <div class="mb-4 grid grid-cols-2 gap-4 overflow-hidden">
                             <div
                                 class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                @if (isset($project))
-                                <div class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                    <x-input type="text" class="w-full" name="projects_id_project" value="{{ $project->project_name }}" disabled />
-                                </div>
-                                    
+                                @if (isset($id_project))
+                                    <div
+                                        class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                        <x-input type="text" class="w-full"
+                                            value="{{ $project_send->project_name }}" disabled />
+                                    </div>
                                 @else
                                     @if (isset($evaluatedFragance) && is_object($evaluatedFragance))
                                         <x-select name="projects_id_project" wire:model.live="projects_id_project"
@@ -56,13 +56,15 @@
                             </div>
                             <div
                                 class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                <x-input type="text" class="w-full" name="tb" placeholder="TB"
-                                    value="{{ $evaluatedFragance->tb ?? '' }}" required />
+                                <x-input type="text" class="w-full" name="test_identifier"
+                                    placeholder="Código de evaluacion"
+                                    value="{{ $evaluatedFragance->test_identifier ?? '' }}" required />
                             </div>
                             <div
                                 class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 @if (isset($evaluatedFragance) && is_object($evaluatedFragance))
-                                    <x-select name="number_judges" wire:model.live="number_judges" class="w-full" required>
+                                    <x-select name="number_judges" wire:model.live="number_judges" class="w-full"
+                                        required>
                                         <option value="" selected disabled>Cant. Jueces</option>
                                         <option value="8">8</option>
                                         <option value="12">12</option>
@@ -75,9 +77,12 @@
                                     </x-select>
                                 @endif
                             </div>
-                            <div class="w-full">
-                                <x-input type="hidden" class="w-full" name="projects_id_project" value="{{ $project->id_project }}"/>
-                            </div>
+                            @if(isset($id_project))
+                                <div class="w-full">
+                                    <x-input type="hidden" class="w-full" name="projects_id_project"
+                                        value="{{ $project_send->id_project}}"/>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="mb-4 overflow-hidden">
@@ -127,7 +132,8 @@
                                     value="{{ $evaluatedFragance->fragance_name_2 ?? '' }}" required />
                             </div>
                             <div class="w-full">
-                                <x-input type="text" class="w-full" name="fragance_counter_2" placeholder="Contador"
+                                <x-input type="text" class="w-full" name="fragance_counter_2"
+                                    placeholder="Contador"
                                     value="{{ $evaluatedFragance->fragance_counter_2 ?? '' }}" />
                             </div>
                             <div class="w-full">

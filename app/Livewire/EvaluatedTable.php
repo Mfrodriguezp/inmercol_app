@@ -52,7 +52,7 @@ final class EvaluatedTable extends PowerGridComponent
             })
             ->select([
                 'id_evaluated_fragance',
-                'tb',
+                'test_identifier',
                 'projects.project_name as project_name',
                 'fragance_name_1',
                 'fragance_counter_1',
@@ -90,7 +90,7 @@ final class EvaluatedTable extends PowerGridComponent
     {
         return PowerGrid::fields()
             ->add('id_evaluated_fragance')
-            ->add('tb')
+            ->add('test_identifier')
             ->add('project_name')
             ->add('fragance_name_1')
             ->add('fragance_ms_1')
@@ -112,7 +112,7 @@ final class EvaluatedTable extends PowerGridComponent
     {
         return [
             Column::make('ID', 'id_evaluated_fragance'),
-            Column::make('Tb', 'tb')
+            Column::make('codigo de evaluacion', 'test_identifier')
                 ->sortable()
                 ->searchable(),
             Column::make('proyecto', 'project_name')

@@ -12,8 +12,8 @@ class EvaluatedFragance extends Model
     public $primaryKey= 'id_evaluated_fragance';
     public $timestamps = false;
     protected $fillable =[
-        'tb',
         'projects_id_project',
+        'test_identifier',
         'fragance_name_1',
         'fragance_counter_1',
         'fragance_ms_1',

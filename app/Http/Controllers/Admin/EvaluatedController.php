@@ -20,7 +20,6 @@ class EvaluatedController extends Controller
     public function store(Request $request)
     {
         $number_judges = $request->input('number_judges'); // Input de número de jueces
-
         /*---------Validación de rotación--------------*/
         $id_project = $request->input('projects_id_project');
 
@@ -275,12 +274,11 @@ class EvaluatedController extends Controller
                     );
                 break;
         }
-
-
         //Data Del formulario
         $record = [
-            'tb' => $request->input('tb'),
+
             'projects_id_project' => $request->input('projects_id_project'),
+            'test_identifier' => $request->input('test_identifier'),
             'fragance_name_1' => $request->input('fragance_name_1'),
             'fragance_counter_1' => $request->input('fragance_counter_1'),
             'fragance_ms_1' => $request->input('fragance_ms_1'),
@@ -314,8 +312,8 @@ class EvaluatedController extends Controller
 
         //Datos del formulario para enviar
         $record = [
-            'tb' => $request->input('tb'),
             'projects_id_project' => $request->input('projects_id_project'),
+            'test_identifier' => $request->input('test_identifier'),
             'fragance_name_1' => $request->input('fragance_name_1'),
             'fragance_counter_1' => $request->input('fragance_counter_1'),
             'fragance_ms_1' => $request->input('fragance_ms_1'),
@@ -334,25 +332,7 @@ class EvaluatedController extends Controller
         ];
         //Query para actualizar Evaluación de fragancia
         $evaluated = EvaluatedFragance::where('id_evaluated_fragance', $id)
-            ->update($record/*[
-                'tb' => $request->input('tb'),
-                'projects_id_project' => $request->input('projects_id_project'),
-                'fragance_name_1' => $request->input('fragance_name_1'),
-                'fragance_counter_1' => $request->input('fragance_counter_1'),
-                'fragance_ms_1' => $request->input('fragance_ms_1'),
-                'fragance_test_code_1' => $request->input('fragance_test_code_1'),
-                'fragance_name_2' => $request->input('fragance_name_2'),
-                'fragance_counter_2' => $request->input('fragance_counter_2'),
-                'fragance_ms_2' => $request->input('fragance_ms_2'),
-                'fragance_test_code_2' => $request->input('fragance_test_code_2'),
-                'number_judges' => $request->input('number_judges'),
-                'name_carrier_a' => $request->input('name_carrier_a'),
-                'name_carrier_b' => $request->input('name_carrier_b'),
-                'code_1_test_a' => $request->input('code_1_test_a'),
-                'code_2_test_a' => $request->input('code_2_test_a'),
-                'code_1_test_b' => $request->input('code_1_test_b'),
-                'code_2_test_b' => $request->input('code_2_test_b')
-            ]*/);
+            ->update($record);
 
         return redirect()->route('admin.evaluateds.index')
             ->with('success', 'Evaluación de Fragancia Actualizada Satisfactoriamente');
