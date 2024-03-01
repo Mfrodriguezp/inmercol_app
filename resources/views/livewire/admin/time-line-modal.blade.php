@@ -1,5 +1,5 @@
 <div>
-    <div class="data min-w-7xl">
+    <div class="w-full">
         <div class="px-6 py-4">
             <div class="text-lg font-medium text-gray-900">
                Titulo
