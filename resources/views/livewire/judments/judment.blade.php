@@ -295,7 +295,7 @@
                                 </div>
                             </div>
                             <div class="m-auto">
-                                <input type="range" min="0" max="20" value="20" name="quality_1"
+                                <input type="range" min="0" max="20" value="0" name="quality_1"
                                     class="range block" id="rango" step="0.05" />
                                 <div class="scala">
                                     <div class="markingA">

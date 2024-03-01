@@ -93,18 +93,16 @@ final class EvaluatedTable extends PowerGridComponent
             ->add('test_identifier')
             ->add('project_name')
             ->add('fragance_name_1')
+            ->add('fragance_counter_1')
             ->add('fragance_ms_1')
             ->add('fragance_test_code_1')
             ->add('fragance_name_2')
+            ->add('fragance_counter_2')
             ->add('fragance_ms_2')
             ->add('fragance_test_code_2')
             ->add('rot_fragance_aplication')
             ->add('name_carrier_a')
             ->add('name_carrier_b')
-            ->add('control_1')
-            ->add('control_2')
-            ->add('control_3')
-            ->add('control_4')
             ->add('status_evaluation');
     }
 
@@ -112,7 +110,7 @@ final class EvaluatedTable extends PowerGridComponent
     {
         return [
             Column::make('ID', 'id_evaluated_fragance'),
-            Column::make('codigo de evaluacion', 'test_identifier')
+            Column::make('cod. evaluacion', 'test_identifier')
                 ->sortable()
                 ->searchable(),
             Column::make('proyecto', 'project_name')
@@ -121,10 +119,14 @@ final class EvaluatedTable extends PowerGridComponent
             Column::make('Fragancia 1', 'fragance_name_1')
                 ->sortable()
                 ->searchable(),
-
+            Column::make('Contador Frag. 1', 'fragance_counter_1')
+                ->sortable()
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
             Column::make('Muestra Frag. 1', 'fragance_ms_1')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
 
             Column::make('Cod. Test Frag. 1', 'fragance_test_code_1')
                 ->sortable()
@@ -133,10 +135,14 @@ final class EvaluatedTable extends PowerGridComponent
             Column::make('Fragancia 2', 'fragance_name_2')
                 ->sortable()
                 ->searchable(),
-
+            Column::make('Contador Frag. 2', 'fragance_counter_2')
+                ->sortable()
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
             Column::make('Muestra Frag. 2', 'fragance_ms_2')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
 
             Column::make('Cod. Test Frag. 2', 'fragance_test_code_2')
                 ->sortable()
@@ -146,7 +152,6 @@ final class EvaluatedTable extends PowerGridComponent
                 ->sortable()
                 ->searchable()
                 ->hidden($isHidden = true, $isForceHidden = false),
-
             Column::make('Portador A', 'name_carrier_a')
                 ->sortable()
                 ->searchable()
@@ -157,31 +162,11 @@ final class EvaluatedTable extends PowerGridComponent
                 ->searchable()
                 ->hidden($isHidden = true, $isForceHidden = false),
 
-            Column::make('Control 1', 'control_1')
-                ->sortable()
-                ->searchable()
-                ->hidden($isHidden = true, $isForceHidden = false),
-
-            Column::make('Control 2', 'control_2')
-                ->sortable()
-                ->searchable()
-                ->hidden($isHidden = true, $isForceHidden = false),
-
-            Column::make('Control 3', 'control_3')
-                ->sortable()
-                ->searchable()
-                ->hidden($isHidden = true, $isForceHidden = false),
-
-            Column::make('Control 4', 'control_4')
-                ->sortable()
-                ->searchable()
-                ->hidden($isHidden = true, $isForceHidden = false),
-
             Column::make('Estado', 'status_evaluation')
                 ->sortable()
                 ->searchable(),
 
-            Column::action('Action')
+            Column::action('opciones')
         ];
     }
 

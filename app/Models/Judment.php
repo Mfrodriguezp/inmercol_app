@@ -19,6 +19,10 @@ class Judment extends Model
         'carrier_type',
         'marking_type',
         'qualification',
+        'qualification_control_1',
+        'qualification_control_2',
+        'qualification_control_3',
+        'qualification_control_4',
         'evaluation_date'
     ];
 

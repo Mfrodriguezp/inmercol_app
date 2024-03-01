@@ -54,16 +54,17 @@ final class JudmentTable extends PowerGridComponent
             })
             ->select([
                 'judments.id_judment as id_judment',
-                'evaluated_fragances_id_evaluated_fragance as id_evaluated',
                 'projects.project_name AS proyecto',
-                'evaluated_fragances.tb AS tb',
+                'evaluated_fragances.test_identifier AS test_identifier',
                 'carrier_type AS portador',
                 'judges.judge_number as numero_juez',
                 'judges.judge_name as nombre_juez',
-                'marking_type AS control',
                 'fragance_code AS codigo_fragancia',
-                'qualification AS calificacion',
-                'evaluation_date as fecha_evaluacion'
+                'qualification_control_1 AS control_1',
+                'qualification_control_2 AS control_2',
+                'qualification_control_3 AS control_3',
+                'qualification_control_4 AS control_4',
+                'evaluation_date'
             ]);
     }
 
@@ -82,16 +83,18 @@ final class JudmentTable extends PowerGridComponent
         return PowerGrid::fields()
             ->add('id_judment')
             ->add('proyecto')
-            ->add('tb')
+            ->add('test_identifier')
             ->add('nombre_juez')
             ->add('numero_juez')
             ->add('codigo_fragancia')
             ->add('portador', function (Judment $judment) {
                 return strtoupper($judment->portador);
             })
-            ->add('control')
-            ->add('calificacion')
-            ->add('fecha_evaluacion', function (Judment $judment) {
+            ->add('control_1')
+            ->add('control_2')
+            ->add('control_3')
+            ->add('control_4')
+            ->add('evaluation_date', function (Judment $judment) {
                 return Carbon::parse($judment->evaluation_date)->format('d-m-Y | H:i');
             });
     }
@@ -101,14 +104,12 @@ final class JudmentTable extends PowerGridComponent
         return [
             Column::make('proyecto', 'proyecto')
                 ->sortable()
-                ->searchable(),
-            Column::make('id evaluacion', 'id_evaluated')
+                ->searchable()
+                ->visibleInExport(false),
+            Column::make('codigo de evaluacion', 'test_identifier')
                 ->sortable()
                 ->searchable()
                 ->visibleInExport(false),
-            Column::make('tb', 'tb')
-                ->sortable()
-                ->searchable(),
             Column::make('N° Juez', 'numero_juez')
                 ->sortable()
                 ->searchable(),
@@ -124,26 +125,20 @@ final class JudmentTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('control', 'control')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('calificacion', 'calificacion')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('fecha evaluacion', 'fecha_evaluacion')
+            Column::make('control 1', 'control_1'),
+            Column::make('control 2', 'control_2'),
+            Column::make('control 3', 'control_3'),
+            Column::make('control 4', 'control_4'),
+            Column::make('fecha evaluacion', 'evaluation_date')
                 ->sortable()
                 ->visibleInExport(false),
-
-            //Column::action('Action')
         ];
     }
 
     public function filters(): array
     {
         return [
-            Filter::inputText('id_evaluated', 'evaluated_fragances_id_evaluated_fragance')
+            Filter::inputText('test_identifier', 'test_identifier')
                 ->operators(['contains']),
         ];
     }

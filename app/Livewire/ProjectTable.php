@@ -128,7 +128,7 @@ final class ProjectTable extends PowerGridComponent
                 ->sortable()
                 ->searchable()
                 ->toggleable($canEdit, 'Finalizado', 'En curso'),
-            Column::action('Action')
+            Column::action('opciones')
         ];
     }
 

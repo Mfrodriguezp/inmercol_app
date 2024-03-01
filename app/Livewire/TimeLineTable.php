@@ -43,7 +43,40 @@ final class TimeLineTable extends PowerGridComponent
 
     public function datasource(): ?Builder
     {
-        return EvaluatedFragance::query()->where('projects_id_project',$this->id_project);
+        return EvaluatedFragance::query()
+        ->where('projects_id_project',$this->id_project)
+        ->join('projects', function ($projects) {
+            $projects->on('evaluated_fragances.projects_id_project', '=', 'projects.id_project');
+        })
+        ->select([
+            'id_evaluated_fragance',
+            'test_identifier',
+            'projects.project_name as project_name',
+            'fragance_name_1',
+            'fragance_counter_1',
+            'fragance_ms_1',
+            'fragance_test_code_1',
+            'fragance_name_2',
+            'fragance_counter_2',
+            'fragance_ms_2',
+            'fragance_test_code_2',
+            'rot_fragance_aplication',
+            'name_carrier_a',
+            'name_carrier_b',
+            'control_1_a',
+            'control_2_a',
+            'control_3_a',
+            'control_4_a',
+            'control_1_b',
+            'control_2_b',
+            'control_3_b',
+            'control_4_b',
+            'code_1_test_a',
+            'code_2_test_a',
+            'code_1_test_b',
+            'code_2_test_b',
+            'status_evaluation',
+        ])->orderByDesc('id_evaluated_fragance');;
     }
 
     public function relationSearch(): array
@@ -54,152 +87,82 @@ final class TimeLineTable extends PowerGridComponent
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
-            ->add('id_evaluated_fragance')
-            ->add('tb')
-            ->add('projects_id_project')
-            ->add('fragance_name_1')
-            ->add('fragance_counter_1')
-            ->add('fragance_ms_1')
-            ->add('fragance_test_code_1')
-            ->add('fragance_name_2')
-            ->add('fragance_counter_2')
-            ->add('fragance_ms_2')
-            ->add('fragance_test_code_2')
-            ->add('number_judges')
-            ->add('rot_fragance_aplication')
-            ->add('name_carrier_a')
-            ->add('name_carrier_b')
-            ->add('control_1_a')
-            ->add('control_2_a')
-            ->add('control_3_a')
-            ->add('control_4_a')
-            ->add('control_1_b')
-            ->add('control_2_b')
-            ->add('control_3_b')
-            ->add('control_4_b')
-            ->add('code_1_test_a')
-            ->add('code_2_test_a')
-            ->add('code_1_test_b')
-            ->add('code_2_test_b')
-            ->add('status_evaluation');
+        ->add('id_evaluated_fragance')
+        ->add('test_identifier')
+        ->add('project_name')
+        ->add('fragance_name_1')
+        ->add('fragance_counter_1')
+        ->add('fragance_ms_1')
+        ->add('fragance_test_code_1')
+        ->add('fragance_name_2')
+        ->add('fragance_counter_2')
+        ->add('fragance_ms_2')
+        ->add('fragance_test_code_2')
+        ->add('rot_fragance_aplication')
+        ->add('name_carrier_a')
+        ->add('name_carrier_b')
+        ->add('status_evaluation');
     }
 
     public function columns(): array
     {
         return [
-            Column::make('Id evaluated fragance', 'id_evaluated_fragance')
+            Column::make('ID', 'id_evaluated_fragance'),
+            Column::make('cod. evaluacion', 'test_identifier')
+                ->sortable()
+                ->searchable(),
+            Column::make('proyecto', 'project_name')
+                ->sortable()
+                ->searchable(),
+            Column::make('Fragancia 1', 'fragance_name_1')
+                ->sortable()
+                ->searchable(),
+            Column::make('Contador Frag. 1', 'fragance_counter_1')
+                ->sortable()
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
+            Column::make('Muestra Frag. 1', 'fragance_ms_1')
+                ->sortable()
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
+
+            Column::make('Cod. Test Frag. 1', 'fragance_test_code_1')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Tb', 'tb')
+            Column::make('Fragancia 2', 'fragance_name_2')
+                ->sortable()
+                ->searchable(),
+            Column::make('Contador Frag. 2', 'fragance_counter_2')
+                ->sortable()
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
+            Column::make('Muestra Frag. 2', 'fragance_ms_2')
+                ->sortable()
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
+
+            Column::make('Cod. Test Frag. 2', 'fragance_test_code_2')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Projects id project', 'projects_id_project')
+            Column::make('Rotacion Aplicacion Fragancia', 'rot_fragance_aplication')
+                ->sortable()
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
+            Column::make('Portador A', 'name_carrier_a')
+                ->sortable()
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
+
+            Column::make('Portador B', 'name_carrier_b')
+                ->sortable()
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
+
+            Column::make('Estado', 'status_evaluation')
                 ->sortable()
                 ->searchable(),
-
-            Column::make('Fragance name 1', 'fragance_name_1')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Fragance counter 1', 'fragance_counter_1')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Fragance ms 1', 'fragance_ms_1')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Fragance test code 1', 'fragance_test_code_1')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Fragance name 2', 'fragance_name_2')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Fragance counter 2', 'fragance_counter_2')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Fragance ms 2', 'fragance_ms_2')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Fragance test code 2', 'fragance_test_code_2')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Number judges', 'number_judges')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Rot fragance aplication', 'rot_fragance_aplication')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Name carrier a', 'name_carrier_a')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Name carrier b', 'name_carrier_b')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Control 1 a', 'control_1_a')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Control 2 a', 'control_2_a')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Control 3 a', 'control_3_a')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Control 4 a', 'control_4_a')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Control 1 b', 'control_1_b')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Control 2 b', 'control_2_b')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Control 3 b', 'control_3_b')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Control 4 b', 'control_4_b')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Code 1 test a', 'code_1_test_a')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Code 2 test a', 'code_2_test_a')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Code 1 test b', 'code_1_test_b')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Code 2 test b', 'code_2_test_b')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Status evaluation', 'status_evaluation')
-                ->sortable()
-                ->searchable(),
-
-            Column::action('Action')
         ];
     }
 
@@ -215,7 +178,7 @@ final class TimeLineTable extends PowerGridComponent
         $this->js('alert('.$rowId.')');
     }
 
-    public function actions(EvaluatedFragance $row): array
+    /*public function actions(EvaluatedFragance $row): array
     {
         return [
             Button::add('edit')
@@ -224,7 +187,7 @@ final class TimeLineTable extends PowerGridComponent
                 ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
                 ->dispatch('edit', ['rowId' => $row->id])
         ];
-    }
+    }*/
 
     /*
     public function actionRules($row): array
