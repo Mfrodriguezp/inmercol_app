@@ -23,6 +23,10 @@
     background: var(--secondary-color);
 }
 
+.activate{
+    background-color: rgba(49, 196, 204, 0.5);
+}
+
 .btn-menu {
     width: var(--width-collapsed);
     margin-right: 2rem;
