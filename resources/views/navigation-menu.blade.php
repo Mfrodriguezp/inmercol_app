@@ -252,8 +252,9 @@
         </div>
     </nav>
     <div class="menu-collapsed fixed z-0" id="vertical-menu">
-        @can('admin.projects.index')
-            <div id="menu-items">
+
+        <div id="menu-items">
+            @can('admin.projects.index')
                 @if (Request::path() == 'app/projects')
                     <div class="item activate">
                         <a href="{{ route('admin.projects.index') }}">

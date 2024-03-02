@@ -20,10 +20,6 @@ class JudmentController extends Controller
 
     public function judment($control, $carrier, $judges, $judmentNumber, $idEvaluated)
     {
-        //reset del contador de paso de jueces
-        $judmentCounter = JudmentCounter::find($judmentNumber);
-        $judmentCounter->judment_number = 1;
-        $judmentCounter->save();
 
         switch ($judges) {
             case '8':
