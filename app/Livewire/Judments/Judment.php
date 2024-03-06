@@ -5,6 +5,7 @@ namespace App\Livewire\Judments;
 use Livewire\Component;
 use App\Models\Judge;
 use App\Models\EvaluatedFragance;
+use Illuminate\Support\Facades\Cookie;
 
 class Judment extends Component
 {
@@ -19,10 +20,6 @@ class Judment extends Component
     public $codigo_brazo_derecho; // Código del brazo derecho identificando la fragancia asignada para el portador
     public $number_judges; // Cantidad de jueces para el juicio
     public $message;
-    // public $cod_port_a_frag_1;
-    // public $cod_port_a_frag_2;
-    // public $cod_port_b_frag_1;
-    // public $cod_port_b_frag_2;
     /*----------------------
     Parámetros configurados para traer:
     *Códigos de muestras

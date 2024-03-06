@@ -6,6 +6,8 @@ use App\Livewire\Admin\EvaluatedsIndex;
 use App\Models\EvaluatedFragance;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Http\Request;
 
 class JudmentsIndex extends Component
 {

@@ -61,14 +61,14 @@ Route::group(['prefix' => 'evaluateds'], function () {
     ->middleware([\Illuminate\Auth\Middleware\Authorize::using('admin.evaluateds.destroy')])
     ->name('admin.evaluateds.destroy');
 });
-//Rutas para evaluaciones
+//Rutas para reportes
 Route::group([
     'prefix' => 'reports',
     'middleware' => [\Illuminate\Auth\Middleware\Authorize::using('admin.reports.index')]
 ], function () {
     Route::get('/', [ReportController::class, 'index'])->name('admin.reports.index');
 });
-
+//Rutas para juicios
 Route::group([
     'prefix' => 'judments',
     'middleware' => [\Illuminate\Auth\Middleware\Authorize::using('admin.judments.index')]
