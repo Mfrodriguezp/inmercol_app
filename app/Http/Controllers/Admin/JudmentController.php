@@ -27,12 +27,12 @@ class JudmentController extends Controller
                         $validation = DB::table('judments')
                             ->where('evaluated_fragances_id_evaluated_fragance', '=', $idEvaluated)
                             ->where('carrier_type', '=', $carrier)
-                            ->whereNotNull('qualification_control_' . intval($control))
-                            ->count('qualification_control_' . intval($control));
-                        if ($validation % 2 == 0) {
-                            $judmentNumber = ($validation / 2) + 1;
+                            ->whereNotNull('qualification_control_' . intval($control) . '_frag_1')
+                            ->count('qualification_control_' . intval($control) . '_frag_1');
+                        if ($validation == 0) {
+                            $judmentNumber = 1;
                         } else {
-                            $judmentNumber = ($validation + 1) / 2;
+                            $judmentNumber = $validation + 1;
                         }
                         switch ($judmentNumber) {
                             case 1:
@@ -168,12 +168,12 @@ class JudmentController extends Controller
                         $validation = DB::table('judments')
                             ->where('evaluated_fragances_id_evaluated_fragance', '=', $idEvaluated)
                             ->where('carrier_type', '=', $carrier)
-                            ->whereNotNull('qualification_control_' . intval($control))
-                            ->count('qualification_control_' . intval($control));
-                        if ($validation % 2 == 0) {
-                            $judmentNumber = ($validation / 2) + 1;
+                            ->whereNotNull('qualification_control_' . intval($control) . '_frag_1')
+                            ->count('qualification_control_' . intval($control) . '_frag_1');
+                        if ($validation == 0) {
+                            $judmentNumber = 1;
                         } else {
-                            $judmentNumber = ($validation + 1) / 2;
+                            $judmentNumber = $validation + 1;
                         }
                         switch ($judmentNumber) {
                             case 1:
@@ -306,12 +306,12 @@ class JudmentController extends Controller
                         $validation = DB::table('judments')
                             ->where('evaluated_fragances_id_evaluated_fragance', '=', $idEvaluated)
                             ->where('carrier_type', '=', $carrier)
-                            ->whereNotNull('qualification_control_' . intval($control))
-                            ->count('qualification_control_' . intval($control));
-                        if ($validation % 2 == 0) {
-                            $judmentNumber = ($validation / 2) + 1;
+                            ->whereNotNull('qualification_control_' . intval($control) . 'frag_1')
+                            ->count('qualification_control_' . intval($control) . '_frag_1');
+                        if ($validation == 0) {
+                            $judmentNumber = 1;
                         } else {
-                            $judmentNumber = ($validation + 1) / 2;
+                            $judmentNumber = $validation + 1;
                         }
                         switch ($judmentNumber) {
                             case 1:
@@ -471,17 +471,7 @@ class JudmentController extends Controller
                                     ->first();
                                 break;
                         }
-                        //query para validación del primer Juez para enviarla a la vista
-                        /*$rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                            ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                            ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                            ->select([
-                                'judges_12_rotations.judment_1 as juez',
-                                'start_12_evaluations.judge_1_a as brazo_inicial'
-                            ])
-                            ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                            ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                            ->first();*/
+
                         //Query para extracción de los datos de la evaluación portador A
                         $evaluated = DB::table('evaluated_fragances')
                             ->join(
@@ -509,12 +499,12 @@ class JudmentController extends Controller
                         $validation = DB::table('judments')
                             ->where('evaluated_fragances_id_evaluated_fragance', '=', $idEvaluated)
                             ->where('carrier_type', '=', $carrier)
-                            ->whereNotNull('qualification_control_' . intval($control))
-                            ->count('qualification_control_' . intval($control));
-                        if ($validation % 2 == 0) {
-                            $judmentNumber = ($validation / 2) + 1;
+                            ->whereNotNull('qualification_control_' . intval($control) . 'frag_1')
+                            ->count('qualification_control_' . intval($control) . '_frag_1');
+                        if ($validation == 0) {
+                            $judmentNumber = 1;
                         } else {
-                            $judmentNumber = ($validation + 1) / 2;
+                            $judmentNumber = $validation + 1;
                         }
                         switch ($judmentNumber) {
                             case 1:
@@ -741,90 +731,189 @@ class JudmentController extends Controller
                     //inserción del juicios de 1 al 7
                     switch ($control) {
                         case 1:
-                            //Inserción de la calificación del primer código
-                            $judment1 = Judment::updateOrCreate(
-                                [
-                                    'projects_id_project' => $request->input('id_proyecto'),
-                                    'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
-                                    'judges_id_judge' => $request->input('id_judge'),
-                                    'fragance_code' => $request->input('fragance_code_test_1'),
-                                    'carrier_type' => $request->input('carrier'),
-                                ],
-                                ['qualification_control_1' => $request->input('quality_1')]
-                            );
-                            //Inserción de la calificación del segundo código
-                            $judment2 = Judment::updateOrCreate(
-                                [
-                                    'projects_id_project' => $request->input('id_proyecto'),
-                                    'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
-                                    'judges_id_judge' => $request->input('id_judge'),
-                                    'fragance_code' => $request->input('fragance_code_test_2'),
-                                    'carrier_type' => $request->input('carrier')
-                                ],
-                                ['qualification_control_1' => $request->input('quality_2')]
-                            );
+                            //Validación de dato existente en el primer control
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+                                //Inserción de la calificación del primer código
+                                $judment1 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'fragance_1' => $request->input('fragance_code_test_1')
+                                    ],
+                                    [
+                                        'qualification_control_1_frag_1' => $request->input('quality_1')
+                                    ]
+                                );
+                                //Inserción de la calificación del segundo código
+                                $judment2 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'carrier_type' => $request->input('carrier')
+                                    ],
+                                    [
+                                        'fragance_2' => $request->input('fragance_code_test_2'),
+                                        'qualification_control_1_frag_2' => $request->input('quality_2')
+                                    ]
+                                );
+                            } else {
+                                //Inserción de la calificación del primer código
+                                $judment1 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'fragance_1' => $request->input('fragance_code_test_2'),
+                                        'carrier_type' => $request->input('carrier'),
+                                    ],
+                                    ['qualification_control_1_frag_1' => $request->input('quality_2')]
+                                );
+                                //Inserción de la calificación del segundo código
+                                $judment2 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'carrier_type' => $request->input('carrier')
+                                    ],
+                                    [
+                                        'fragance_2' => $request->input('fragance_code_test_1'),
+                                        'qualification_control_1_frag_2' => $request->input('quality_1')
+                                    ]
+                                );
+                            }
                             break;
                         case 2:
-                            //Captura de los datos para inserción
-                            $quality1 = [
-                                'qualification_control_2' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'qualification_control_2' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificació para el control 2 de la fragancia 1
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_1'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality1);
-                            //Inserción de la calificació para el control 2 de la fragancia 2
-                            $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_2'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality2);
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_1' => $request->input('quality_1')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_2' => $request->input('quality_2')
+                                    ]);
+                            } else {
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_1' => $request->input('quality_2')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_2' => $request->input('quality_1')
+                                    ]);
+                            }
                             break;
                         case 3:
-                            //Captura de los datos para inserción
-                            $quality1 = [
-                                'qualification_control_3' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'qualification_control_3' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificació para el control 2 de la fragancia 1
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_1'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality1);
-                            //Inserción de la calificació para el control 2 de la fragancia 2
-                            $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_2'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality2);
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_1' => $request->input('quality_1')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_2' => $request->input('quality_2')
+                                    ]);
+                            } else {
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_1' => $request->input('quality_2')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_2' => $request->input('quality_1')
+                                    ]);
+                            }
                             break;
                         case 4:
-                            $quality1 = [
-                                'qualification_control_4' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'qualification_control_4' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificació para el control 2 de la fragancia 1
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_1'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality1);
-                            //Inserción de la calificació para el control 2 de la fragancia 2
-                            $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_2'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality2);
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_1' => $request->input('quality_1')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_2' => $request->input('quality_2')
+                                    ]);
+                            } else {
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_1' => $request->input('quality_2')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_2' => $request->input('quality_1')
+                                    ]);
+                            }
                             break;
                     }
                     //validación de parámetros para siguiente juez
@@ -1078,92 +1167,190 @@ class JudmentController extends Controller
                     //Inserción del juicio 8
                     switch ($control) {
                         case 1:
-                            //recolección de datos
-                            $quality1 = [
-                                'projects_id_project' => $request->input('id_proyecto'),
-                                'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
-                                'judges_id_judge' => $request->input('id_judge'),
-                                'fragance_code' => $request->input('fragance_code_test_1'),
-                                'carrier_type' => $request->input('carrier'),
-                                'qualification_control_1' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'projects_id_project' => $request->input('id_proyecto'),
-                                'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
-                                'judges_id_judge' => $request->input('id_judge'),
-                                'fragance_code' => $request->input('fragance_code_test_2'),
-                                'carrier_type' => $request->input('carrier'),
-                                'qualification_control_1' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificación del primer código
-                            $judment1 = Judment::create($quality1);
-                            //Inserción de la calificación del segundo código
-                            $judment2 = Judment::create($quality2);
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+                                //Inserción de la calificación del primer código
+                                $judment1 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'fragance_1' => $request->input('fragance_code_test_1'),
+                                        'carrier_type' => $request->input('carrier')
+                                    ],
+                                    ['qualification_control_1_frag_1' => $request->input('quality_1')]
+                                );
+                                //Inserción de la calificación del segundo código
+                                $judment2 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'carrier_type' => $request->input('carrier')
+                                    ],
+                                    [
+                                        'fragance_2' => $request->input('fragance_code_test_2'),
+                                        'qualification_control_1_frag_2' => $request->input('quality_2')
+                                    ]
+                                );
+                            } else {
+                                //Inserción de la calificación del primer código
+                                $judment1 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'fragance_1' => $request->input('fragance_code_test_2'),
+                                        'carrier_type' => $request->input('carrier'),
+                                    ],
+                                    ['qualification_control_1_frag_1' => $request->input('quality_2')]
+                                );
+                                //Inserción de la calificación del segundo código
+                                $judment2 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'carrier_type' => $request->input('carrier')
+                                    ],
+                                    [
+                                        'fragance_2' => $request->input('fragance_code_test_1'),
+                                        'qualification_control_1_frag_2' => $request->input('quality_1')
+                                    ]
+                                );
+                            }
                             break;
                         case 2:
-                            //Captura de los datos para inserción
-                            $quality1 = [
-                                'qualification_control_2' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'qualification_control_2' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificació para el control 2 de la fragancia 1
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_1'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality1);
-                            //Inserción de la calificació para el control 2 de la fragancia 2
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_2'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality2);
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_1' => $request->input('quality_1')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_2' => $request->input('quality_2')
+                                    ]);
+                            } else {
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_1' => $request->input('quality_2')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_2' => $request->input('quality_1')
+                                    ]);
+                            }
                             break;
                         case 3:
-                            //Captura de los datos para inserción
-                            $quality1 = [
-                                'qualification_control_3' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'qualification_control_3' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificació para el control 2 de la fragancia 1
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_1'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality1);
-                            //Inserción de la calificació para el control 2 de la fragancia 2
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_2'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality2);
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_1' => $request->input('quality_1')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_2' => $request->input('quality_2')
+                                    ]);
+                            } else {
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_1' => $request->input('quality_2')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_2' => $request->input('quality_1')
+                                    ]);
+                            }
                             break;
                         case 4:
-                            $quality1 = [
-                                'qualification_control_4' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'qualification_control_4' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificació para el control 2 de la fragancia 1
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_1'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality1);
-                            //Inserción de la calificació para el control 2 de la fragancia 2
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_2'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality2);
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_1' => $request->input('quality_1')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_2' => $request->input('quality_2')
+                                    ]);
+                            } else {
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_1' => $request->input('quality_2')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_2' => $request->input('quality_1')
+                                    ]);
+                            }
                             break;
                     }
-                    //Update del status del control
+                    //Update del status de cada control
                     switch ($carrier) {
                         case 'a':
                             switch ($control) {
@@ -1265,91 +1452,188 @@ class JudmentController extends Controller
                     //inserción del juicios de 1 al 11
                     switch ($control) {
                         case 1:
-                            //Inserción de la calificación del primer código
-                            $judment1 = Judment::updateOrCreate(
-                                [
-                                    'projects_id_project' => $request->input('id_proyecto'),
-                                    'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
-                                    'judges_id_judge' => $request->input('id_judge'),
-                                    'fragance_code' => $request->input('fragance_code_test_1'),
-                                    'carrier_type' => $request->input('carrier'),
-                                ],
-                                ['qualification_control_1' => $request->input('quality_1')]
-                            );
-                            //Inserción de la calificación del segundo código
-                            $judment2 = Judment::updateOrCreate(
-                                [
-                                    'projects_id_project' => $request->input('id_proyecto'),
-                                    'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
-                                    'judges_id_judge' => $request->input('id_judge'),
-                                    'fragance_code' => $request->input('fragance_code_test_2'),
-                                    'carrier_type' => $request->input('carrier')
-                                ],
-                                ['qualification_control_1' => $request->input('quality_2')]
-                            );
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+                                //Inserción de la calificación del primer código
+                                $judment1 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'fragance_1' => $request->input('fragance_code_test_1')
+                                    ],
+                                    [
+                                        'qualification_control_1_frag_1' => $request->input('quality_1')
+                                    ]
+                                );
+                                //Inserción de la calificación del segundo código
+                                $judment2 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'carrier_type' => $request->input('carrier')
+                                    ],
+                                    [
+                                        'fragance_2' => $request->input('fragance_code_test_2'),
+                                        'qualification_control_1_frag_2' => $request->input('quality_2')
+                                    ]
+                                );
+                            } else {
+                                //Inserción de la calificación del primer código
+                                $judment1 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'fragance_1' => $request->input('fragance_code_test_2'),
+                                        'carrier_type' => $request->input('carrier'),
+                                    ],
+                                    ['qualification_control_1_frag_1' => $request->input('quality_2')]
+                                );
+                                //Inserción de la calificación del segundo código
+                                $judment2 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'carrier_type' => $request->input('carrier')
+                                    ],
+                                    [
+                                        'fragance_2' => $request->input('fragance_code_test_1'),
+                                        'qualification_control_1_frag_2' => $request->input('quality_1')
+                                    ]
+                                );
+                            }
                             break;
                         case 2:
-                            //Captura de los datos para inserción
-                            $quality1 = [
-                                'qualification_control_2' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'qualification_control_2' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificació para el control 2 de la fragancia 1
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_1'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality1);
-                            //Inserción de la calificació para el control 2 de la fragancia 2
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_2'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality2);
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_1' => $request->input('quality_1')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_2' => $request->input('quality_2')
+                                    ]);
+                            } else {
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_1' => $request->input('quality_2')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_2' => $request->input('quality_1')
+                                    ]);
+                            }
                             break;
                         case 3:
-                            //Captura de los datos para inserción
-                            $quality1 = [
-                                'qualification_control_3' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'qualification_control_3' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificació para el control 2 de la fragancia 1
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_1'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality1);
-                            //Inserción de la calificació para el control 2 de la fragancia 2
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_2'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality2);
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_1' => $request->input('quality_1')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_2' => $request->input('quality_2')
+                                    ]);
+                            } else {
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_1' => $request->input('quality_2')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_2' => $request->input('quality_1')
+                                    ]);
+                            }
                             break;
                         case 4:
-                            $quality1 = [
-                                'qualification_control_4' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'qualification_control_4' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificació para el control 2 de la fragancia 1
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_1'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality1);
-                            //Inserción de la calificació para el control 2 de la fragancia 2
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_2'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality2);
-                            break;
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_1' => $request->input('quality_1')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_2' => $request->input('quality_2')
+                                    ]);
+                            } else {
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_1' => $request->input('quality_2')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_2' => $request->input('quality_1')
+                                    ]);
+                            }
                     }
 
                     //validación de parámetros para siguiente juez
@@ -2147,92 +2431,191 @@ class JudmentController extends Controller
                     //inserción del juicio 12
                     switch ($control) {
                         case 1:
-                            //recolección de datos
-                            $quality1 = [
-                                'projects_id_project' => $request->input('id_proyecto'),
-                                'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
-                                'judges_id_judge' => $request->input('id_judge'),
-                                'fragance_code' => $request->input('fragance_code_test_1'),
-                                'carrier_type' => $request->input('carrier'),
-                                'qualification_control_1' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'projects_id_project' => $request->input('id_proyecto'),
-                                'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
-                                'judges_id_judge' => $request->input('id_judge'),
-                                'fragance_code' => $request->input('fragance_code_test_2'),
-                                'carrier_type' => $request->input('carrier'),
-                                'qualification_control_1' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificación del primer código
-                            $judment1 = Judment::create($quality1);
-                            //Inserción de la calificación del segundo código
-                            $judment2 = Judment::create($quality2);
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+                                //Inserción de la calificación del primer código
+                                $judment1 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'fragance_1' => $request->input('fragance_code_test_1'),
+                                        'carrier_type' => $request->input('carrier')
+                                    ],
+                                    ['qualification_control_1_frag_1' => $request->input('quality_1')]
+                                );
+                                //Inserción de la calificación del segundo código
+                                $judment2 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'carrier_type' => $request->input('carrier')
+                                    ],
+                                    [
+                                        'fragance_2' => $request->input('fragance_code_test_2'),
+                                        'qualification_control_1_frag_2' => $request->input('quality_2')
+                                    ]
+                                );
+                            } else {
+                                //Inserción de la calificación del primer código
+                                $judment1 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'fragance_1' => $request->input('fragance_code_test_2'),
+                                        'carrier_type' => $request->input('carrier'),
+                                    ],
+                                    ['qualification_control_1_frag_1' => $request->input('quality_2')]
+                                );
+                                //Inserción de la calificación del segundo código
+                                $judment2 = Judment::updateOrCreate(
+                                    [
+                                        'projects_id_project' => $request->input('id_proyecto'),
+                                        'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
+                                        'judges_id_judge' => $request->input('id_judge'),
+                                        'carrier_type' => $request->input('carrier')
+                                    ],
+                                    [
+                                        'fragance_2' => $request->input('fragance_code_test_1'),
+                                        'qualification_control_1_frag_2' => $request->input('quality_1')
+                                    ]
+                                );
+                            }
                             break;
                         case 2:
-                            //Captura de los datos para inserción
-                            $quality1 = [
-                                'qualification_control_2' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'qualification_control_2' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificació para el control 2 de la fragancia 1
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_1'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality1);
-                            //Inserción de la calificació para el control 2 de la fragancia 2
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_2'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality2);
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_1' => $request->input('quality_1')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_2' => $request->input('quality_2')
+                                    ]);
+                            } else {
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_1' => $request->input('quality_2')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_2_frag_2' => $request->input('quality_1')
+                                    ]);
+                            }
                             break;
                         case 3:
-                            //Captura de los datos para inserción
-                            $quality1 = [
-                                'qualification_control_3' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'qualification_control_3' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificació para el control 2 de la fragancia 1
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_1'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality1);
-                            //Inserción de la calificació para el control 2 de la fragancia 2
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_2'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality2);
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_1' => $request->input('quality_1')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_2' => $request->input('quality_2')
+                                    ]);
+                            } else {
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_1' => $request->input('quality_2')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_3_frag_2' => $request->input('quality_1')
+                                    ]);
+                            }
                             break;
                         case 4:
-                            $quality1 = [
-                                'qualification_control_4' => $request->input('quality_1')
-                            ];
-                            $quality2 = [
-                                'qualification_control_4' => $request->input('quality_2')
-                            ];
-                            //Inserción de la calificació para el control 2 de la fragancia 1
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_1'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality1);
-                            //Inserción de la calificació para el control 2 de la fragancia 2
-                            $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
-                                ->where('carrier_type', $request->input('carrier'))
-                                ->where('fragance_code', $request->input('fragance_code_test_2'))
-                                ->where('judges_id_judge', $request->input('id_judge'))
-                                ->update($quality2);
+                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+
+                            if ($validation_fragance_1 == 1) {
+
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_1' => $request->input('quality_1')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_2' => $request->input('quality_2')
+                                    ]);
+                            } else {
+                                //Inserción de la calificació para el control 2 de la fragancia 1
+                                $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_1', $request->input('fragance_code_test_2'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_1' => $request->input('quality_2')
+                                    ]);
+                                //Inserción de la calificació para el control 2 de la fragancia 2
+                                $judment2 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
+                                    ->where('carrier_type', $request->input('carrier'))
+                                    ->where('fragance_2', $request->input('fragance_code_test_1'))
+                                    ->where('judges_id_judge', $request->input('id_judge'))
+                                    ->update([
+                                        'qualification_control_4_frag_2' => $request->input('quality_1')
+                                    ]);
+                            }
                             break;
                     }
 
+                    //Update de estados de los controles
                     switch ($carrier) {
                         case 'a':
                             switch ($control) {
