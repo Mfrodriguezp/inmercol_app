@@ -743,7 +743,8 @@ class JudmentController extends Controller
                                         'projects_id_project' => $request->input('id_proyecto'),
                                         'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
                                         'judges_id_judge' => $request->input('id_judge'),
-                                        'fragance_1' => $request->input('fragance_code_test_1')
+                                        'fragance_1' => $request->input('fragance_code_test_1'),
+                                        'carrier_type' => $request->input('carrier'),
                                     ],
                                     [
                                         'qualification_control_1_frag_1' => $request->input('quality_1')
@@ -1463,7 +1464,8 @@ class JudmentController extends Controller
                                         'projects_id_project' => $request->input('id_proyecto'),
                                         'evaluated_fragances_id_evaluated_fragance' => $request->input('id_evaluated_fragance'),
                                         'judges_id_judge' => $request->input('id_judge'),
-                                        'fragance_1' => $request->input('fragance_code_test_1')
+                                        'fragance_1' => $request->input('fragance_code_test_1'),
+                                        'carrier_type' => $request->input('carrier')
                                     ],
                                     [
                                         'qualification_control_1_frag_1' => $request->input('quality_1')

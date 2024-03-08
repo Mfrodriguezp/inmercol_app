@@ -23,16 +23,29 @@ final class JudmentTable extends PowerGridComponent
     public string $primaryKey = 'judments.id_judment';
     public string $sortField = 'judments.id_judment';
     public int $perPage = 20;
-    public array $perPageValues = [0,5, 10, 20, 50, 100];
+    public array $perPageValues = [0, 5, 10, 20, 50, 100];
     public bool $showFilters = true;
     public function setUp(): array
     {
-        $this->showCheckBox('id_judment');
 
+        $nameFile = Carbon::parse(now())->format('mdy_His'); // Nombre para el archivo exportable basado en la fecha/hora
+        $this->showCheckBox('id_judment');
         return [
-            Exportable::make('export')
-                ->striped()
-                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+            Exportable::make($nameFile)
+                ->striped('82CDD0')
+                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV)
+                ->columnWidth([
+                    3 => 12,
+                    4 => 10,
+                    5 => 10,
+                    6 => 10,
+                    7 => 10,
+                    8 => 12,
+                    9 => 10,
+                    10 => 10,
+                    11 => 10,
+                    12 => 10,
+                ]),
             Header::make()->showToggleColumns()
                 ->withoutLoading(),
             Footer::make()
@@ -53,57 +66,50 @@ final class JudmentTable extends PowerGridComponent
                 $judges->on('judments.judges_id_judge', '=', 'judges.id_judge');
             })
             ->select([
-                'judments.id_judment as id_judment',
-                'projects.project_name AS proyecto',
-                'evaluated_fragances.test_identifier AS test_identifier',
-                'carrier_type AS portador',
-                'judges.judge_number as numero_juez',
-                'judges.judge_name as nombre_juez',
-                'fragance_1 AS fragancia_1',
-                'qualification_control_1_frag_1 AS control_1_frag_1',
-                'qualification_control_2_frag_1 AS control_2_frag_1',
-                'qualification_control_3_frag_1 AS control_3_frag_1',
-                'qualification_control_4_frag_1 AS control_4_frag_1',
-                'fragance_2 AS fragancia_2',
-                'qualification_control_1_frag_2 AS control_1_frag_2',
-                'qualification_control_2_frag_2 AS control_2_frag_2',
-                'qualification_control_3_frag_2 AS control_3_frag_2',
-                'qualification_control_4_frag_2 AS control_4_frag_2',
+                'judments.id_judment',
+                'projects.project_name',
+                'evaluated_fragances.test_identifier',
+                'carrier_type',
+                'judges.judge_number',
+                'judges.judge_name',
+                'fragance_1',
+                'qualification_control_1_frag_1',
+                'qualification_control_2_frag_1',
+                'qualification_control_3_frag_1',
+                'qualification_control_4_frag_1',
+                'fragance_2',
+                'qualification_control_1_frag_2',
+                'qualification_control_2_frag_2',
+                'qualification_control_3_frag_2',
+                'qualification_control_4_frag_2',
                 'evaluation_date'
-            ]);
+            ])
+            ->orderBy('carrier_type')
+            ->orderBy('judges.judge_number');
     }
 
-    public function relationSearch(): array
-    {
-        return [
-            'project' => [ // relationship on dishes model
-                'projects_id_project', // column enabled to search
-                'project' => ['project_name'] // nested relation and column enabled to search
-            ]
-        ];
-    }
 
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
             ->add('id_judment')
-            ->add('proyecto')
-            ->add('test_identifier')
-            ->add('portador', function (Judment $judment) {
-                return strtoupper($judment->portador);
+            ->add('projects.project_name')
+            ->add('evaluated_fragances.test_identifier')
+            ->add('carrier_type', function (Judment $judment) {
+                return strtoupper($judment->carrier_type);
             })
-            ->add('numero_juez')
-            ->add('nombre_juez')
-            ->add('fragancia_1')
-            ->add('control_1_frag_1')
-            ->add('control_2_frag_1')
-            ->add('control_3_frag_1')
-            ->add('control_4_frag_1')
-            ->add('fragancia_2')
-            ->add('control_1_frag_2')
-            ->add('control_2_frag_2')
-            ->add('control_3_frag_2')
-            ->add('control_4_frag_2')
+            ->add('judges.judge_number')
+            ->add('judges.judge_name')
+            ->add('fragance_1')
+            ->add('qualification_control_1_frag_1')
+            ->add('qualification_control_2_frag_1')
+            ->add('qualification_control_3_frag_1')
+            ->add('qualification_control_4_frag_1')
+            ->add('fragance_2')
+            ->add('qualification_control_1_frag_2')
+            ->add('qualification_control_2_frag_2')
+            ->add('qualification_control_3_frag_2')
+            ->add('qualification_control_4_frag_2')
             ->add('evaluation_date', function (Judment $judment) {
                 return Carbon::parse($judment->evaluation_date)->format('d-m-Y | H:i');
             });
@@ -112,38 +118,38 @@ final class JudmentTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('cod. evaluacion', 'test_identifier')
+            Column::make('cod. evaluación', 'test_identifier')
                 ->sortable()
                 ->searchable()
                 ->visibleInExport(false),
-            Column::make('proyecto', 'proyecto')
+            Column::make('proyecto', 'project_name')
                 ->sortable()
                 ->searchable()
                 ->visibleInExport(false),
-            Column::make('portador', 'portador')
+            Column::make('portador', 'carrier_type')
                 ->sortable()
                 ->searchable(),
-            Column::make('N° Juez', 'numero_juez')
+            Column::make('N° Juez', 'judge_number')
                 ->sortable()
                 ->searchable(),
-            Column::make('juez', 'nombre_juez')
+            Column::make('juez', 'judge_name')
                 ->sortable()
                 ->searchable()
                 ->visibleInExport(false),
-            Column::make('fragancia 1', 'fragancia_1')
+            Column::make('fragancia 1', 'fragance_1')
                 ->sortable()
                 ->searchable(),
-            Column::make('c1 frag 1', 'control_1_frag_1'),
-            Column::make('c2 frag 1', 'control_2_frag_1'),
-            Column::make('c3 frag 1', 'control_3_frag_1'),
-            Column::make('c4 frag 1', 'control_4_frag_1'),
-            Column::make('fragancia 2', 'fragancia_2')
+            Column::make('c1 frag 1', 'qualification_control_1_frag_1'),
+            Column::make('c2 frag 1', 'qualification_control_2_frag_1'),
+            Column::make('c3 frag 1', 'qualification_control_3_frag_1'),
+            Column::make('c4 frag 1', 'qualification_control_4_frag_1'),
+            Column::make('fragancia 2', 'fragance_2')
                 ->sortable()
                 ->searchable(),
-            Column::make('c1 frag 2', 'control_1_frag_2'),
-            Column::make('c2 frag 2', 'control_2_frag_2'),
-            Column::make('c3 frag 2', 'control_3_frag_2'),
-            Column::make('c4 frag 2', 'control_4_frag_2'),
+            Column::make('c1 frag 2', 'qualification_control_1_frag_2'),
+            Column::make('c2 frag 2', 'qualification_control_2_frag_2'),
+            Column::make('c3 frag 2', 'qualification_control_3_frag_2'),
+            Column::make('c4 frag 2', 'qualification_control_4_frag_2'),
             Column::make('fecha evaluacion', 'evaluation_date')
                 ->sortable()
                 ->visibleInExport(false),
@@ -154,7 +160,7 @@ final class JudmentTable extends PowerGridComponent
     {
         return [
             Filter::inputText('test_identifier', 'test_identifier')
-                ->operators(['contains']),
+                ->operators(['contains','is','is_not']),
         ];
     }
 
