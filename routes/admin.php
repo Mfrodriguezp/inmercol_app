@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\ReportController;
 Route::get('index', [HomeController::class, 'index'])->name('index.admin');
 
 //Rutas Resource para administración de usuarios y permisos.
-Route::resource('users', UserController::class)->names('admin.users');
+Route::resource('users', UserController::class)->names('admin.users')->only(['index','store','update','destroy']);
 
 //Rutas Resource para Proyectos
 Route::group(['prefix' => 'projects'], function () {
