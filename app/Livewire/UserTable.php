@@ -22,6 +22,9 @@ use Livewire\Component;
 final class UserTable extends PowerGridComponent
 {
     use WithExport;
+    public int $perPage = 10;
+    public array $perPageValues = [0, 5, 10, 20, 50, 100];
+    public bool $showFilters = true;
 
     public function setUp(): array
     {
@@ -33,7 +36,7 @@ final class UserTable extends PowerGridComponent
                 ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             Header::make()->showSearchInput(),
             Footer::make()
-                ->showPerPage()
+                ->showPerPage($this->perPage, $this->perPageValues)
                 ->showRecordCount(),
         ];
     }
@@ -68,9 +71,6 @@ final class UserTable extends PowerGridComponent
             Column::make('Correo', 'email')
                 ->sortable()
                 ->searchable(),
-
-            Column::make('Created at', 'created_at_formatted', 'created_at')
-                ->sortable(),
 
             Column::make('Created at', 'created_at')
                 ->sortable()
@@ -109,20 +109,20 @@ final class UserTable extends PowerGridComponent
     public function actions(\App\Models\User $row): array
     {
         return [
-            Button::add('permisions')
-                ->slot('<i class="fa-solid fa-sliders"></i>')
-                ->class('inline-flex items-center px-2 py-2 bg-gray-800 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150')
-                ->dispatch('admin.edit-modal', ['rowId' => $row->id])
-                ->tooltip('Permisos'),
             Button::add('edit')
                 ->slot('<i class="fa-solid fa-pencil"></i>')
                 ->class('inline-flex items-center justify-center px-2 py-2 bg-yellow-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
-                ->openModal('admin.create-edit-user-modal', ['user' => $row])
+                ->openModal('admin.users.create-edit-user-modal', ['user' => $row->id])
                 ->tooltip('Editar'),
-                Button::add('destroy')
+            Button::add('reset')
+                ->slot('<i class="fa-solid fa-rotate-left"></i>')
+                ->class('inline-flex items-center justify-center px-2 py-2 bg-lime-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-lime-500 active:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 transition ease-in-out duration-150')
+                ->openModal('admin.users.reset-password-modal', ['user' => $row->id])
+                ->tooltip('Restablecer Password'),
+            Button::add('destroy')
                 ->slot('<i class="fa-solid fa-trash"></i>')
                 ->class('inline-flex items-center justify-center px-2 py-2 bg-red-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
-                ->openModal('admin.edit-modal', ['rowId' => $row->id])
+                ->openModal('admin.users.destroy-user-modal', ['user' => $row->id])
                 ->tooltip('Eliminar'),
 
         ];

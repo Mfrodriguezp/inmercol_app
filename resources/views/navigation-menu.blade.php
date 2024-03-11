@@ -340,13 +340,22 @@
                     </div>
                 @endif
             @endcan
-            {{-- <div class="item">
-                <a
-                    href="{{route('admin.users.index')}}">
-                    <div class="icon"><i class="fa-solid fa-toolbox"></i></div>
-                    <div class="title"><span>Permisos</span></div>
-                </a>
-            </div> --}}
+            @if (Request::path() == 'app/users')
+                <div class="item activate">
+                    <a href="{{ route('admin.users.index') }}">
+                        <div class="icon"><i class="fa-solid fa-toolbox"></i></div>
+                        <div class="title"><span>Configuraciones</span></div>
+                    </a>
+                </div>
+            @else
+                <div class="item">
+                    <a href="{{ route('admin.users.index') }}">
+                        <div class="icon"><i class="fa-solid fa-toolbox"></i></div>
+                        <div class="title"><span>Configuraciones</span></div>
+                    </a>
+                </div>
+            @endif
+
         </div>
         <div id="menu-item-logout">
             <form class="item" method="POST" action="{{ route('logout') }}" x-data>
