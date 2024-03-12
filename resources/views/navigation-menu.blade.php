@@ -306,6 +306,23 @@
                     </div>
                 @endif
             @endcan
+            @can('admin.users.index')
+                @if (Request::path() == 'app/users')
+                    <div class="item activate">
+                        <a href="{{ route('admin.users.index') }}">
+                            <div class="icon"><i class="fa-solid fa-user-gear"></i></div>
+                            <div class="title"><span>Gestión de usuarios</span></div>
+                        </a>
+                    </div>
+                @else
+                    <div class="item">
+                        <a href="{{ route('admin.users.index') }}">
+                            <div class="icon"><i class="fa-solid fa-user-gear"></i></div>
+                            <div class="title"><span>Gestión de usuarios</span></div>
+                        </a>
+                    </div>
+                @endif
+            @endcan
             @can('admin.reports.index')
                 @if (Request::path() == 'app/reports')
                     <div class="item activate">
@@ -340,22 +357,6 @@
                     </div>
                 @endif
             @endcan
-            @if (Request::path() == 'app/users')
-                <div class="item activate">
-                    <a href="{{ route('admin.users.index') }}">
-                        <div class="icon"><i class="fa-solid fa-toolbox"></i></div>
-                        <div class="title"><span>Configuraciones</span></div>
-                    </a>
-                </div>
-            @else
-                <div class="item">
-                    <a href="{{ route('admin.users.index') }}">
-                        <div class="icon"><i class="fa-solid fa-toolbox"></i></div>
-                        <div class="title"><span>Configuraciones</span></div>
-                    </a>
-                </div>
-            @endif
-
         </div>
         <div id="menu-item-logout">
             <form class="item" method="POST" action="{{ route('logout') }}" x-data>

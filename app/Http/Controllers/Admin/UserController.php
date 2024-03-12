@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Exceptions\ReportableHandler;
 use Spatie\FlareClient\Truncation\ReportTrimmer;
 use Throwable;
+
 class UserController extends Controller
 {
     /**
@@ -26,19 +27,19 @@ class UserController extends Controller
     public function store(Request $request)
     {
         try {
-            $user= User::Create([
-                'name'=>$request->input('name'),
-                'email'=>$request->input('email'),
-                'password'=>bcrypt($request->input('password_confirmation'))
+            $user = User::Create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => bcrypt($request->input('password_confirmation'))
             ])->assignRole($request->input('role'));
         } catch (Throwable $e) {
             //report($e);
             return redirect()->route('admin.users.index')
-            ->with('error','No se ha podido crear el usuario, por favor valide la información ingresada');
+                ->with('error', 'No se ha podido crear el usuario, por favor valide la información ingresada');
         }
 
         return redirect()->route('admin.users.index')
-        ->with('success','El usuario ha sido creado satisfactoriamente');
+            ->with('success', 'El usuario ha sido creado satisfactoriamente');
     }
 
     /**
@@ -46,9 +47,14 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email')
+        ]);
         $user->roles()->sync($request->role);
+
         return redirect()->route('admin.users.index')
-        ->with('success','El usuario ha sido modificado');
+            ->with('success', 'El usuario ha sido modificado');
     }
 
     /**
@@ -58,6 +64,6 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->route('admin.users.index')
-        ->with('success','El usuario '.$user->name.' ha sido eliminado correctamente');
+            ->with('success', 'El usuario ' . $user->name . ' ha sido eliminado correctamente');
     }
 }

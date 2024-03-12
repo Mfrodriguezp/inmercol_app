@@ -71,7 +71,7 @@ final class JudgeTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::action('Action')
+            Column::action('Opciones')
         ];
     }
 

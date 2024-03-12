@@ -18,6 +18,7 @@ use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\View;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 final class UserTable extends PowerGridComponent
 {
@@ -72,11 +73,11 @@ final class UserTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Created at', 'created_at')
+            Column::make('Fecha Creación', 'created_at')
                 ->sortable()
                 ->searchable(),
 
-            Column::action('Action')
+            Column::action('Opciones')
         ];
     }
 
@@ -108,6 +109,16 @@ final class UserTable extends PowerGridComponent
 
     public function actions(\App\Models\User $row): array
     {
+        //Validación de usuario actual para permiso de eliminar
+        $id_user = Auth::user()->id;
+        $this_authorize = User::permission('admin.users.destroy')
+        ->where('id',$id_user)
+        ->get();
+        if(count($this_authorize)==0){
+            $canDestroy = false;
+        }else{
+            $canDestroy = true;
+        }
         return [
             Button::add('edit')
                 ->slot('<i class="fa-solid fa-pencil"></i>')
@@ -123,6 +134,7 @@ final class UserTable extends PowerGridComponent
                 ->slot('<i class="fa-solid fa-trash"></i>')
                 ->class('inline-flex items-center justify-center px-2 py-2 bg-red-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
                 ->openModal('admin.users.destroy-modal', ['user' => $row->id])
+                ->can($canDestroy)
                 ->tooltip('Eliminar'),
 
         ];
