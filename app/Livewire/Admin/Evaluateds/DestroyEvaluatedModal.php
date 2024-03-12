@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Evaluateds;
 
 use App\Models\EvaluatedFragance;
 use LivewireUI\Modal\ModalComponent;
@@ -12,6 +12,6 @@ class DestroyEvaluatedModal extends ModalComponent
 
     public function render()
     {
-        return view('livewire.admin.destroy-evaluated-modal');
+        return view('livewire.admin.evaluateds.destroy-evaluated-modal');
     }
 }

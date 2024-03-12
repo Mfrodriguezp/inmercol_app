@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Evaluateds;
 
 use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
@@ -21,6 +21,6 @@ class RotFraganceCarriersModal extends ModalComponent
 
     public function render()
     {
-        return view('livewire.admin.rot-fragance-carriers-modal');
+        return view('livewire.admin.evaluateds.rot-fragance-carriers-modal');
     }
 }

@@ -163,22 +163,22 @@ final class ProjectTable extends PowerGridComponent
             Button::add('evaluated')
                 ->slot('<i class="fa-solid fa-flask-vial"></i>')
                 ->class('inline-flex items-center px-2 py-2 bg-gray-800 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150')
-                ->openModal('admin.create-edit-evaluated-modal', ['id_project' => $row->id_project])
+                ->openModal('admin.evaluateds.create-edit-evaluated-modal', ['id_project' => $row->id_project])
                 ->tooltip('Añadir Evaluaciones'),
             Button::add('historial')
                 ->slot('<i class="fa-solid fa-timeline"></i>')
                 ->class('btn-primary inline-flex items-center px-2 py-2 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150')
-                ->openModal('admin.time-line-modal', ['project' => $row->id_project])
+                ->openModal('admin.projects.time-line-modal', ['project' => $row->id_project])
                 ->tooltip('Histórico de evaluaciones'),
             Button::add('edit')
                 ->slot('<i class="fa-solid fa-pencil"></i>')
                 ->class('inline-flex items-center justify-center px-2 py-2 bg-yellow-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
-                ->openModal('admin.create-edit-modal', ['project' => $row->id_project])
+                ->openModal('admin.projects.create-edit-modal', ['project' => $row->id_project])
                 ->tooltip('Editar'),
             Button::add('destroy')
                 ->slot('<i class="fa-solid fa-trash"></i>')
                 ->class('inline-flex items-center justify-center px-2 py-2 bg-red-600 border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150')
-                ->openModal('admin.destroy-modal', ['project' => $row->id_project])
+                ->openModal('admin.projects.destroy-modal', ['project' => $row->id_project])
                 ->can($canDestroy)
                 ->tooltip('Eliminar'),
         ];

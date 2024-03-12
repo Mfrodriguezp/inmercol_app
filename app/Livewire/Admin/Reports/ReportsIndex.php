@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Reports;
 
 use Livewire\Component;
 
@@ -10,6 +10,6 @@ class ReportsIndex extends Component
 
     public function render()
     {
-        return view('livewire.admin.reports-index');
+        return view('livewire.admin.reports.reports-index');
     }
 }

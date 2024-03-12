@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Judges;
 
 use Livewire\Component;
 
@@ -14,6 +14,6 @@ class JudgesIndex extends Component
 
     public function render()
     {
-        return view('livewire.admin.judges-index');
+        return view('livewire.admin.judges.judges-index');
     }
 }

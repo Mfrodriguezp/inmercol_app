@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Evaluateds;
 
 use App\Models\Project;
 use Livewire\Component;
@@ -27,6 +27,6 @@ class EvaluatedsIndex extends Component
 
     public function render()
     {
-        return view('livewire.admin.evaluateds-index');
+        return view('livewire.admin.evaluateds.evaluateds-index');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Judges;
 
 use App\Models\Judge;
 use LivewireUI\Modal\ModalComponent;
@@ -12,6 +12,6 @@ class CreateEditJudgeModal extends ModalComponent
     
     public function render()
     {
-        return view('livewire.admin.create-edit-judge-modal');
+        return view('livewire.admin.judges.create-edit-judge-modal');
     }
 }

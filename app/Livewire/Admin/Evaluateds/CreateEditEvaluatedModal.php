@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Evaluateds;
 
 use LivewireUI\Modal\ModalComponent;
 use App\Models\EvaluatedFragance;
@@ -34,6 +34,6 @@ class CreateEditEvaluatedModal extends ModalComponent
 
     public function render()
     {
-        return view('livewire.admin.create-edit-evaluated-modal');
+        return view('livewire.admin.evaluateds.create-edit-evaluated-modal');
     }
 }

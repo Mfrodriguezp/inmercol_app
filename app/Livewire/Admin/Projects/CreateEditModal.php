@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Projects;
 
 use App\Http\Controllers\Admin\ProjectController;
 use LivewireUI\Modal\ModalComponent;
@@ -29,6 +29,6 @@ class CreateEditModal extends ModalComponent
 
     public function render()
     {
-        return view('livewire.admin.create-edit-modal');
+        return view('livewire.admin.projects.create-edit-modal');
     }
 }

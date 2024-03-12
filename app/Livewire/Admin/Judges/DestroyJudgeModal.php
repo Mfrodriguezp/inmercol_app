@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Judges;
 
 use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
@@ -12,6 +12,6 @@ class DestroyJudgeModal extends ModalComponent
     
     public function render()
     {
-        return view('livewire.admin.destroy-judge-modal');
+        return view('livewire.admin.judges.destroy-judge-modal');
     }
 }

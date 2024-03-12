@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Projects;
 
 use App\Models\Project;
 use LivewireUI\Modal\ModalComponent;
@@ -26,6 +26,6 @@ public static function modalMaxWidth(): string
 
     public function render()
     {
-        return view('livewire.admin.time-line-modal');
+        return view('livewire.admin.projects.time-line-modal');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Projects;
 
 use LivewireUI\Modal\ModalComponent;
 use App\Models\Project;
@@ -12,6 +12,6 @@ class DestroyModal extends ModalComponent
     
     public function render()
     {
-        return view('livewire.admin.destroy-modal');
+        return view('livewire.admin.projects.destroy-modal');
     }
 }

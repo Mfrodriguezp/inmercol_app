@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Projects;
 use Livewire\Component;
 use App\Models\Project;
 
@@ -17,6 +17,6 @@ class ProjectsIndex extends Component
 
     public function render()
     {
-        return view('livewire.admin.projects-index');
+        return view('livewire.admin.projects.projects-index');
     }
 }
