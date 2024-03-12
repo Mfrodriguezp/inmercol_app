@@ -12,9 +12,8 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'auth'=>'Usuario y/o contraseña inválidos.',
-    'failed' => 'Usuario y/o contraseña inválidos.',
+    'failed' => 'Credenciales invádas.',
     'password' => 'The provided password is incorrect.',
-    'throttle' => 'Demasiados intentos de inicio de sesión. Inténtelo de nuevo en :segundos segundos.',
+    'throttle' => 'Demasiados intentos de inicio de sesión. Inténtelo de nuevo en 2 minutos.',
 
 ];

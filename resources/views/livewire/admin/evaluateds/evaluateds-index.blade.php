@@ -94,7 +94,7 @@
     @endif
 
     <div class="data">
-        <livewire:evaluated-table />
+        <livewire:admin.evaluateds.evaluated-table />
     </div>
     {{-- Modals --}}
 

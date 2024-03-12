@@ -43,8 +43,9 @@
             {{ $slot }}
         </main>
     </div>
-
+    
     @stack('modals')
+    @include('popper::assets')
     @livewireScripts
 </body>
 

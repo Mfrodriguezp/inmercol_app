@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Admin\Judges;
 
 use App\Models\Judge;
 use Illuminate\Support\Carbon;

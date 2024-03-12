@@ -5,7 +5,6 @@
         </div>
     </div>
     <div class="data">
-        <livewire:judment-table />
+        <livewire:admin.reports.judment-table />
     </div>
-
 </div>

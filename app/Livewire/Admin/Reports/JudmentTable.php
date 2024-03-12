@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Admin\Reports;
 
 use App\Livewire\Admin\Judges;
 use App\Models\Judment;

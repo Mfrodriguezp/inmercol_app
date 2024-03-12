@@ -65,7 +65,7 @@
         </div>
     @endif
     <div class="data">
-        <livewire:user-table />
+        <livewire:admin.users.user-table />
     </div>
 
     {{-- Modals --}}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Admin\Evaluateds;
 
 use App\Models\EvaluatedFragance;
 use Illuminate\Support\Carbon;

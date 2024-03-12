@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Admin\Users;
 
 use App\Models\User;
 use Illuminate\Support\Carbon;

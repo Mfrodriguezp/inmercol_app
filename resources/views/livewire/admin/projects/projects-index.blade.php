@@ -41,7 +41,7 @@
         </div>
     @endif
     <div class="data">
-        <livewire:project-table />
+        <livewire:admin.projects.project-table />
     </div>
 
     {{-- Modals --}}

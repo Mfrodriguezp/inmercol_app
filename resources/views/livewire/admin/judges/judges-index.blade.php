@@ -41,7 +41,7 @@
         </div>
     @endif
     <div class="data">
-        <livewire:judge-table />
+        <livewire:admin.judges.judge-table />
     </div>
 
     {{-- Modals --}}
