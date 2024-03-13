@@ -170,7 +170,7 @@ Estilos para el input range de las pruebas de sustantividad
     border-left: 1px solid black;
     height: 15px;
     position: relative;
-    top: -0.8rem;
+    top: -1rem;
     z-index: 1;
     display: flex;
     /*justify-content: space-between;*/
@@ -242,8 +242,8 @@ input[type="range"]::-webkit-slider-thumb {
     margin-top: -0.35em;
     border: none;
     width: 1.75em;
-    height: 1.75em;
-    --poly:polygon(50% 100%, 10% 0, 90% 0);
+    height: 2.5em;
+    --poly:polygon(50% 100%, 30% 0, 70% 0);
     -webkit-clip-path: var(--poly);
     clip-path: var(--poly);
     cursor: pointer;
@@ -255,8 +255,8 @@ input[type="range"]::-moz-range-thumb {
     margin-top: -0.35em;
     border: none;
     width: 1.75em;
-    height: 1.5em;
-    --poly: polygon(50% 100%, 10% 0, 90% 0);
+    height: 2.5em;
+    --poly: polygon(50% 100%, 30% 0, 70% 0);
     -webkit-clip-path: var(--poly);
     clip-path: var(--poly);
     cursor: pointer;
