@@ -60,7 +60,7 @@
                             </x-label>
 
                             <x-select name="id_client" class="w-full" required>
-                                <option value="" disabled>
+                                <option value="" selected disabled>
                                     Seleccione una opción
                                 </option>
                                 @foreach ($clients as $client)
