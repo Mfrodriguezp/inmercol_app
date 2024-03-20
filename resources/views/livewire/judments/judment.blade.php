@@ -35,12 +35,6 @@
             @csrf
             <div class="flex justify-between first-section" id="first-section">
                 <div class="">
-                    {{-- <input type="text" name="judge_name" id="judge_name" value="{{ $judge->judge_name }}"
-                            class="block pt-5 pb-1 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            disabled />
-                        <label for="judge_name"
-                            class="peer-focus:font-medium absolute text-xl text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombre
-                            del Juez</label> --}}
                     <strong>Nombre del juez : </strong><span class="capitalize">{{ $judge->judge_name }}</span>
                 </div>
                 <div>
@@ -48,12 +42,6 @@
                         {{ $carrier === 'a' ? $evaluated->nombre_portador_a : $evaluated->nombre_portador_b }}</span>
                 </div>
                 <div class="">
-                    {{-- <input type="text" name="judge_number" value="{{ $judge->judge_number }}"
-                            class="block pt-5 pb-1 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            disabled />
-                        <label for="judge_name"
-                            class="peer-focus:font-medium absolute text-xl text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Número
-                            de Juez</label> --}}
                     <strong>Número de Juez: </strong><span class="capitalize">{{ $judge->judge_number }}</span>
                 </div>
             </div>
@@ -87,11 +75,11 @@
             <div class="second-section">
                 <div class="mb-2">
                     <span class="text-teal-500 text-xl font-semibold"
-                        aria-describedby="helper-text-explanation">Marcación</span>
+                        aria-describedby="helper-text-explanation">Marcación: Iniciar con brazo {{$brazo_inicial}}</span>
                     <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Por favor
                         expresar su percepción de intensidad moviendo la línea que se muestra sobre la escala LMS.</p>
                 </div>
-                @if ($brazo_inicial === 'derecho')
+                {{--@if ($brazo_inicial === 'derecho')
                     @if ($carrier === 'a')
                         <div id="code1" class="my-4 quality grid grid-cols-1">
                             <div class="flex justify-between">
@@ -277,13 +265,12 @@
                             </div>
                         </div>
                     @endif
-                @else
+                @else--}}
                     @if ($carrier === 'a')
                         <div id="code1" class="my-4 quality grid grid-cols-1">
                             <div class="flex justify-between">
                                 <div class="mb-4">
-                                    <strong>Brazo inicial : </strong><span
-                                        class="capitalize">{{ $brazo_inicial }}</span>
+                                    <strong>Brazo izquierdo</strong>
                                 </div>
                                 <div class="mb-4">
                                     <input type="hidden" name="fragance_code_test_1"
@@ -291,7 +278,7 @@
                                 </div>
                                 <div>
                                     <strong>Código : </strong><span
-                                        class="capitalize">{{ $brazo_inicial === 'izquierdo' ? $evaluated->codigo_brazo_izquierdo : $evaluated->codigo_brazo_derecho }}</span>
+                                        class="capitalize">{{ $evaluated->codigo_brazo_izquierdo}}</span>
                                 </div>
                             </div>
                             <div class="m-auto">
@@ -328,7 +315,7 @@
                         <div id="code2" class="my-4 quality grid grid-cols-1">
                             <div class="flex justify-between">
                                 <div class="mb-4">
-                                    <strong>Brazo final : </strong><span class="capitalize">derecho</span>
+                                    <strong>Brazo derecho</strong>
                                 </div>
                                 <div class="mb-4">
                                     <input type="hidden" name="fragance_code_test_2"
@@ -374,8 +361,7 @@
                         <div id="code1" class="my-4 quality grid grid-cols-1">
                             <div class="flex justify-between">
                                 <div class="mb-4">
-                                    <strong>Brazo inicial : </strong><span
-                                        class="capitalize">{{ $brazo_inicial }}</span>
+                                    <strong>Brazo izquierdo</strong>
                                 </div>
                                 <div class="mb-4">
                                     <input type="hidden" name="fragance_code_test_1"
@@ -383,7 +369,7 @@
                                 </div>
                                 <div>
                                     <strong>Código : </strong><span
-                                        class="">{{ $brazo_inicial === 'izquierdo' ? $evaluated->codigo_brazo_izquierdo : $evaluated->codigo_brazo_derecho }}</span>
+                                        class="">{{ $evaluated->codigo_brazo_izquierdo }}</span>
                                 </div>
                             </div>
                             <div class="m-auto">
@@ -420,7 +406,7 @@
                         <div id="code2" class="my-4 quality grid grid-cols-1">
                             <div class="flex justify-between">
                                 <div class="mb-4">
-                                    <strong>Brazo final : </strong><span class="capitalize">derecho</span>
+                                    <strong>Brazo derecho</strong>
                                 </div>
                                 <div class="mb-4">
                                     <input type="hidden" name="fragance_code_test_2"
@@ -463,7 +449,7 @@
                             </div>
                         </div>
                     @endif
-                @endif
+                {{--@endif--}}
                 <div class="footer flex justify-between items-center">
                     <div class="flex justify-between basis-3/5">
                         <span class="block text-xs">Escala: </span>
