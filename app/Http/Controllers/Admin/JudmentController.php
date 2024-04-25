@@ -9,7 +9,6 @@ use App\Models\Judment;
 use Illuminate\Support\Facades\DB;
 use App\Models\JudmentCounter;
 use App\Models\Project;
-use Seld\PharUtils\Timestamps;
 
 class JudmentController extends Controller
 {
@@ -1147,8 +1146,8 @@ class JudmentController extends Controller
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
                                     'code_2_test_a as codigo_portador_b_fragancia_2',
                                     'evaluated_fragances.name_carrier_b as nombre_portador_b',
-                                    'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
-                                    'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
+                                    'rotation_aplication_fragances.fragance_carrier_b_arm_right as codigo_brazo_derecho',
+                                    'rotation_aplication_fragances.fragance_carrier_b_arm_left as codigo_brazo_izquierdo'
                                 ])
                                 ->orderBy('id_evaluated_fragance', 'desc')
                                 ->first();
