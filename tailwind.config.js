@@ -28,6 +28,7 @@ export default {
             colors: {
                 "pg-primary": colors.gray,
                 "pg-secondary": colors.teal,
+                "lime":colors.lime,
             },
         },
     },

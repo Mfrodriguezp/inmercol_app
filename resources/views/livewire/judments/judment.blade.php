@@ -75,7 +75,7 @@
             <div class="second-section">
                 <div class="mb-2">
                     <span class="text-teal-500 text-xl font-semibold"
-                        aria-describedby="helper-text-explanation">Marcación: Iniciar con brazo {{$brazo_inicial}}</span>
+                        aria-describedby="helper-text-explanation">Iniciar con brazo {{$brazo_inicial}}</span>
                     <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Por favor
                         expresar su percepción de intensidad moviendo la línea que se muestra sobre la escala LMS.</p>
                 </div>
