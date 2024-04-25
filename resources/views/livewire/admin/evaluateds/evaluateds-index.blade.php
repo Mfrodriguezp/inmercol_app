@@ -58,12 +58,12 @@
                             <h3 class="text-lg font-medium">Aplicación Fragancias Portador (a) {{$rotationCarriers->name_carrier_a}}</h3>
                             <ul>
                                 <li>
-                                    <strong>Brazo Derecho:
-                                    </strong>{{ $rotationCarriers->fragance_carrier_a_arm_right }}
-                                </li>
-                                <li>
                                     <strong>Brazo Izquierdo:
                                     </strong>{{ $rotationCarriers->fragance_carrier_a_arm_left }}
+                                </li>
+                                <li>
+                                    <strong>Brazo Derecho:
+                                    </strong>{{ $rotationCarriers->fragance_carrier_a_arm_right }}
                                 </li>
                             </ul>
                         </div>
@@ -71,12 +71,13 @@
                             <h3 class="text-lg font-medium">Aplicación Fragancias Portador (a) {{$rotationCarriers->name_carrier_b}}</h3>
                             <ul>
                                 <li>
-                                    <strong>Brazo Derecho:
-                                    </strong>{{ $rotationCarriers->fragance_carrier_b_arm_right }}
-                                </li>
-                                <li>
                                     <strong>Brazo Izquierdo:
                                     </strong>{{ $rotationCarriers->fragance_carrier_b_arm_left }}
+                                    
+                                </li>
+                                <li>
+                                    <strong>Brazo Derecho:
+                                    </strong>{{ $rotationCarriers->fragance_carrier_b_arm_right }}
                                 </li>
                             </ul>
                         </div>
