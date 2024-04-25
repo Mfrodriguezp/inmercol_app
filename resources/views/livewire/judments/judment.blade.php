@@ -74,12 +74,12 @@
             </div>
             <div class="second-section">
                 <div class="mb-2">
-                    <span class="text-teal-500 text-xl font-semibold"
-                        aria-describedby="helper-text-explanation">Iniciar con brazo {{$brazo_inicial}}</span>
+                    <span class="text-teal-500 text-xl font-semibold" aria-describedby="helper-text-explanation">Iniciar
+                        con brazo {{ $brazo_inicial }}</span>
                     <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Por favor
                         expresar su percepción de intensidad moviendo la línea que se muestra sobre la escala LMS.</p>
                 </div>
-                {{--@if ($brazo_inicial === 'derecho')
+                {{-- @if ($brazo_inicial === 'derecho')
                     @if ($carrier === 'a')
                         <div id="code1" class="my-4 quality grid grid-cols-1">
                             <div class="flex justify-between">
@@ -265,191 +265,191 @@
                             </div>
                         </div>
                     @endif
-                @else--}}
-                    @if ($carrier === 'a')
-                        <div id="code1" class="my-4 quality grid grid-cols-1">
-                            <div class="flex justify-between">
-                                <div class="mb-4">
-                                    <strong>Brazo izquierdo</strong>
-                                </div>
-                                <div class="mb-4">
-                                    <input type="hidden" name="fragance_code_test_1"
-                                        value="{{ $codigo_brazo_izquierdo === $evaluated->codigo_portador_a_fragancia_2 ? $evaluated->codigo_test_fragancia_2 : $evaluated->codigo_test_fragancia_1 }}" />
-                                </div>
-                                <div>
-                                    <strong>Código : </strong><span
-                                        class="capitalize">{{ $evaluated->codigo_brazo_izquierdo}}</span>
-                                </div>
+                @else --}}
+                @if ($carrier === 'a')
+                    <div id="code1" class="my-4 quality grid grid-cols-1">
+                        <div class="flex justify-between">
+                            <div class="mb-4">
+                                <strong>Brazo izquierdo</strong>
                             </div>
-                            <div class="m-auto">
-                                <input type="range" min="0" max="20" value="0" name="quality_1"
-                                    class="range block" id="rango" step="0.05" />
-                                <div class="scala">
-                                    <div class="markingA">
-                                        <div class="numero">A<div class="linea"></div>
-                                        </div>
+                            <div class="mb-4">
+                                <input type="hidden" name="fragance_code_test_1"
+                                    value="{{ $codigo_brazo_izquierdo === $evaluated->codigo_portador_a_fragancia_2 ? $evaluated->codigo_test_fragancia_2 : $evaluated->codigo_test_fragancia_1 }}" />
+                            </div>
+                            <div>
+                                <strong>Código : </strong><span
+                                    class="capitalize">{{ $evaluated->codigo_brazo_izquierdo }}</span>
+                            </div>
+                        </div>
+                        <div class="m-auto">
+                            <input type="range" min="0" max="20" value="0" name="quality_1"
+                                class="range block" id="rango" step="0.05" />
+                            <div class="scala">
+                                <div class="markingA">
+                                    <div class="numero">A<div class="linea"></div>
                                     </div>
-                                    <div class="markingB">
-                                        <div class="numero">B<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingB">
+                                    <div class="numero">B<div class="linea"></div>
                                     </div>
-                                    <div class="markingC">
-                                        <div class="numero">C<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingC">
+                                    <div class="numero">C<div class="linea"></div>
                                     </div>
-                                    <div class="markingD">
-                                        <div class="numero">D<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingD">
+                                    <div class="numero">D<div class="linea"></div>
                                     </div>
-                                    <div class="markingE">
-                                        <div class="numero">E<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingE">
+                                    <div class="numero">E<div class="linea"></div>
                                     </div>
-                                    <div class="markingF">
-                                        <div class="numero">F<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingF">
+                                    <div class="numero">F<div class="linea"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="code2" class="my-4 quality grid grid-cols-1">
-                            <div class="flex justify-between">
-                                <div class="mb-4">
-                                    <strong>Brazo derecho</strong>
-                                </div>
-                                <div class="mb-4">
-                                    <input type="hidden" name="fragance_code_test_2"
-                                        value="{{ $codigo_brazo_derecho === $evaluated->codigo_portador_a_fragancia_2 ? $evaluated->codigo_test_fragancia_2 : $evaluated->codigo_test_fragancia_1 }}" />
-                                </div>
-                                <div>
-                                    <strong>Código : </strong><span
-                                        class="">{{ $evaluated->codigo_brazo_derecho }}</span>
-                                </div>
+                    </div>
+                    <div id="code2" class="my-4 quality grid grid-cols-1">
+                        <div class="flex justify-between">
+                            <div class="mb-4">
+                                <strong>Brazo derecho</strong>
                             </div>
-                            <div class="m-auto">
-                                <input type="range" min="0" max="20" value="0" name="quality_2"
-                                    class="range block" id="rango" step="0.05" />
-                                <div class="scala">
-                                    <div class="markingA">
-                                        <div class="numero">A<div class="linea"></div>
-                                        </div>
+                            <div class="mb-4">
+                                <input type="hidden" name="fragance_code_test_2"
+                                    value="{{ $codigo_brazo_derecho === $evaluated->codigo_portador_a_fragancia_2 ? $evaluated->codigo_test_fragancia_2 : $evaluated->codigo_test_fragancia_1 }}" />
+                            </div>
+                            <div>
+                                <strong>Código : </strong><span
+                                    class="">{{ $evaluated->codigo_brazo_derecho }}</span>
+                            </div>
+                        </div>
+                        <div class="m-auto">
+                            <input type="range" min="0" max="20" value="0" name="quality_2"
+                                class="range block" id="rango" step="0.05" />
+                            <div class="scala">
+                                <div class="markingA">
+                                    <div class="numero">A<div class="linea"></div>
                                     </div>
-                                    <div class="markingB">
-                                        <div class="numero">B<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingB">
+                                    <div class="numero">B<div class="linea"></div>
                                     </div>
-                                    <div class="markingC">
-                                        <div class="numero">C<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingC">
+                                    <div class="numero">C<div class="linea"></div>
                                     </div>
-                                    <div class="markingD">
-                                        <div class="numero">D<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingD">
+                                    <div class="numero">D<div class="linea"></div>
                                     </div>
-                                    <div class="markingE">
-                                        <div class="numero">E<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingE">
+                                    <div class="numero">E<div class="linea"></div>
                                     </div>
-                                    <div class="markingF">
-                                        <div class="numero">F<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingF">
+                                    <div class="numero">F<div class="linea"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @else
-                        <div id="code1" class="my-4 quality grid grid-cols-1">
-                            <div class="flex justify-between">
-                                <div class="mb-4">
-                                    <strong>Brazo izquierdo</strong>
-                                </div>
-                                <div class="mb-4">
-                                    <input type="hidden" name="fragance_code_test_1"
-                                        value="{{ $codigo_brazo_izquierdo === $evaluated->codigo_portador_b_fragancia_2 ? $evaluated->codigo_test_fragancia_2 : $evaluated->codigo_test_fragancia_1 }}" />
-                                </div>
-                                <div>
-                                    <strong>Código : </strong><span
-                                        class="">{{ $evaluated->codigo_brazo_izquierdo }}</span>
-                                </div>
+                    </div>
+                @else
+                    <div id="code1" class="my-4 quality grid grid-cols-1">
+                        <div class="flex justify-between">
+                            <div class="mb-4">
+                                <strong>Brazo izquierdo</strong>
                             </div>
-                            <div class="m-auto">
-                                <input type="range" min="0" max="20" value="0" name="quality_1"
-                                    class="range block" id="rango" step="0.05" />
-                                <div class="scala">
-                                    <div class="markingA">
-                                        <div class="numero">A<div class="linea"></div>
-                                        </div>
+                            <div class="mb-4">
+                                <input type="hidden" name="fragance_code_test_1"
+                                    value="{{ $codigo_brazo_izquierdo === $evaluated->codigo_portador_b_fragancia_2 ? $evaluated->codigo_test_fragancia_2 : $evaluated->codigo_test_fragancia_1 }}" />
+                            </div>
+                            <div>
+                                <strong>Código : </strong><span
+                                    class="">{{ $evaluated->codigo_brazo_izquierdo }}</span>
+                            </div>
+                        </div>
+                        <div class="m-auto">
+                            <input type="range" min="0" max="20" value="0" name="quality_1"
+                                class="range block" id="rango" step="0.05" />
+                            <div class="scala">
+                                <div class="markingA">
+                                    <div class="numero">A<div class="linea"></div>
                                     </div>
-                                    <div class="markingB">
-                                        <div class="numero">B<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingB">
+                                    <div class="numero">B<div class="linea"></div>
                                     </div>
-                                    <div class="markingC">
-                                        <div class="numero">C<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingC">
+                                    <div class="numero">C<div class="linea"></div>
                                     </div>
-                                    <div class="markingD">
-                                        <div class="numero">D<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingD">
+                                    <div class="numero">D<div class="linea"></div>
                                     </div>
-                                    <div class="markingE">
-                                        <div class="numero">E<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingE">
+                                    <div class="numero">E<div class="linea"></div>
                                     </div>
-                                    <div class="markingF">
-                                        <div class="numero">F<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingF">
+                                    <div class="numero">F<div class="linea"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="code2" class="my-4 quality grid grid-cols-1">
-                            <div class="flex justify-between">
-                                <div class="mb-4">
-                                    <strong>Brazo derecho</strong>
-                                </div>
-                                <div class="mb-4">
-                                    <input type="hidden" name="fragance_code_test_2"
-                                        value="{{ $codigo_brazo_derecho === $evaluated->codigo_portador_b_fragancia_2 ? $evaluated->codigo_test_fragancia_2 : $evaluated->codigo_test_fragancia_1 }}" />
-                                </div>
-                                <div>
-                                    <strong>Código : </strong><span
-                                        class="uppercase">{{ $evaluated->codigo_brazo_derecho }}</span>
-                                </div>
+                    </div>
+                    <div id="code2" class="my-4 quality grid grid-cols-1">
+                        <div class="flex justify-between">
+                            <div class="mb-4">
+                                <strong>Brazo derecho</strong>
                             </div>
-                            <div class="m-auto">
-                                <input type="range" min="0" max="20" value="0" name="quality_2"
-                                    class="range block" id="rango" step="0.05" />
-                                <div class="scala">
-                                    <div class="markingA">
-                                        <div class="numero">A<div class="linea"></div>
-                                        </div>
+                            <div class="mb-4">
+                                <input type="hidden" name="fragance_code_test_2"
+                                    value="{{ $codigo_brazo_derecho === $evaluated->codigo_portador_b_fragancia_2 ? $evaluated->codigo_test_fragancia_2 : $evaluated->codigo_test_fragancia_1 }}" />
+                            </div>
+                            <div>
+                                <strong>Código : </strong><span
+                                    class="uppercase">{{ $evaluated->codigo_brazo_derecho }}</span>
+                            </div>
+                        </div>
+                        <div class="m-auto">
+                            <input type="range" min="0" max="20" value="0" name="quality_2"
+                                class="range block" id="rango" step="0.05" />
+                            <div class="scala">
+                                <div class="markingA">
+                                    <div class="numero">A<div class="linea"></div>
                                     </div>
-                                    <div class="markingB">
-                                        <div class="numero">B<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingB">
+                                    <div class="numero">B<div class="linea"></div>
                                     </div>
-                                    <div class="markingC">
-                                        <div class="numero">C<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingC">
+                                    <div class="numero">C<div class="linea"></div>
                                     </div>
-                                    <div class="markingD">
-                                        <div class="numero">D<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingD">
+                                    <div class="numero">D<div class="linea"></div>
                                     </div>
-                                    <div class="markingE">
-                                        <div class="numero">E<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingE">
+                                    <div class="numero">E<div class="linea"></div>
                                     </div>
-                                    <div class="markingF">
-                                        <div class="numero">F<div class="linea"></div>
-                                        </div>
+                                </div>
+                                <div class="markingF">
+                                    <div class="numero">F<div class="linea"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endif
-                {{--@endif--}}
+                    </div>
+                @endif
+                {{-- @endif --}}
                 <div class="footer flex justify-between items-center">
                     <div class="flex justify-between basis-3/5">
                         <span class="block text-xs">Escala: </span>
@@ -460,9 +460,18 @@
                         <span class="block text-xs">E= Muy Fuerte</span>
                         <span class="block text-xs">F= Extremo Fuerte</span>
                     </div>
-                    <x-button>
-                        Registrar Prueba
-                    </x-button>
+                    <x-label>
+                        <x-checkbox wire:click="$toggle('checked')" />Confirmar marcación
+                    </x-label>
+                    @if ($checked)
+                        <x-button>
+                            Registrar Marcación
+                        </x-button>
+                    @else
+                        <x-button disabled>
+                            Deshabilitado<i class="fa-solid fa-ban"></i>
+                        </x-button>
+                    @endif
                 </div>
             </div>
         </form>

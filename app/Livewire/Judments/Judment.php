@@ -20,6 +20,7 @@ class Judment extends Component
     public $codigo_brazo_derecho; // Código del brazo derecho identificando la fragancia asignada para el portador
     public $number_judges; // Cantidad de jueces para el juicio
     public $message;
+    public $checked = false;
     /*----------------------
     Parámetros configurados para traer:
     *Códigos de muestras
