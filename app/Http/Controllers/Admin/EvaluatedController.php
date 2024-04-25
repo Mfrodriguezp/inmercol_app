@@ -42,6 +42,10 @@ class EvaluatedController extends Controller
             $rotation++;
         }
 
+        /*
+
+        Aleatorización de jueces y brazo inicial
+
         $random_judges_a = []; //Array de rotaciones de jueces portadores a
         $random_judges_b = []; //Array de rotaciones de jueces portadores b
         $start_rotation_a = []; //array para rotación de brazo_portadores a
@@ -92,7 +96,7 @@ class EvaluatedController extends Controller
                         array_push($start_rotation_a, $rand);
                     }
 
-                    //Ingreso de valores en la rotacion de brazos portador a
+                    //Ingreso de valores en la rotacion de brazos portador b
                     if (count($start_rotation_b) == 0) {
                         $rand = rand(1, 4); //Creación de número aleatorio
                         array_push($start_rotation_b, $rand);
@@ -274,6 +278,8 @@ class EvaluatedController extends Controller
                     );
                 break;
         }
+        */
+
         //Data Del formulario
         $record = [
 

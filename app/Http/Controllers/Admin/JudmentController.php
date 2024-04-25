@@ -30,9 +30,131 @@ class JudmentController extends Controller
                             ->count('qualification_control_' . intval($control) . '_frag_1');
                         if ($validation == 0) {
                             $judmentNumber = 1;
+                            /**
+                         * Aleatoriedad de Jueces y rotación de brazos
+                         */
+
+                        $random_judges_a = []; //Array de rotaciones de jueces portadores a
+                        $random_judges_b = []; //Array de rotaciones de jueces portadores b
+                        $start_rotation_a = []; //array para rotación de brazo_portadores a
+                        $start_rotation_b = []; //array para rotación de brazo_portadores b
+
+                        //Eliminación de la tabla de rotacion de jueces para limpiarla
+                        $delete_rotations_judges = DB::table('judges_8_rotations_has_start_8_evaluations')
+                            ->delete();
+
+                        //Selección de rotaciones aleatorias para inseción en la tabla de muchos a muchos
+                        for ($i = 1; $i < 5; $i++) {
+                            //Ingreso de valores en la primera rotación de jueces
+                            if (count($random_judges_a) == 0) {
+                                $rand = rand(1, 100); //Creación de número aleatorio
+                                array_push($random_judges_a, $rand);
+                            } else {
+                                $rand = rand(1, 100); //Creación de número aleatorio
+                                while (in_array($rand, $random_judges_a)) {
+                                    $rand = rand(1, 100);
+                                }
+                                array_push($random_judges_a, $rand);
+                            }
+
+                            //Ingreso de valores en la segunda rotación de jueces
+                            $rand = rand(1, 100); //Creación de número aleatorio
+                            if (count($random_judges_b) == 0 && !in_array($rand, $random_judges_a)) {
+                                array_push($random_judges_b, $rand);
+                            } else {
+                                $rand = rand(1, 100); //Creación de número aleatorio
+                                while (in_array($rand, $random_judges_b) || in_array($rand, $random_judges_a)) {
+                                    $rand = rand(1, 100);
+                                }
+                                array_push($random_judges_b, $rand);
+                            }
+
+                            //Ingreso de valores en la rotacion de brazos portador a
+                            if (count($start_rotation_a) == 0) {
+                                $rand = rand(1, 4); //Creación de número aleatorio
+                                array_push($start_rotation_a, $rand);
+                            } else {
+                                $rand = rand(1, 4); //Creación de número aleatorio
+                                while (in_array($rand, $start_rotation_a)) {
+                                    $rand = rand(1, 4);
+                                }
+                                array_push($start_rotation_a, $rand);
+                            }
+
+                            //Ingreso de valores en la rotacion de brazos portador b
+                            if (count($start_rotation_b) == 0) {
+                                $rand = rand(1, 4); //Creación de número aleatorio
+                                array_push($start_rotation_b, $rand);
+                            } else {
+                                $rand = rand(1, 4); //Creación de número aleatorio
+                                while (in_array($rand, $start_rotation_b)) {
+                                    $rand = rand(1, 4);
+                                }
+                                array_push($start_rotation_b, $rand);
+                            }
+                        }
+
+                        //Inserción de datos en la tabla de relación de datos para rotación de jueces
+
+                        $rotation_8_judges = DB::table('judges_8_rotations_has_start_8_evaluations')
+                            ->insert(
+                                [
+                                    [
+                                        'control' => 1,
+                                        'judges_8_rotations_id' => $random_judges_a[0],
+                                        'start_8_evaluations_id' => $start_rotation_a[0],
+                                        'carrier' => "a"
+                                    ],
+                                    [
+                                        'control' => 2,
+                                        'judges_8_rotations_id' => $random_judges_a[1],
+                                        'start_8_evaluations_id' => $start_rotation_a[1],
+                                        'carrier' => "a"
+                                    ],
+                                    [
+                                        'control' => 3,
+                                        'judges_8_rotations_id' => $random_judges_a[2],
+                                        'start_8_evaluations_id' => $start_rotation_a[2],
+                                        'carrier' => "a"
+                                    ],
+                                    [
+                                        'control' => 4,
+                                        'judges_8_rotations_id' => $random_judges_a[3],
+                                        'start_8_evaluations_id' => $start_rotation_a[3],
+                                        'carrier' => "a"
+                                    ],
+                                    [
+                                        'control' => 1,
+                                        'judges_8_rotations_id' => $random_judges_b[0],
+                                        'start_8_evaluations_id' => $start_rotation_b[0],
+                                        'carrier' => "b"
+                                    ],
+                                    [
+                                        'control' => 2,
+                                        'judges_8_rotations_id' => $random_judges_b[1],
+                                        'start_8_evaluations_id' => $start_rotation_b[1],
+                                        'carrier' => "b"
+                                    ],
+                                    [
+                                        'control' => 3,
+                                        'judges_8_rotations_id' => $random_judges_b[2],
+                                        'start_8_evaluations_id' => $start_rotation_b[2],
+                                        'carrier' => "b"
+                                    ],
+                                    [
+                                        'control' => 4,
+                                        'judges_8_rotations_id' => $random_judges_b[3],
+                                        'start_8_evaluations_id' => $start_rotation_b[3],
+                                        'carrier' => "b"
+                                    ]
+                                ]
+                            );
+
+                        //Aleatoriedad de jueces y rotación de brazos ^^
                         } else {
                             $judmentNumber = $validation + 1;
                         }
+                    
                         switch ($judmentNumber) {
                             case 1:
                                 //query para validación del primer Juez para enviarla a la vista
@@ -171,9 +293,131 @@ class JudmentController extends Controller
                             ->count('qualification_control_' . intval($control) . '_frag_1');
                         if ($validation == 0) {
                             $judmentNumber = 1;
+                            /**
+                         * Aleatoriedad de Jueces y rotación de brazos
+                         */
+
+                        $random_judges_a = []; //Array de rotaciones de jueces portadores a
+                        $random_judges_b = []; //Array de rotaciones de jueces portadores b
+                        $start_rotation_a = []; //array para rotación de brazo_portadores a
+                        $start_rotation_b = []; //array para rotación de brazo_portadores b
+
+                        //Eliminación de la tabla de rotacion de jueces para limpiarla
+                        $delete_rotations_judges = DB::table('judges_8_rotations_has_start_8_evaluations')
+                            ->delete();
+
+                        //Selección de rotaciones aleatorias para inseción en la tabla de muchos a muchos
+                        for ($i = 1; $i < 5; $i++) {
+                            //Ingreso de valores en la primera rotación de jueces
+                            if (count($random_judges_a) == 0) {
+                                $rand = rand(1, 100); //Creación de número aleatorio
+                                array_push($random_judges_a, $rand);
+                            } else {
+                                $rand = rand(1, 100); //Creación de número aleatorio
+                                while (in_array($rand, $random_judges_a)) {
+                                    $rand = rand(1, 100);
+                                }
+                                array_push($random_judges_a, $rand);
+                            }
+
+                            //Ingreso de valores en la segunda rotación de jueces
+                            $rand = rand(1, 100); //Creación de número aleatorio
+                            if (count($random_judges_b) == 0 && !in_array($rand, $random_judges_a)) {
+                                array_push($random_judges_b, $rand);
+                            } else {
+                                $rand = rand(1, 100); //Creación de número aleatorio
+                                while (in_array($rand, $random_judges_b) || in_array($rand, $random_judges_a)) {
+                                    $rand = rand(1, 100);
+                                }
+                                array_push($random_judges_b, $rand);
+                            }
+
+                            //Ingreso de valores en la rotacion de brazos portador a
+                            if (count($start_rotation_a) == 0) {
+                                $rand = rand(1, 4); //Creación de número aleatorio
+                                array_push($start_rotation_a, $rand);
+                            } else {
+                                $rand = rand(1, 4); //Creación de número aleatorio
+                                while (in_array($rand, $start_rotation_a)) {
+                                    $rand = rand(1, 4);
+                                }
+                                array_push($start_rotation_a, $rand);
+                            }
+
+                            //Ingreso de valores en la rotacion de brazos portador b
+                            if (count($start_rotation_b) == 0) {
+                                $rand = rand(1, 4); //Creación de número aleatorio
+                                array_push($start_rotation_b, $rand);
+                            } else {
+                                $rand = rand(1, 4); //Creación de número aleatorio
+                                while (in_array($rand, $start_rotation_b)) {
+                                    $rand = rand(1, 4);
+                                }
+                                array_push($start_rotation_b, $rand);
+                            }
+                        }
+
+                        //Inserción de datos en la tabla de relación de datos para rotación de jueces
+
+                        $rotation_8_judges = DB::table('judges_8_rotations_has_start_8_evaluations')
+                            ->insert(
+                                [
+                                    [
+                                        'control' => 1,
+                                        'judges_8_rotations_id' => $random_judges_a[0],
+                                        'start_8_evaluations_id' => $start_rotation_a[0],
+                                        'carrier' => "a"
+                                    ],
+                                    [
+                                        'control' => 2,
+                                        'judges_8_rotations_id' => $random_judges_a[1],
+                                        'start_8_evaluations_id' => $start_rotation_a[1],
+                                        'carrier' => "a"
+                                    ],
+                                    [
+                                        'control' => 3,
+                                        'judges_8_rotations_id' => $random_judges_a[2],
+                                        'start_8_evaluations_id' => $start_rotation_a[2],
+                                        'carrier' => "a"
+                                    ],
+                                    [
+                                        'control' => 4,
+                                        'judges_8_rotations_id' => $random_judges_a[3],
+                                        'start_8_evaluations_id' => $start_rotation_a[3],
+                                        'carrier' => "a"
+                                    ],
+                                    [
+                                        'control' => 1,
+                                        'judges_8_rotations_id' => $random_judges_b[0],
+                                        'start_8_evaluations_id' => $start_rotation_b[0],
+                                        'carrier' => "b"
+                                    ],
+                                    [
+                                        'control' => 2,
+                                        'judges_8_rotations_id' => $random_judges_b[1],
+                                        'start_8_evaluations_id' => $start_rotation_b[1],
+                                        'carrier' => "b"
+                                    ],
+                                    [
+                                        'control' => 3,
+                                        'judges_8_rotations_id' => $random_judges_b[2],
+                                        'start_8_evaluations_id' => $start_rotation_b[2],
+                                        'carrier' => "b"
+                                    ],
+                                    [
+                                        'control' => 4,
+                                        'judges_8_rotations_id' => $random_judges_b[3],
+                                        'start_8_evaluations_id' => $start_rotation_b[3],
+                                        'carrier' => "b"
+                                    ]
+                                ]
+                            );
+
+                        //Aleatoriedad de jueces y rotación de brazos ^^
                         } else {
                             $judmentNumber = $validation + 1;
                         }
+                        
                         switch ($judmentNumber) {
                             case 1:
                                 //query para validación del primer Juez para enviarla a la vista
