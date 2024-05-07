@@ -101,15 +101,39 @@ final class JudmentTable extends PowerGridComponent
             ->add('judges.judge_number')
             ->add('judges.judge_name')
             ->add('fragance_1')
-            ->add('qualification_control_1_frag_1')
-            ->add('qualification_control_2_frag_1')
-            ->add('qualification_control_3_frag_1')
-            ->add('qualification_control_4_frag_1')
+            ->add('qualification_control_1_frag_1',function (Judment $judment){
+                //Return number with two decimals and colon with decimal separator
+                return number_format($judment->qualification_control_1_frag_1,2,",",".");
+            })
+            ->add('qualification_control_2_frag_1',function (Judment $judment){
+                //Return number with two decimals and colon with decimal separator
+                return number_format($judment->qualification_control_2_frag_1,2,",",".");
+            })
+            ->add('qualification_control_3_frag_1',function (Judment $judment){
+                //Return number with two decimals and colon with decimal separator
+                return number_format($judment->qualification_control_3_frag_1,2,",",".");
+            })
+            ->add('qualification_control_4_frag_1',function (Judment $judment){
+                //Return number with two decimals and colon with decimal separator
+                return number_format($judment->qualification_control_4_frag_1,2,",",".");
+            })
             ->add('fragance_2')
-            ->add('qualification_control_1_frag_2')
-            ->add('qualification_control_2_frag_2')
-            ->add('qualification_control_3_frag_2')
-            ->add('qualification_control_4_frag_2')
+            ->add('qualification_control_1_frag_2',function (Judment $judment){
+                //Return number with two decimals and colon with decimal separator
+                return number_format($judment->qualification_control_1_frag_2,2,",",".");
+            })
+            ->add('qualification_control_2_frag_2',function (Judment $judment){
+                //Return number with two decimals and colon with decimal separator
+                return number_format($judment->qualification_control_2_frag_2,2,",",".");
+            })
+            ->add('qualification_control_3_frag_2',function (Judment $judment){
+                //Return number with two decimals and colon with decimal separator
+                return number_format($judment->qualification_control_3_frag_2,2,",",".");
+            })
+            ->add('qualification_control_4_frag_2',function (Judment $judment){
+                //Return number with two decimals and colon with decimal separator
+                return number_format($judment->qualification_control_4_frag_2,2,",",".");
+            })
             ->add('evaluation_date', function (Judment $judment) {
                 return Carbon::parse($judment->evaluation_date)->format('d-m-Y | H:i');
             });
