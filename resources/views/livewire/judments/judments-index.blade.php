@@ -30,7 +30,7 @@
         @endif
     </div>
 
-    <div class="data">
+    <div class="data" wire:poll.keep-alive>
         @if ($evaluateds->count())
             @foreach ($evaluateds as $evaluated)
                 @switch($evaluated->number_judges)

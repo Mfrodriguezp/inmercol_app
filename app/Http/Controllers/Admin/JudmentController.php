@@ -1386,9 +1386,9 @@ class JudmentController extends Controller
                                     'id_evaluated_fragance',
                                     'projects_id_project as id_proyecto',
                                     'fragance_test_code_1 as codigo_test_fragancia_1',
-                                    'code_1_test_a as codigo_portador_b_fragancia_1',
+                                    'code_1_test_b as codigo_portador_b_fragancia_1',
                                     'fragance_test_code_2 as codigo_test_fragancia_2',
-                                    'code_2_test_a as codigo_portador_b_fragancia_2',
+                                    'code_2_test_b as codigo_portador_b_fragancia_2',
                                     'evaluated_fragances.name_carrier_b as nombre_portador_b',
                                     'rotation_aplication_fragances.fragance_carrier_b_arm_right as codigo_brazo_derecho',
                                     'rotation_aplication_fragances.fragance_carrier_b_arm_left as codigo_brazo_izquierdo'
