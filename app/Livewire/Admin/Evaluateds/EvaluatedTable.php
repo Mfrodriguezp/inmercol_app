@@ -130,7 +130,8 @@ final class EvaluatedTable extends PowerGridComponent
 
             Column::make('Cod. Test Frag. 1', 'fragance_test_code_1')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
 
             Column::make('Fragancia 2', 'fragance_name_2')
                 ->sortable()
@@ -146,7 +147,8 @@ final class EvaluatedTable extends PowerGridComponent
 
             Column::make('Cod. Test Frag. 2', 'fragance_test_code_2')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->hidden($isHidden = true, $isForceHidden = false),
 
             Column::make('Rotacion Aplicacion Fragancia', 'rot_fragance_aplication')
                 ->sortable()
