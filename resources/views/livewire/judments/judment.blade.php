@@ -364,7 +364,7 @@
                                 <strong>Brazo izquierdo</strong>
                             </div>
                             <div class="mb-4">
-                                <input type="text" name="fragance_code_test_1"
+                                <input type="hidden" name="fragance_code_test_1"
                                     value="{{ $codigo_brazo_izquierdo === $evaluated->codigo_portador_b_fragancia_2 ? $evaluated->codigo_test_fragancia_2 : $evaluated->codigo_test_fragancia_1 }}" />
                             </div>
                             <div>
