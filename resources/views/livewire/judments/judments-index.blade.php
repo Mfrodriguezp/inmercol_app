@@ -1,7 +1,9 @@
 <div>
     <div class="header flex justify-between items-center mb-4">
         <div class="title">
-            <span class="title">{{ $title }}</span>
+            @foreach ($evaluateds as $evaluated)
+                <span class="title">{{ $title }} {{$evaluated->test_identifier}}</span>
+            @endforeach
         </div>
         @if (session('message'))
             <div id="alert-1"
@@ -600,7 +602,6 @@
                         </div>
                     @break
                 @endswitch
-                
             @endforeach
         @else
             <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300"

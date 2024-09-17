@@ -273,6 +273,7 @@ class JudmentController extends Controller
                             ->where('id_evaluated_fragance', "=", $idEvaluated)
                             ->select([
                                 'id_evaluated_fragance',
+                                'test_identifier',
                                 'projects_id_project as id_proyecto',
                                 'fragance_test_code_1 as codigo_test_fragancia_1',
                                 'code_1_test_a as codigo_portador_a_fragancia_1',
@@ -529,6 +530,7 @@ class JudmentController extends Controller
                             ->where('id_evaluated_fragance', '=', $idEvaluated)
                             ->select([
                                 'id_evaluated_fragance',
+                                'test_identifier',
                                 'projects_id_project as id_proyecto',
                                 'fragance_test_code_1 as codigo_test_fragancia_1',
                                 'code_1_test_b as codigo_portador_b_fragancia_1',
@@ -847,6 +849,7 @@ class JudmentController extends Controller
                             ->where('id_evaluated_fragance', "=", $idEvaluated)
                             ->select([
                                 'id_evaluated_fragance',
+                                'test_identifier',
                                 'projects_id_project as id_proyecto',
                                 'fragance_test_code_1 as codigo_test_fragancia_1',
                                 'code_1_test_a as codigo_portador_a_fragancia_1',
@@ -1028,20 +1031,6 @@ class JudmentController extends Controller
                                     ->first();
                                 break;
                         }
-                        //query para validación del primer Juez para enviarla a la vista
-                        /*$rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                            ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                            ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                            ->select([
-                                'judges_12_rotations.judment_1 as juez',
-                                'start_12_evaluations.judge_1_b as brazo_inicial'
-                            ])
-                            ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                            ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                            ->first();*/
-                        /*Query para validar los códigos de test de fragancia
-                         y códigos de fragracias para los portadores
-                        */
                         //Query para extracción de los datos de la evaluación portador B
                         $evaluated = DB::table('evaluated_fragances')
                             ->join(
@@ -1053,6 +1042,7 @@ class JudmentController extends Controller
                             ->where('id_evaluated_fragance', '=', $idEvaluated)
                             ->select([
                                 'id_evaluated_fragance',
+                                'test_identifier',
                                 'projects_id_project as id_proyecto',
                                 'fragance_test_code_1 as codigo_test_fragancia_1',
                                 'code_1_test_b as codigo_portador_b_fragancia_1',
@@ -1388,6 +1378,7 @@ class JudmentController extends Controller
                                 ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
+                                    'test_identifier',
                                     'projects_id_project as id_proyecto',
                                     'fragance_test_code_1 as codigo_test_fragancia_1',
                                     'code_1_test_a as codigo_portador_a_fragancia_1',
@@ -1505,6 +1496,7 @@ class JudmentController extends Controller
                                 ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
+                                    'test_identifier',
                                     'projects_id_project as id_proyecto',
                                     'fragance_test_code_1 as codigo_test_fragancia_1',
                                     'code_1_test_b as codigo_portador_b_fragancia_1',
@@ -2161,6 +2153,7 @@ class JudmentController extends Controller
                                 ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
+                                    'test_identifier',
                                     'projects_id_project as id_proyecto',
                                     'fragance_test_code_1 as codigo_test_fragancia_1',
                                     'code_1_test_a as codigo_portador_a_fragancia_1',
@@ -2330,6 +2323,7 @@ class JudmentController extends Controller
                                 ->where('id_evaluated_fragance', '=', $idEvaluated)
                                 ->select([
                                     'id_evaluated_fragance',
+                                    'test_identifier',
                                     'projects_id_project as id_proyecto',
                                     'fragance_test_code_1 as codigo_test_fragancia_1',
                                     'code_1_test_b as codigo_portador_b_fragancia_1',

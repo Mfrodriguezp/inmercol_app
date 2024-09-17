@@ -1,7 +1,7 @@
 <div>
     <div class="header flex justify-between items-center mb-4">
         <div class="title basis-3/5">
-            <span class="title">{{ $title }}</span>
+            <span class="title">{{ $title }} {{$evaluated->test_identifier}}</span>
         </div>
         {{-- Alert --}}
         @if (!is_null($message))
