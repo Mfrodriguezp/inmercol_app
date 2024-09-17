@@ -30,7 +30,7 @@ class Judment extends Component
     ------------------------*/
     public function mount()
     {
-        $this->title = "Marcación de sustantividad";
+        $this->title = "Sustantividad";
         $this->judge = Judge::where('judge_number', $this->rotationJudges->juez)
             ->first();
         $this->brazo_inicial = $this->rotationJudges->brazo_inicial;

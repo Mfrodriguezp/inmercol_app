@@ -7,7 +7,7 @@
                     <span class="title">Bienvenid@ {{Auth::user()->name}}</span>
                 </div>
                 <div>
-                    <img class="m-auto" src="{{ asset('storage/inmercol_logo.svg') }}" type="img/svg" alt="logo inmercol">
+                    <img class="m-auto" src="{{ asset('storage/inmercol_logo_1.svg') }}" type="img/svg" alt="logo inmercol">
                 </div>
             </div>
         </div>
