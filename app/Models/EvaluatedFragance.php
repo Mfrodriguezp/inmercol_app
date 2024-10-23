@@ -54,4 +54,8 @@ class EvaluatedFragance extends Model
     public function rotationAplicationFrangances(){
         return $this->hasMany(RotationAplicationFragance::class);
     }
+    //Relacion Uno a mucho en condiciones ambientales de la prueba
+    public function environmentalConditions(){
+        return $this->hasMany(EnvironmentalCondition::class);
+    }
 }

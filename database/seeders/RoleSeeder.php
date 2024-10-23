@@ -52,5 +52,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.users.create'])->syncRoles([$role1,$role2]);
         Permission::create(['name' => 'admin.users.edit'])->syncRoles([$role1,$role2]);
         Permission::create(['name' => 'admin.users.destroy'])->syncRoles([$role1]);
+        //Permisos seccion Formulario temperatura y humedad
+        Permission::create(['name' => 'admin.environmentals.index'])->syncRoles([$role1,$role3]);
+        Permission::create(['name' => 'admin.environmentals.create'])->syncRoles([$role1,$role3]);
     }
 }

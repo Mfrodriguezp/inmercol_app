@@ -17,7 +17,7 @@ class JudmentController extends Controller
         return view('admin.judments.index');
     }
 
-    public function judment($control, $carrier, $judges, $judmentNumber, $idEvaluated)
+    public function judment($control, $carrier, $judges, $idEvaluated)
     {
         switch ($judges) {
             case '8':
@@ -1707,101 +1707,15 @@ class JudmentController extends Controller
                             }
                             break;
                     }
-                    //Update del status de cada control
-                    switch ($carrier) {
-                        case 'a':
-                            switch ($control) {
-                                case 1:
-                                    //Actualización de estatus activate finish del primer control portador a    
-                                    $update_control_1_a = EvaluatedFragance::find($idEvaluated);
-                                    $update_control_1_a->control_1_a = 'finish';
-                                    $update_control_1_a->save();
-                                    //Update de status de pending a activate segundo control
-                                    $update_control_2_a = EvaluatedFragance::find($idEvaluated);
-                                    $update_control_2_a->control_2_a = 'activate';
-                                    $update_control_2_a->save();
-                                    break;
-                                case 2:
-                                    //Actualización de estatus del segundo control portador a    
-                                    $upd_control_2_a = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_2_a->control_2_a = 'finish';
-                                    $upd_control_2_a->save();
-                                    //Update de status de pending a activate tercer control
-                                    $update_control_3_a = EvaluatedFragance::find($idEvaluated);
-                                    $update_control_3_a->control_3_a = 'activate';
-                                    $update_control_3_a->save();
-                                    break;
-                                case 3:
-                                    //Actualización de estatus del tercer control portador a    
-                                    $upd_control_3_a = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_3_a->control_3_a = 'finish';
-                                    $upd_control_3_a->save();
-                                    //Update de status de pending a activate cuarto control
-                                    $update_control_4_a = EvaluatedFragance::find($idEvaluated);
-                                    $update_control_4_a->control_4_a = 'activate';
-                                    $update_control_4_a->save();
-                                    break;
-                                case 4:
-                                    //Actualización de estatus del último control portador a    
-                                    $upd_control_4_a = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_4_a->control_4_a = 'finish';
-                                    $upd_control_4_a->save();
-                                    break;
-                            }
-                            break;
-                        case 'b':
-                            switch ($control) {
-                                case 1:
-                                    //Actualización de estatus del primer control portador a    
-                                    $upd_control_1_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_1_b->control_1_b = 'finish';
-                                    $upd_control_1_b->save();
-                                    //Update de status de pending a activate segundo control
-                                    $upd_control_2_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_2_b->control_2_b = 'activate';
-                                    $upd_control_2_b->save();
-                                    break;
-                                case 2:
-                                    //Actualización de estatus del segundo control portador a    
-                                    $upd_control_2_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_2_b->control_2_b = 'finish';
-                                    $upd_control_2_b->save();
-                                    //Update de status de pending a activate tercer control
-                                    $upd_control_3_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_3_b->control_3_b = 'activate';
-                                    $upd_control_3_b->save();
-                                    break;
-                                case 3:
-                                    //Actualización de estatus del primer control portador a    
-                                    $upd_control_3_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_3_b->control_3_b = 'finish';
-                                    $upd_control_3_b->save();
-                                    //Update de status de pending a activate tercer control
-                                    $upd_control_4_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_4_b->control_4_b = 'activate';
-                                    $upd_control_4_b->save();
-                                    break;
-                                case 4:
-                                    //Actualización de estatus del cuarto control portador b    
-                                    $upd_control_4_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_4_b->control_4_b = 'finish';
-                                    $upd_control_4_b->save();
-
-                                    //Actualición del estado de la evaluación de fragancia
-                                    $upd_status_evaluated = EvaluatedFragance::find($idEvaluated);
-                                    $upd_status_evaluated->status_evaluation = "Finalizado";
-                                    $upd_status_evaluated->save();
-
-                                    //Actualización de la fecha/hora ultima evaluación en la tabla project
-                                    $upd_last_evaluation = Project::find($idProject);
-                                    $upd_last_evaluation->last_evaluation = now('America/Bogota');
-                                    $upd_last_evaluation->save();
-                                    break;
-                            }
-                            break;
-                    }
-                    return redirect()->route('admin.judments.index')
-                        ->with('message', 'El control ' . $control . ' del portador ' . $carrier_name . ' ha sido guardado correctamente.');
+                    return redirect()->route('admin.environmentals.index')->with([
+                        'control' => $control,
+                        'carrier' => $carrier,
+                        'idEvaluated' => $idEvaluated,
+                        'judges' => 8,
+                        'carrier_name'=>$carrier_name
+                    ]);
+                    /*return redirect()->route('admin.judments.index')
+                        ->with('message', 'El control ' . $control . ' del portador ' . $carrier_name . ' ha sido guardado correctamente.');*/
                 }
                 break;
             case 12:

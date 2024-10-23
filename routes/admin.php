@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\EnvironmentalController;
 
 Route::get('index', [HomeController::class, 'index'])->name('index.admin');
 
@@ -74,7 +75,16 @@ Route::group([
     'middleware' => [\Illuminate\Auth\Middleware\Authorize::using('admin.judments.index')]
 ], function () {
     Route::get('', [JudmentController::class, 'index'])->name('admin.judments.index');
-    Route::get('judment/{control?}/{carrier?}/{judges?}/{judmentNumber?}/{idEvaluated?}', [JudmentController::class, 'judment'])
+    Route::get('judment/{control?}/{carrier?}/{judges?}/{idEvaluated?}', [JudmentController::class, 'judment'])
         ->name('admin.judments.judment');
     Route::post('saveJudment', [JudmentController::class, 'saveJudment'])->name('admin.judments.saveJudment');
+});
+
+Route::group(['prefix'=>'environmentals'],function(){
+    Route::get('/',[EnvironmentalController::class,'index'])
+    ->middleware([\Illuminate\Auth\Middleware\Authorize::using('admin.environmentals.index')])
+    ->name('admin.environmentals.index');
+    Route::post('store', [EnvironmentalController::class, 'store'])
+    ->middleware([\Illuminate\Auth\Middleware\Authorize::using('admin.environmentals.create')])
+    ->name('admin.evaluateds.store');
 });
