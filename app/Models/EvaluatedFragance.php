@@ -26,6 +26,7 @@ class EvaluatedFragance extends Model
         'rot_fragance_aplication',
         'name_carrier_a',
         'name_carrier_b',
+        'benchmark',
         'control_1_a',
         'control_2_a',
         'control_3_a',

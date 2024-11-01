@@ -75,7 +75,8 @@
                                             <option value="12">12</option>
                                         </x-select>
                                     @else
-                                        <x-select name="number_judges" class="w-full" required>
+                                        <x-select name="number_judges" wire:model.live="number_judges" class="w-full"
+                                            required>
                                             <option value="" selected disabled>Cant. Jueces</option>
                                             <option value="8">8</option>
                                             <option value="12">12</option>
@@ -90,7 +91,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="mb-4 overflow-hidden">
+                        <div class="mb-4 pb-2 overflow-hidden">
                             <div class="title mb-4">
                                 <strong>Datos Fragancia 1</strong>
                             </div>
@@ -113,7 +114,7 @@
                                     <x-input type="text" class="w-full" name="fragance_test_code_1"
                                         placeholder="Código de Test"
                                         value="{{ $evaluatedFragance->fragance_test_code_1 ?? '' }}"
-                                        wire:model.live=fragance_test_code_1 required />
+                                        wire:model.live="fragance_test_code_1" required />
                                 </div>
                                 <div class="w-full">
                                     <x-input type="text" class="w-full" name="code_1_test_a"
@@ -121,9 +122,27 @@
                                         value="{{ $evaluatedFragance->code_1_test_a ?? '' }}" required />
                                 </div>
                                 <div class="w-full">
-                                    <x-input type="text" class="w-full" name="code_1_test_b"
-                                        placeholder="Frag. 1 Portador B"
-                                        value="{{ $evaluatedFragance->code_1_test_b ?? '' }}" required />
+                                    @if ($number_judges == '8' || $number_judges == '')
+                                        <x-input type="text" class="w-full" name="code_1_test_b"
+                                            placeholder="Frag. 1 Portador B"
+                                            value="{{ $evaluatedFragance->code_1_test_b ?? '' }}" required />
+                                    @else
+                                    @endif
+                                </div>
+                                <div class="w-full p-2">
+                                    @if (isset($evaluatedFragance) && is_object($evaluatedFragance) && $benchmark == $fragance_test_code_1)
+                                        <input checked id="default-radio-1" type="radio"
+                                            value="{{ $fragance_test_code_1 }}" name="benchmark"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="default-radio-1"
+                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Benchmark</label>
+                                    @else
+                                        <input id="default-radio-1" type="radio"
+                                            value="{{ $fragance_test_code_1 }}" name="benchmark"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="default-radio-1"
+                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Benchmark</label>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -151,7 +170,7 @@
                                     <x-input type="text" class="w-full" name="fragance_test_code_2"
                                         placeholder="Código de Test"
                                         value="{{ $evaluatedFragance->fragance_test_code_2 ?? '' }}"
-                                        wire:model.live=fragance_test_code_2 required />
+                                        wire:model.live="fragance_test_code_2" required />
                                 </div>
                                 <div class="w-full">
                                     <x-input type="text" class="w-full" name="code_2_test_a"
@@ -159,9 +178,27 @@
                                         value="{{ $evaluatedFragance->code_2_test_a ?? '' }}" required />
                                 </div>
                                 <div class="w-full">
+                                    @if ($number_judges == '8' || $number_judges == '')
                                     <x-input type="text" class="w-full" name="code_2_test_b"
                                         placeholder="Frag. 2 Portador B"
                                         value="{{ $evaluatedFragance->code_2_test_b ?? '' }}" required />
+                                    @else
+                                    @endif
+                                </div>
+                                <div class="w-full p-2">
+                                    @if (isset($evaluatedFragance) && is_object($evaluatedFragance) && $benchmark == $fragance_test_code_1)
+                                        <input checked id="default-radio-2" type="radio"
+                                            value="{{ $fragance_test_code_2 }}" name="benchmark"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="default-radio-2"
+                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Benchmark</label>
+                                    @else
+                                        <input id="default-radio-2" type="radio"
+                                            value="{{ $fragance_test_code_2 ?? '' }}" name="benchmark"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="default-radio-2"
+                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Benchmark</label>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -176,9 +213,12 @@
                                         value="{{ $evaluatedFragance->name_carrier_a ?? '' }}" required />
                                 </div>
                                 <div class="w-full">
+                                    @if ($number_judges == '8' || $number_judges == '')
                                     <x-input type="text" class="w-full" name="name_carrier_b"
                                         placeholder="Nombre Portador B"
                                         value="{{ $evaluatedFragance->name_carrier_b ?? '' }}" required />
+                                    @else
+                                    @endif
                                 </div>
                             </div>
                         </div>

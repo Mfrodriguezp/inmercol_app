@@ -12,7 +12,8 @@ class CreateEditEvaluatedModal extends ModalComponent
     public $projects;
     public $project_send; //Variable para asignar proyecto cuando se crea desde la sección proyectos
     public $id_project; // Parámetro para recibir el id proyecto desde la sección de proyectos
-    public $projects_id_project, $number_judges;
+    public $projects_id_project, $number_judges="";
+    public $fragance_test_code_1,$fragance_test_code_2, $benchmark;// Códigos de fragancias y benckmark
 
     public function mount(){
 
@@ -28,6 +29,9 @@ class CreateEditEvaluatedModal extends ModalComponent
         if(isset($this->evaluatedFragance)){
             $this->projects_id_project= $this->evaluatedFragance->projects_id_project;
             $this->number_judges = $this->evaluatedFragance->number_judges;
+            $this->fragance_test_code_1 = $this->evaluatedFragance->fragance_test_code_1;
+            $this->fragance_test_code_2 = $this->evaluatedFragance->fragance_test_code_2;
+            $this->benchmark = $this->evaluatedFragance->benchmark;
         }
 
     }
