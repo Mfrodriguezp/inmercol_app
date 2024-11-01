@@ -19,19 +19,23 @@
                         </li>
                     </ul>
                 </div>
-                <div class="mb-4">
-                    <h3 class="text-lg font-medium mb-2">Fragancias Portador {{ $rotationCarriers->name_carrier_b }}</h3>
-                    <ul>
-                        <li>
-                            <strong>Brazo Izquierdo:
-                            </strong>{{ $rotationCarriers->fragance_carrier_b_arm_left }}
-                        </li>
-                        <li>
-                            <strong>Brazo Derecho:
-                            </strong>{{ $rotationCarriers->fragance_carrier_b_arm_right }}
-                        </li>
-                    </ul>
-                </div>
+                @if ($rotationCarriers->fragance_carrier_b_arm_right != '')
+                    <div class="mb-4">
+                        <h3 class="text-lg font-medium mb-2">Fragancias Portador {{ $rotationCarriers->name_carrier_b }}
+                        </h3>
+                        <ul>
+                            <li>
+                                <strong>Brazo Izquierdo:
+                                </strong>{{ $rotationCarriers->fragance_carrier_b_arm_left }}
+                            </li>
+                            <li>
+                                <strong>Brazo Derecho:
+                                </strong>{{ $rotationCarriers->fragance_carrier_b_arm_right }}
+                            </li>
+                        </ul>
+                    </div>
+                @else
+                @endif
             </div>
         </div>
     </div>

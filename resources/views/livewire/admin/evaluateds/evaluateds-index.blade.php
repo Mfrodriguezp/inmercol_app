@@ -55,7 +55,8 @@
                 <div class="mt-2 mb-4 text-sm">
                     @if (isset($rotationCarriers) && is_object($rotationCarriers))
                         <div class="mb-4">
-                            <h3 class="text-lg font-medium">Aplicación Fragancias Portador (a) {{$rotationCarriers->name_carrier_a}}</h3>
+                            <h3 class="text-lg font-medium">Aplicación Fragancias Portador (a)
+                                {{ $rotationCarriers->name_carrier_a }}</h3>
                             <ul>
                                 <li>
                                     <strong>Brazo Izquierdo:
@@ -67,20 +68,24 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="mb-4">
-                            <h3 class="text-lg font-medium">Aplicación Fragancias Portador (a) {{$rotationCarriers->name_carrier_b}}</h3>
-                            <ul>
-                                <li>
-                                    <strong>Brazo Izquierdo:
-                                    </strong>{{ $rotationCarriers->fragance_carrier_b_arm_left }}
-                                    
-                                </li>
-                                <li>
-                                    <strong>Brazo Derecho:
-                                    </strong>{{ $rotationCarriers->fragance_carrier_b_arm_right }}
-                                </li>
-                            </ul>
-                        </div>
+                        @if ($rotationCarriers->fragance_carrier_b_arm_right != '')
+                            <div class="mb-4">
+                                <h3 class="text-lg font-medium">Aplicación Fragancias Portador (a)
+                                    {{ $rotationCarriers->name_carrier_b }}</h3>
+                                <ul>
+                                    <li>
+                                        <strong>Brazo Izquierdo:
+                                        </strong>{{ $rotationCarriers->fragance_carrier_b_arm_left }}
+
+                                    </li>
+                                    <li>
+                                        <strong>Brazo Derecho:
+                                        </strong>{{ $rotationCarriers->fragance_carrier_b_arm_right }}
+                                    </li>
+                                </ul>
+                            </div>
+                        @else
+                        @endif
                     @endif
                 </div>
                 <div class="flex">
