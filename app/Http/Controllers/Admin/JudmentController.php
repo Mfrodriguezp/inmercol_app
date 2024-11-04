@@ -1712,7 +1712,7 @@ class JudmentController extends Controller
                         'carrier' => $carrier,
                         'idEvaluated' => $idEvaluated,
                         'judges' => 8,
-                        'carrier_name'=>$carrier_name
+                        'carrier_name' => $carrier_name
                     ]);
                     /*return redirect()->route('admin.judments.index')
                         ->with('message', 'El control ' . $control . ' del portador ' . $carrier_name . ' ha sido guardado correctamente.');*/
@@ -1723,6 +1723,12 @@ class JudmentController extends Controller
                     //inserción del juicios de 1 al 11
                     switch ($control) {
                         case 1:
+                            /**
+                             * Validación para identificar si la fragancia del brazo izquierdo
+                             * corresponde a la fragancia de código 1 en la tabla de EvaluatedFragance
+                             * Si si corresponde entonces se coloca en la columan izquierda la calificación 
+                             * y el código de la fragancia.
+                             */
                             $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
                                 ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
                                 ->count();
@@ -1909,348 +1915,175 @@ class JudmentController extends Controller
                     }
 
                     //validación de parámetros para siguiente juez
-                    switch ($carrier) {
-                        case 'a':
-                            switch ($counter) {
-                                case 2:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_2 as juez',
-                                            'start_12_evaluations.judge_2_a as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 3:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_3 as juez',
-                                            'start_12_evaluations.judge_3_a as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 4:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_4 as juez',
-                                            'start_12_evaluations.judge_4_a as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 5:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_5 as juez',
-                                            'start_12_evaluations.judge_5_a as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 6:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_6 as juez',
-                                            'start_12_evaluations.judge_6_a as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 7:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_7 as juez',
-                                            'start_12_evaluations.judge_7_a as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 8:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_8 as juez',
-                                            'start_12_evaluations.judge_8_a as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 9:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_9 as juez',
-                                            'start_12_evaluations.judge_9_a as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 10:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_10 as juez',
-                                            'start_12_evaluations.judge_10_a as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 11:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_11 as juez',
-                                            'start_12_evaluations.judge_11_a as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 12:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_12 as juez',
-                                            'start_12_evaluations.judge_12_a as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                            }
-                            //Query para extracción de los datos de la evaluación portador A
-                            $evaluated = DB::table('evaluated_fragances')
-                                ->join(
-                                    'rotation_aplication_fragances',
-                                    'evaluated_fragances.id_evaluated_fragance',
-                                    '=',
-                                    'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
-                                )
-                                ->where('id_evaluated_fragance', '=', $idEvaluated)
+                    switch ($counter) {
+                        case 2:
+                            //query para validación del Juez para enviarla a la vista
+                            $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
+                                ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
+                                ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
                                 ->select([
-                                    'id_evaluated_fragance',
-                                    'test_identifier',
-                                    'projects_id_project as id_proyecto',
-                                    'fragance_test_code_1 as codigo_test_fragancia_1',
-                                    'code_1_test_a as codigo_portador_a_fragancia_1',
-                                    'fragance_test_code_2 as codigo_test_fragancia_2',
-                                    'code_2_test_a as codigo_portador_a_fragancia_2',
-                                    'evaluated_fragances.name_carrier_a as nombre_portador_a',
-                                    'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
-                                    'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
+                                    'judges_12_rotations.judment_2 as juez',
+                                    'start_12_evaluations.judge_2_a as brazo_inicial'
                                 ])
-                                ->orderBy('id_evaluated_fragance', 'desc')
+                                ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
+                                ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
                                 ->first();
                             break;
-                        case 'b':
-                            switch ($counter) {
-                                case 2:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_2 as juez',
-                                            'start_12_evaluations.judge_2_b as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 3:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_3 as juez',
-                                            'start_12_evaluations.judge_3_b as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 4:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_4 as juez',
-                                            'start_12_evaluations.judge_4_b as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 5:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_5 as juez',
-                                            'start_12_evaluations.judge_5_b as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 6:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_6 as juez',
-                                            'start_12_evaluations.judge_6_b as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 7:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_7 as juez',
-                                            'start_12_evaluations.judge_7_b as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 8:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_8 as juez',
-                                            'start_12_evaluations.judge_8_b as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 9:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_9 as juez',
-                                            'start_12_evaluations.judge_9_b as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 10:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_10 as juez',
-                                            'start_12_evaluations.judge_10_b as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 11:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_11 as juez',
-                                            'start_12_evaluations.judge_11_b as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                                case 12:
-                                    //query para validación del Juez para enviarla a la vista
-                                    $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
-                                        ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
-                                        ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
-                                        ->select([
-                                            'judges_12_rotations.judment_12 as juez',
-                                            'start_12_evaluations.judge_12_b as brazo_inicial'
-                                        ])
-                                        ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
-                                        ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
-                                        ->first();
-                                    break;
-                            }
-                            //Query para extracción de los datos de la evaluación portador B
-                            $evaluated = DB::table('evaluated_fragances')
-                                ->join(
-                                    'rotation_aplication_fragances',
-                                    'evaluated_fragances.id_evaluated_fragance',
-                                    '=',
-                                    'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
-                                )
-                                ->where('id_evaluated_fragance', '=', $idEvaluated)
+                        case 3:
+                            //query para validación del Juez para enviarla a la vista
+                            $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
+                                ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
+                                ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
                                 ->select([
-                                    'id_evaluated_fragance',
-                                    'test_identifier',
-                                    'projects_id_project as id_proyecto',
-                                    'fragance_test_code_1 as codigo_test_fragancia_1',
-                                    'code_1_test_b as codigo_portador_b_fragancia_1',
-                                    'fragance_test_code_2 as codigo_test_fragancia_2',
-                                    'code_2_test_b as codigo_portador_b_fragancia_2',
-                                    'evaluated_fragances.name_carrier_b as nombre_portador_b',
-                                    'rotation_aplication_fragances.fragance_carrier_b_arm_right as codigo_brazo_derecho',
-                                    'rotation_aplication_fragances.fragance_carrier_b_arm_left as codigo_brazo_izquierdo'
+                                    'judges_12_rotations.judment_3 as juez',
+                                    'start_12_evaluations.judge_3_a as brazo_inicial'
                                 ])
-                                ->orderBy('id_evaluated_fragance', 'desc')
+                                ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
+                                ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
+                                ->first();
+                            break;
+                        case 4:
+                            //query para validación del Juez para enviarla a la vista
+                            $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
+                                ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
+                                ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
+                                ->select([
+                                    'judges_12_rotations.judment_4 as juez',
+                                    'start_12_evaluations.judge_4_a as brazo_inicial'
+                                ])
+                                ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
+                                ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
+                                ->first();
+                            break;
+                        case 5:
+                            //query para validación del Juez para enviarla a la vista
+                            $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
+                                ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
+                                ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
+                                ->select([
+                                    'judges_12_rotations.judment_5 as juez',
+                                    'start_12_evaluations.judge_5_a as brazo_inicial'
+                                ])
+                                ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
+                                ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
+                                ->first();
+                            break;
+                        case 6:
+                            //query para validación del Juez para enviarla a la vista
+                            $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
+                                ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
+                                ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
+                                ->select([
+                                    'judges_12_rotations.judment_6 as juez',
+                                    'start_12_evaluations.judge_6_a as brazo_inicial'
+                                ])
+                                ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
+                                ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
+                                ->first();
+                            break;
+                        case 7:
+                            //query para validación del Juez para enviarla a la vista
+                            $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
+                                ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
+                                ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
+                                ->select([
+                                    'judges_12_rotations.judment_7 as juez',
+                                    'start_12_evaluations.judge_7_a as brazo_inicial'
+                                ])
+                                ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
+                                ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
+                                ->first();
+                            break;
+                        case 8:
+                            //query para validación del Juez para enviarla a la vista
+                            $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
+                                ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
+                                ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
+                                ->select([
+                                    'judges_12_rotations.judment_8 as juez',
+                                    'start_12_evaluations.judge_8_a as brazo_inicial'
+                                ])
+                                ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
+                                ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
+                                ->first();
+                            break;
+                        case 9:
+                            //query para validación del Juez para enviarla a la vista
+                            $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
+                                ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
+                                ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
+                                ->select([
+                                    'judges_12_rotations.judment_9 as juez',
+                                    'start_12_evaluations.judge_9_a as brazo_inicial'
+                                ])
+                                ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
+                                ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
+                                ->first();
+                            break;
+                        case 10:
+                            //query para validación del Juez para enviarla a la vista
+                            $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
+                                ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
+                                ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
+                                ->select([
+                                    'judges_12_rotations.judment_10 as juez',
+                                    'start_12_evaluations.judge_10_a as brazo_inicial'
+                                ])
+                                ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
+                                ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
+                                ->first();
+                            break;
+                        case 11:
+                            //query para validación del Juez para enviarla a la vista
+                            $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
+                                ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
+                                ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
+                                ->select([
+                                    'judges_12_rotations.judment_11 as juez',
+                                    'start_12_evaluations.judge_11_a as brazo_inicial'
+                                ])
+                                ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
+                                ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
+                                ->first();
+                            break;
+                        case 12:
+                            //query para validación del Juez para enviarla a la vista
+                            $rotationJudges = DB::table('judges_12_rotations_has_start_12_evaluations')
+                                ->join('judges_12_rotations', 'judges_12_rotations_has_start_12_evaluations.judges_12_rotations_id', '=', 'judges_12_rotations.id')
+                                ->join('start_12_evaluations', 'judges_12_rotations_has_start_12_evaluations.start_12_evaluations_id', '=', 'start_12_evaluations.id')
+                                ->select([
+                                    'judges_12_rotations.judment_12 as juez',
+                                    'start_12_evaluations.judge_12_a as brazo_inicial'
+                                ])
+                                ->where('judges_12_rotations_has_start_12_evaluations.control', '=', $control)
+                                ->where('judges_12_rotations_has_start_12_evaluations.carrier', '=', $carrier)
                                 ->first();
                             break;
                     }
+                    //Query para extracción de los datos de la evaluación portador A
+                    $evaluated = DB::table('evaluated_fragances')
+                        ->join(
+                            'rotation_aplication_fragances',
+                            'evaluated_fragances.id_evaluated_fragance',
+                            '=',
+                            'rotation_aplication_fragances.evaluated_fragances_id_evaluated_fragance'
+                        )
+                        ->where('id_evaluated_fragance', '=', $idEvaluated)
+                        ->select([
+                            'id_evaluated_fragance',
+                            'test_identifier',
+                            'projects_id_project as id_proyecto',
+                            'fragance_test_code_1 as codigo_test_fragancia_1',
+                            'code_1_test_a as codigo_portador_a_fragancia_1',
+                            'fragance_test_code_2 as codigo_test_fragancia_2',
+                            'code_2_test_a as codigo_portador_a_fragancia_2',
+                            'evaluated_fragances.name_carrier_a as nombre_portador_a',
+                            'rotation_aplication_fragances.fragance_carrier_a_arm_right as codigo_brazo_derecho',
+                            'rotation_aplication_fragances.fragance_carrier_a_arm_left as codigo_brazo_izquierdo'
+                        ])
+                        ->orderBy('id_evaluated_fragance', 'desc')
+                        ->first();
+                        
                     //Retorno de vista de formulario con el siguiente juez
                     return view('admin.judments.judment', [
                         'rotationJudges' => $rotationJudges, //Juez que inicia y el brazo inicial
@@ -2450,102 +2283,58 @@ class JudmentController extends Controller
                     }
 
                     //Update de estados de los controles
-                    switch ($carrier) {
-                        case 'a':
-                            switch ($control) {
-                                case 1:
-                                    //Actualización de estatus activate finish del primer control portador a    
-                                    $update_control_1_a = EvaluatedFragance::find($idEvaluated);
-                                    $update_control_1_a->control_1_a = 'finish';
-                                    $update_control_1_a->save();
-                                    //Update de status de pending a activate segundo control
-                                    $update_control_2_a = EvaluatedFragance::find($idEvaluated);
-                                    $update_control_2_a->control_2_a = 'activate';
-                                    $update_control_2_a->save();
-                                    break;
-                                case 2:
-                                    //Actualización de estatus del segundo control portador a    
-                                    $upd_control_2_a = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_2_a->control_2_a = 'finish';
-                                    $upd_control_2_a->save();
-                                    //Update de status de pending a activate tercer control
-                                    $update_control_3_a = EvaluatedFragance::find($idEvaluated);
-                                    $update_control_3_a->control_3_a = 'activate';
-                                    $update_control_3_a->save();
-                                    break;
-                                case 3:
-                                    //Actualización de estatus del tercer control portador a    
-                                    $upd_control_3_a = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_3_a->control_3_a = 'finish';
-                                    $upd_control_3_a->save();
-                                    //Update de status de pending a activate cuarto control
-                                    $update_control_4_a = EvaluatedFragance::find($idEvaluated);
-                                    $update_control_4_a->control_4_a = 'activate';
-                                    $update_control_4_a->save();
-                                    break;
-                                case 4:
-                                    //Actualización de estatus del último control portador a    
-                                    $upd_control_4_a = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_4_a->control_4_a = 'finish';
-                                    $upd_control_4_a->save();
-                                    break;
-                            }
+                    switch ($control) {
+                        case 1:
+                            //Actualización de estatus activate finish del primer control portador a    
+                            $update_control_1_a = EvaluatedFragance::find($idEvaluated);
+                            $update_control_1_a->control_1_a = 'finish';
+                            $update_control_1_a->save();
+                            //Update de status de pending a activate segundo control
+                            $update_control_2_a = EvaluatedFragance::find($idEvaluated);
+                            $update_control_2_a->control_2_a = 'activate';
+                            $update_control_2_a->save();
                             break;
-                        case 'b':
-                            switch ($control) {
-                                case 1:
-                                    //Actualización de estatus del primer control portador a    
-                                    $upd_control_1_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_1_b->control_1_b = 'finish';
-                                    $upd_control_1_b->save();
-                                    //Update de status de pending a activate segundo control
-                                    $upd_control_2_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_2_b->control_2_b = 'activate';
-                                    $upd_control_2_b->save();
-                                    break;
-                                case 2:
-                                    //Actualización de estatus del segundo control portador a    
-                                    $upd_control_2_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_2_b->control_2_b = 'finish';
-                                    $upd_control_2_b->save();
-                                    //Update de status de pending a activate tercer control
-                                    $upd_control_3_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_3_b->control_3_b = 'activate';
-                                    $upd_control_3_b->save();
-                                    break;
-                                case 3:
-                                    //Actualización de estatus del primer control portador a    
-                                    $upd_control_3_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_3_b->control_3_b = 'finish';
-                                    $upd_control_3_b->save();
-                                    //Update de status de pending a activate tercer control
-                                    $upd_control_4_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_4_b->control_4_b = 'activate';
-                                    $upd_control_4_b->save();
-                                    break;
-                                case 4:
-                                    //Actualización de estatus del cuarto control portador b    
-                                    $upd_control_4_b = EvaluatedFragance::find($idEvaluated);
-                                    $upd_control_4_b->control_4_b = 'finish';
-                                    $upd_control_4_b->save();
+                        case 2:
+                            //Actualización de estatus del segundo control portador a    
+                            $upd_control_2_a = EvaluatedFragance::find($idEvaluated);
+                            $upd_control_2_a->control_2_a = 'finish';
+                            $upd_control_2_a->save();
+                            //Update de status de pending a activate tercer control
+                            $update_control_3_a = EvaluatedFragance::find($idEvaluated);
+                            $update_control_3_a->control_3_a = 'activate';
+                            $update_control_3_a->save();
+                            break;
+                        case 3:
+                            //Actualización de estatus del tercer control portador a    
+                            $upd_control_3_a = EvaluatedFragance::find($idEvaluated);
+                            $upd_control_3_a->control_3_a = 'finish';
+                            $upd_control_3_a->save();
+                            //Update de status de pending a activate cuarto control
+                            $update_control_4_a = EvaluatedFragance::find($idEvaluated);
+                            $update_control_4_a->control_4_a = 'activate';
+                            $update_control_4_a->save();
+                            break;
+                        case 4:
+                            //Actualización de estatus del último control portador a    
+                            $upd_control_4_a = EvaluatedFragance::find($idEvaluated);
+                            $upd_control_4_a->control_4_a = 'finish';
+                            $upd_control_4_a->save();
 
-                                    //Actualición del estado de la evaluación de fragancia
-                                    $upd_status_evaluated = EvaluatedFragance::find($idEvaluated);
-                                    $upd_status_evaluated->status_evaluation = "Finalizado";
-                                    $upd_status_evaluated->save();
+                            //Actualición del estado de la evaluación de fragancia
+                            $upd_status_evaluated = EvaluatedFragance::find($idEvaluated);
+                            $upd_status_evaluated->status_evaluation = "Finalizado";
+                            $upd_status_evaluated->save();
 
-                                    //Actualización de la fecha/hora ultima evaluación en la tabla project
-                                    $upd_last_evaluation = Project::find($idProject);
-                                    $upd_last_evaluation->last_evaluation = now('America/Bogota');
-                                    $upd_last_evaluation->save();
-                                    break;
-                            }
+                            //Actualización de la fecha/hora ultima evaluación en la tabla project
+                            $upd_last_evaluation = Project::find($idProject);
+                            $upd_last_evaluation->last_evaluation = now('America/Bogota');
+                            $upd_last_evaluation->save();
+
                             break;
                     }
                     return redirect()->route('admin.judments.index')
                         ->with('message', 'El control ' . $control . ' del portador ' . $carrier_name . ' ha sido guardado correctamente.');
                 }
-                break;
         }
     }
 }
