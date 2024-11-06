@@ -16,6 +16,7 @@ use PowerComponents\LivewirePowerGrid\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
+use Illuminate\Support\Facades\DB;
 
 final class JudmentTable extends PowerGridComponent
 {
@@ -85,7 +86,7 @@ final class JudmentTable extends PowerGridComponent
                 'evaluation_date'
             ])
             ->orderBy('carrier_type')
-            ->orderBy('judges.judge_number');
+            ->orderBy(DB::raw('judges.judge_number + 0'));
     }
 
 
