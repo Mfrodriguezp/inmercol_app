@@ -883,18 +883,32 @@ class JudmentController extends Controller
         $idEvaluated = $request->input('id_evaluated_fragance');
         $idProject = $request->input('id_proyecto');
         $number_judges = $request->input('number_judges');
+        /**
+         * Validación para identificar si la fragancia del brazo izquierdo
+         * corresponde a la fragancia de código 1 en la tabla de EvaluatedFragance
+         * Si si corresponde entonces se coloca en la columan izquierda la calificación 
+         * y el código de la fragancia.
+         * 
+         * ---Validación si la fragancia 1 del juicio es igual a la fragancia 1 registrada en
+         * la evaluación de fragancias
+         * $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
+                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                                ->count();
+         *---Validación si la fragancia 1 del juicio es igual al benchmark
+                    $validation_fragance_1 = EvaluatedFragance::where('benchmark', '=', $request->input('fragance_code_test_1'))
+                    ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+                    ->count();
+         */
+        $validation_fragance_1 = EvaluatedFragance::where('benchmark', '=', $request->input('fragance_code_test_1'))
+            ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
+            ->count();
         switch ($number_judges) {
             case 8:
                 if ($counter < 9) {
                     //inserción del juicios de 1 al 7
                     switch ($control) {
                         case 1:
-                            //Validación de dato existente en el primer control
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
                                 //Inserción de la calificación del primer código
                                 $judment1 = Judment::updateOrCreate(
                                     [
@@ -949,11 +963,7 @@ class JudmentController extends Controller
                             }
                             break;
                         case 2:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
 
                                 //Inserción de la calificació para el control 2 de la fragancia 1
                                 $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
@@ -991,11 +1001,7 @@ class JudmentController extends Controller
                             }
                             break;
                         case 3:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
 
                                 //Inserción de la calificació para el control 2 de la fragancia 1
                                 $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
@@ -1033,11 +1039,7 @@ class JudmentController extends Controller
                             }
                             break;
                         case 4:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
 
                                 //Inserción de la calificació para el control 2 de la fragancia 1
                                 $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
@@ -1328,11 +1330,7 @@ class JudmentController extends Controller
                     //Inserción del juicio 8
                     switch ($control) {
                         case 1:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
                                 //Inserción de la calificación del primer código
                                 $judment1 = Judment::updateOrCreate(
                                     [
@@ -1385,11 +1383,7 @@ class JudmentController extends Controller
                             }
                             break;
                         case 2:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
 
                                 //Inserción de la calificació para el control 2 de la fragancia 1
                                 $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
@@ -1427,11 +1421,8 @@ class JudmentController extends Controller
                             }
                             break;
                         case 3:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
 
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
 
                                 //Inserción de la calificació para el control 2 de la fragancia 1
                                 $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
@@ -1469,10 +1460,6 @@ class JudmentController extends Controller
                             }
                             break;
                         case 4:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
                             if ($validation_fragance_1 == 1) {
 
                                 //Inserción de la calificació para el control 2 de la fragancia 1
@@ -1518,8 +1505,6 @@ class JudmentController extends Controller
                         'judges' => 8,
                         'carrier_name' => $carrier_name
                     ]);
-                    /*return redirect()->route('admin.judments.index')
-                        ->with('message', 'El control ' . $control . ' del portador ' . $carrier_name . ' ha sido guardado correctamente.');*/
                 }
                 break;
             case 12:
@@ -1527,17 +1512,7 @@ class JudmentController extends Controller
                     //inserción del juicios de 1 al 11
                     switch ($control) {
                         case 1:
-                            /**
-                             * Validación para identificar si la fragancia del brazo izquierdo
-                             * corresponde a la fragancia de código 1 en la tabla de EvaluatedFragance
-                             * Si si corresponde entonces se coloca en la columan izquierda la calificación 
-                             * y el código de la fragancia.
-                             */
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
                                 //Inserción de la calificación del primer código
                                 $judment1 = Judment::updateOrCreate(
                                     [
@@ -1592,11 +1567,7 @@ class JudmentController extends Controller
                             }
                             break;
                         case 2:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
 
                                 //Inserción de la calificació para el control 2 de la fragancia 1
                                 $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
@@ -1634,11 +1605,7 @@ class JudmentController extends Controller
                             }
                             break;
                         case 3:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
 
                                 //Inserción de la calificació para el control 2 de la fragancia 1
                                 $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
@@ -1676,11 +1643,7 @@ class JudmentController extends Controller
                             }
                             break;
                         case 4:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
 
                                 //Inserción de la calificació para el control 2 de la fragancia 1
                                 $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
@@ -1902,11 +1865,7 @@ class JudmentController extends Controller
                     //inserción del juicio 12
                     switch ($control) {
                         case 1:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
                                 //Inserción de la calificación del primer código
                                 $judment1 = Judment::updateOrCreate(
                                     [
@@ -1959,11 +1918,7 @@ class JudmentController extends Controller
                             }
                             break;
                         case 2:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
 
                                 //Inserción de la calificació para el control 2 de la fragancia 1
                                 $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
@@ -2001,11 +1956,7 @@ class JudmentController extends Controller
                             }
                             break;
                         case 3:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
 
                                 //Inserción de la calificació para el control 2 de la fragancia 1
                                 $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))
@@ -2043,11 +1994,7 @@ class JudmentController extends Controller
                             }
                             break;
                         case 4:
-                            $validation_fragance_1 = EvaluatedFragance::where('fragance_test_code_1', '=', $request->input('fragance_code_test_1'))
-                                ->where('id_evaluated_fragance', '=', $request->input('id_evaluated_fragance'))
-                                ->count();
-
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
 
                                 //Inserción de la calificació para el control 2 de la fragancia 1
                                 $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))

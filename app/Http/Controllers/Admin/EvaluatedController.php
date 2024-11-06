@@ -86,7 +86,11 @@ class EvaluatedController extends Controller
                 'name_carrier_a' => $request->input('name_carrier_a'),
                 'benchmark'=>$benchmark,
                 'code_1_test_a' => $request->input('code_1_test_a'),
-                'code_2_test_a' => $request->input('code_2_test_a')
+                'code_2_test_a' => $request->input('code_2_test_a'),
+                'control_1_b'=>'N/A',
+                'control_2_b'=>'N/A',
+                'control_3_b'=>'N/A',
+                'control_4_b'=>'N/A'
             ];
             $evaluated = EvaluatedFragance::create($record);
         }
