@@ -2083,8 +2083,13 @@ class JudmentController extends Controller
 
                             break;
                     }
-                    return redirect()->route('admin.judments.index')
-                        ->with('message', 'El control ' . $control . ' del portador ' . $carrier_name . ' ha sido guardado correctamente.');
+                    return redirect()->route('admin.environmentals.index')->with([
+                        'control' => $control,
+                        'carrier' => $carrier,
+                        'idEvaluated' => $idEvaluated,
+                        'judges' => 12,
+                        'carrier_name' => $carrier_name
+                    ]);
                 }
         }
     }
