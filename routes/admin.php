@@ -68,6 +68,7 @@ Route::group([
     'middleware' => [\Illuminate\Auth\Middleware\Authorize::using('admin.reports.index')]
 ], function () {
     Route::get('/', [ReportController::class, 'index'])->name('admin.reports.index');
+    Route::get('{testIdentified}/{dataOption}',[ReportController::class,'getReport'])->name('admin.reports.getReport');
 });
 //Rutas para juicios
 Route::group([
