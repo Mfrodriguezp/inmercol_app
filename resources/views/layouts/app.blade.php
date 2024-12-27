@@ -15,8 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"-->
     <!-- Scripts -->
-    <link rel="icon" type="image/png" href="{{asset('favicon.png')}}"/>
-    <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}" />
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/expandCollapsedMenu.js'])
 
     <!-- Styles -->
@@ -43,10 +43,12 @@
             {{ $slot }}
         </main>
     </div>
-    
+
     @stack('modals')
-    {{--@include('popper::assets')--}}
+    {{-- @include('popper::assets') --}}
     @livewireScripts
+    <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
+    <x-livewire-alert::flash />
 </body>
 
 </html>

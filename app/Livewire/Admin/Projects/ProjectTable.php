@@ -66,7 +66,7 @@ final class ProjectTable extends PowerGridComponent
                 'projects.date_creation',
                 'projects.last_evaluation',
                 'clients.client_name as client_name',
-            ]);
+            ])->orderByDesc('projects.id_project');
     }
 
     public function relationSearch(): array

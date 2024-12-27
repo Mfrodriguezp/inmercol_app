@@ -23,7 +23,7 @@ class CreateEditEvaluatedModal extends ModalComponent
             $this->project_send=Project::find($this->id_project);
         }else{
             //Cargue de data de proyectos cuando se crea evalución desde la ventana evaluaciones
-            $this->projects=Project::all();
+            $this->projects=Project::where('status', '0')->get();
         }
         //Cargue de data de evaluación de fragancia para actualizar una evaluación
         if(isset($this->evaluatedFragance)){
