@@ -22,6 +22,7 @@
         "flatpickr": "^4.6.13",
         "flowbite": "^2.2.1",
         "slim-select": "^2.8.1",
+        "sweetalert2": "^11.15.9",
         "tom-select": "^2.3.1"
     }
 }

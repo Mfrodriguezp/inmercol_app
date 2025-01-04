@@ -42,13 +42,15 @@
                     </div>
                     <div class="flex">
                         <div class="flex items-center">
-                            <input required checked id="standar" type="radio" value="standar" name="dataOption" wire:model="dataOption"
+                            <input required checked id="standar" type="radio" value="standar" name="dataOption"
+                                wire:model="dataOption"
                                 class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="standar"
                                 class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Standar</label>
                         </div>
                         <div class="flex items-center ps-4 ">
-                            <input required id="modified" type="radio" value="modified" name="dataOption" wire:model="dataOption"
+                            <input required id="modified" type="radio" value="modified" name="dataOption"
+                                wire:model="dataOption"
                                 class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="modified"
                                 class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Modificado
@@ -79,5 +81,41 @@
             </div>
         </div>
     @endif
-
+    @if (session('ok'))
+        @push('scripts')
+            <script>
+                window.addEventListener("load", (event) => {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+                    Toast.fire({
+                        icon: "success",
+                        title: "{{session('ok')}}"
+                    });
+                });
+            </script>
+        @endpush
+    @elseif (session('error'))
+        @push('scripts')
+            <script>
+                window.addEventListener("load", (event) => {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+                    Toast.fire({
+                        icon: "error",
+                        title: "{{session('error')}}"
+                    });
+                });
+            </script>
+        @endpush
+    @endif
 </div>

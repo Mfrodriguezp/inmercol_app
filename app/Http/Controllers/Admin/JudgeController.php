@@ -26,7 +26,7 @@ class JudgeController extends Controller
         ]);
 
         return redirect()->route('admin.judges.index')
-            ->with('success', 'Juez Creado Satisfactoriamente');
+            ->with('ok', 'Juez Creado Satisfactoriamente');
     }
 
     //Función para editar juez
@@ -43,7 +43,7 @@ class JudgeController extends Controller
         ]);
 
         return redirect()->route('admin.judges.index')
-            ->with('success', 'Juez Actualizado Satisfactoriamente');
+            ->with('ok', 'Juez Actualizado!');
 
     }
 
@@ -54,6 +54,6 @@ class JudgeController extends Controller
         $judge->delete();
         
         return redirect()->route('admin.judges.index')
-            ->with('success', 'Registro Eliminado Satisfactoriamente');
+            ->with('ok', 'Registro Eliminado!');
     }
 }

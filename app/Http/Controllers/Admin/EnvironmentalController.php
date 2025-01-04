@@ -142,7 +142,7 @@ class EnvironmentalController extends Controller
             }
 
             return redirect()->route('admin.judments.index')
-                        ->with('message', 'El control ' . $control . ' del portador ' . $carrier_name . ' ha sido guardado correctamente.');
+                        ->with('ok', 'El control ' . $control . ' del portador ' . $carrier_name . ' ha sido guardado correctamente.');
         }else{
             #Inserción de Humedad y temperatura al iniciar los juicios
             $queryInsert = EnvironmentalCondition::updateOrCreate(

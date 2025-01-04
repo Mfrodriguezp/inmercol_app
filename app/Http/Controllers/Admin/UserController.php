@@ -35,11 +35,11 @@ class UserController extends Controller
         } catch (Throwable $e) {
             //report($e);
             return redirect()->route('admin.users.index')
-                ->with('error', 'No se ha podido crear el usuario, por favor valide la información ingresada');
+                ->with('error', 'No se ha podido crear el usuario!');
         }
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'El usuario ha sido creado satisfactoriamente');
+            ->with('ok', 'Usuario Creado!');
     }
 
     /**
@@ -54,7 +54,7 @@ class UserController extends Controller
         $user->roles()->sync($request->role);
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'El usuario ha sido modificado');
+            ->with('ok', 'Usuario modificado');
     }
 
     /**
@@ -64,6 +64,6 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->route('admin.users.index')
-            ->with('success', 'El usuario ' . $user->name . ' ha sido eliminado correctamente');
+            ->with('ok', 'El usuario ' . $user->name . ' ha sido eliminado!');
     }
 }

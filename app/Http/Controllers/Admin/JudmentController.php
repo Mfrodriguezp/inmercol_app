@@ -1324,7 +1324,7 @@ class JudmentController extends Controller
                         'evaluated' => $evaluated, //Datata para el formulario
                         'counter' => $counter,
                         'number_judges' => $number_judges, // Total de jueces para la evaluacion
-                        'message' => 'Evaluación registrada satisfactoriamente'
+                        'message' => 'Evaluación registrada!'
                     ]);
                 } else {
                     //Inserción del juicio 8
@@ -1859,7 +1859,7 @@ class JudmentController extends Controller
                         'evaluated' => $evaluated, //Datata para el formulario
                         'counter' => $counter,
                         'number_judges' => $number_judges, // Total de jueces para la evaluacion
-                        'message' => 'Evaluación registrada satisfactoriamente'
+                        'message' => 'Evaluación registrada!'
                     ]);
                 } else {
                     //inserción del juicio 12

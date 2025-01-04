@@ -47,8 +47,7 @@
     @stack('modals')
     {{-- @include('popper::assets') --}}
     @livewireScripts
-    <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
-    <x-livewire-alert::flash />
+    @stack('scripts')
 </body>
 
 </html>

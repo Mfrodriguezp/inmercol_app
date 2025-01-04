@@ -30,7 +30,7 @@ class ProjectController extends Controller
                 'clients_id_client' => $id_client
             ]);
             return redirect()->action([ProjectController::class, 'index'])
-                ->with('success', 'Proyecto Creado Correctamente!');
+                ->with('ok', 'Proyecto Creado Correctamente!');
         } else {
 
             $newClient = Client::create([
@@ -48,7 +48,7 @@ class ProjectController extends Controller
                 'clients_id_client' => $id
             ]);
             return redirect()->action([ProjectController::class, 'index'])
-                ->with('success', 'Proyecto Creado Correctamente!');
+                ->with('ok', 'Proyecto Creado Correctamente!');
         }
     }
 
@@ -69,7 +69,7 @@ class ProjectController extends Controller
             ]);
 
             return redirect()->action([ProjectController::class, 'index'])
-                ->with('success', 'Proyecto Actualizado Correctamente!');
+                ->with('ok', 'Proyecto Actualizado!');
             
     }
 
@@ -79,6 +79,6 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->action([ProjectController::class, 'index'])
-            ->with('success', 'Proyecto Eliminado Correctamente!');
+            ->with('ok', 'Proyecto Eliminado!');
     }
 }

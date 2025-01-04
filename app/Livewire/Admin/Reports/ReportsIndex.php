@@ -3,7 +3,6 @@
 namespace App\Livewire\Admin\Reports;
 
 use App\Http\Controllers\Admin\ReportController;
-
 use Livewire\Component;
 
 class ReportsIndex extends Component
@@ -34,21 +33,12 @@ class ReportsIndex extends Component
                 ['testIdentified' => $this->reportName,
                 'dataOption'=>$this->dataOption]
             );
-
-            $this->dispatchBrowserEvent('notify', [
-                'type' => 'success',
-                'message' => 'El reporte se está generando. Recibirá una notificación cuando esté listo $reportName '.$this->reportName
-            ]);
-
             $this->reset('reportName');
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('notify', [
                 'type' => 'error',
                 'message' => 'Hubo un error al generar el reporte.'
             ]);
-
-            // Opcional: Registrar el error
-            //\Log::error('Error generando reporte: ' . $e->getMessage());
         }
     }
 

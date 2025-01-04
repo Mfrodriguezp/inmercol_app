@@ -96,7 +96,7 @@ class EvaluatedController extends Controller
         }
 
         return redirect()->route('admin.evaluateds.index')
-            ->with('success', 'Evaluación Creada Satisfactoriamente')
+            ->with('ok', 'Evaluación Creada!')
             ->with('info', 'Aplicación de Fragancias para Portadores');
     }
 
@@ -133,7 +133,7 @@ class EvaluatedController extends Controller
             ->update($record);
 
         return redirect()->route('admin.evaluateds.index')
-            ->with('success', 'Evaluación de Fragancia Actualizada Satisfactoriamente');
+            ->with('ok', 'Evaluación Actualizada!');
     }
 
     public function destroy($evaluated)
@@ -144,6 +144,6 @@ class EvaluatedController extends Controller
         $evaluated->delete();
 
         return redirect()->route('admin.evaluateds.index')
-            ->with('success', 'Registro Eliminado Satisfactoriamente');
+            ->with('ok', 'Registro Eliminado!');
     }
 }
