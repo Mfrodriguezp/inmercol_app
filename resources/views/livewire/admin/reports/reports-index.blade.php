@@ -81,6 +81,7 @@
             </div>
         </div>
     @endif
+
     @if (session('ok'))
         @push('scripts')
             <script>
@@ -94,7 +95,7 @@
                     });
                     Toast.fire({
                         icon: "success",
-                        title: "{{session('ok')}}"
+                        title: "{{ session('ok') }}"
                     });
                 });
             </script>
@@ -112,7 +113,7 @@
                     });
                     Toast.fire({
                         icon: "error",
-                        title: "{{session('error')}}"
+                        title: "{{ session('error') }}"
                     });
                 });
             </script>

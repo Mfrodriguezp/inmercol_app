@@ -9,6 +9,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use App\Models\EnvironmentalCondition;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use Maatwebsite\Excel\Concerns\WithEvents;
 
 // Clase principal que une las tres hojas
 class ConsolidReport implements WithMultipleSheets
@@ -42,7 +45,7 @@ class ConsolidReport implements WithMultipleSheets
     public function sheets(): array
     {
         return [
-            new DataEvaluatedSheet($this->idEvaluated,$this->idProject, $this->benchmark), // Primera hoja
+            new DataEvaluatedSheet($this->idEvaluated, $this->idProject, $this->benchmark), // Primera hoja
             new JudgmentsSheet($this->idEvaluated, $this->dataOption), // Segunda hoja
             new EnvironmentalConditionsSheet($this->idEvaluated), //Tercer hoja
         ];
@@ -50,12 +53,12 @@ class ConsolidReport implements WithMultipleSheets
 }
 
 // Primera hoja: Datos de la evaluación
-class DataEvaluatedSheet implements FromQuery, WithHeadings, WithMapping, WithTitle
+class DataEvaluatedSheet implements FromQuery, WithHeadings, WithMapping, WithTitle, WithEvents
 {
     private $idEvaluated;
     private $idProject;
     private $benchmark;
-    
+
 
     /**
      * Constructor
@@ -91,12 +94,12 @@ class DataEvaluatedSheet implements FromQuery, WithHeadings, WithMapping, WithTi
      */
     public function map($evaluated): array
     {
-        
+
         $idAnalisys = DB::table('projects')
-        ->where('id_project',$this->idProject)
-        ->first();
-        
-        if ($this->benchmark == $evaluated->fragance_test_code_1){
+            ->where('id_project', $this->idProject)
+            ->first();
+
+        if ($this->benchmark == $evaluated->fragance_test_code_1) {
             return [
                 [
                     $evaluated->fragance_name_2,
@@ -113,7 +116,7 @@ class DataEvaluatedSheet implements FromQuery, WithHeadings, WithMapping, WithTi
                     $idAnalisys->id_analisys
                 ]
             ];
-        }else{
+        } else {
             return [
                 [
                     $evaluated->fragance_name_1,
@@ -156,10 +159,32 @@ class DataEvaluatedSheet implements FromQuery, WithHeadings, WithMapping, WithTi
     {
         return 'Data Evaluación';
     }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                $queryResult = $this->query()->get();
+                $totalRows = $queryResult->count() + 1;
+                $totalColumns = count($this->headings());
+                $lastColumn = Coordinate::stringFromColumnIndex($totalColumns);
+                $cellRange = "A1:{$lastColumn}{$totalRows}";
+
+                $event->sheet->getDelegate()->getStyle($cellRange)->applyFromArray([
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => 'FF000000'],
+                        ],
+                    ],
+                ]);
+            },
+        ];
+    }
 }
 
 // Segunda hoja: Datos de los juicios
-class JudgmentsSheet implements FromQuery, WithHeadings, WithMapping, WithTitle
+class JudgmentsSheet implements FromQuery, WithHeadings, WithMapping, WithTitle, WithEvents
 {
     private $idEvaluated;
     private $dataOption;
@@ -314,10 +339,32 @@ class JudgmentsSheet implements FromQuery, WithHeadings, WithMapping, WithTitle
     {
         return 'Juicios';
     }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                $queryResult = $this->query()->get();
+                $totalRows = $queryResult->count() + 1;
+                $totalColumns = count($this->headings());
+                $lastColumn = Coordinate::stringFromColumnIndex($totalColumns);
+                $cellRange = "A1:{$lastColumn}{$totalRows}";
+
+                $event->sheet->getDelegate()->getStyle($cellRange)->applyFromArray([
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => 'FF000000'],
+                        ],
+                    ],
+                ]);
+            },
+        ];
+    }
 }
 
 // Tercer hoja: Datos del termohigómetro
-class EnvironmentalConditionsSheet implements FromQuery, WithHeadings, WithMapping, WithTitle
+class EnvironmentalConditionsSheet implements FromQuery, WithHeadings, WithMapping, WithTitle, WithEvents
 {
     private $idEvaluated;
 
@@ -410,5 +457,27 @@ class EnvironmentalConditionsSheet implements FromQuery, WithHeadings, WithMappi
     public function title(): string
     {
         return 'Data TermoHigometro';
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                $queryResult = $this->query()->get();
+                $totalRows = $queryResult->count() * 4 + 1; // Multiplica por 4 porque cada registro genera 4 filas
+                $totalColumns = count($this->headings());
+                $lastColumn = Coordinate::stringFromColumnIndex($totalColumns);
+                $cellRange = "A1:{$lastColumn}{$totalRows}";
+
+                $event->sheet->getDelegate()->getStyle($cellRange)->applyFromArray([
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => 'FF000000'],
+                        ],
+                    ],
+                ]);
+            },
+        ];
     }
 }
