@@ -1460,7 +1460,7 @@ class JudmentController extends Controller
                             }
                             break;
                         case 4:
-                            if ($validation_fragance_1 == 1) {
+                            if ($validation_fragance_1 == 0) {
 
                                 //Inserción de la calificació para el control 2 de la fragancia 1
                                 $judment1 = Judment::where('evaluated_fragances_id_evaluated_fragance', $request->input('id_evaluated_fragance'))

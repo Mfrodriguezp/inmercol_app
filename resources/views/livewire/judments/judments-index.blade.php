@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <div class="data">
+    <div class="data" wire.poll.60s.visible>
         @if ($evaluateds->count())
             @foreach ($evaluateds as $evaluated)
                 <div>
