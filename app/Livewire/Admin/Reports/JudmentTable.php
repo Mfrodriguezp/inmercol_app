@@ -67,6 +67,7 @@ final class JudmentTable extends PowerGridComponent
                 $judges->on('judments.judges_id_judge', '=', 'judges.id_judge');
             })
             ->select([
+                'evaluated_fragances.id_evaluated_fragance',
                 'judments.id_judment',
                 'projects.project_name',
                 'evaluated_fragances.test_identifier',
@@ -85,6 +86,7 @@ final class JudmentTable extends PowerGridComponent
                 'qualification_control_4_frag_2',
                 'evaluation_date'
             ])
+            ->orderByDesc('evaluated_fragances.id_evaluated_fragance')
             ->orderBy('carrier_type')
             ->orderBy(DB::raw('judges.judge_number + 0'));
     }
