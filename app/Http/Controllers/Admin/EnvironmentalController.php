@@ -21,7 +21,8 @@ class EnvironmentalController extends Controller
         $idEvaluated = $request->input('idEvaluated'); //Evaluación de Fragancia
         $control = $request->input('control'); //Control
         $carrier = $request->input('carrier'); //Portador
-        $temperature = $request->input('temperature'); //Temperatura
+        $temperature = $request->input('temperature');//Temperatura
+        $temperature = str_replace(',', '.',$temperature); // Reemplazo de coma por punto
         $humiditity = $request->input('humidity'); //Humedad
         $judges = $request->input('judges'); //Número de jueces
         $carrier_name = $request->input('carrier_name'); //Nombre del Portador
